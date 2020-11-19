@@ -60,7 +60,7 @@ public class SingleMemberImage extends View {
         return Bitmap.createScaledBitmap(original, (int)newWidth, (int)newHeight, true);
     }
 
-    public void updateThreeTemplesBitmapIds(int id, int idLast, int idNext) {
+    public void updateThreeMembersBitmapIds(int id, int idLast, int idNext) {
         this.idStore = id;
         this.idLastStore = idLast;
         this.idNextStore = idNext;

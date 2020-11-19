@@ -32,7 +32,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -50,21 +49,21 @@ public class SpiralView extends View {
     private float initialR;
     private boolean sliderMoving;
     private static ArrayList<Member> memberObjects; // more OO be more object oriented
-    private ArrayList<ArrayList<Float>> onScreenTemples;
-    private ArrayList<Float> oneOnScreenTemple;
+    private ArrayList<ArrayList<Float>> onScreenMembers;
+    private ArrayList<Float> oneOnScreenMember;
     private ArrayList<ArrayList<Float>> spiralCoordinates;
     private ArrayList<Float> sizes;
-    private ArrayList<String> allTempleLinks;
+    private ArrayList<String> allMemberLinks;
     private ArrayList<String> allEventsDates;
     public ArrayList<String> allYears;
     private int eachIndex;
-    private Matrix currentTempleMatrix;
+    private Matrix currentMemberMatrix;
     private float topCoordinateInSpiralX;
     private float topCoordinateInSpiralY;
     private float largestSizeInSpiral;
     private boolean coordinatesAndSizesUpdated;
     private boolean orientationJustChanged;
-    public boolean touchDownOnScreenTempleView;
+    public boolean touchDownOnScreenMemberView;
     private float downX;
     private float downY;
     private ArrayList<Float> movingCoordinatesLastTime;
@@ -75,16 +74,16 @@ public class SpiralView extends View {
     private float windowHeight;
     private String lastSpiralEffectHolder;
     private static ArrayList<Integer> allLargeImageIds;
-    private String oneTempleInfo;
-    private static ArrayList<Integer> allTempleInfoFileIds;
+    private String oneMemberInfo;
+    private static ArrayList<Integer> allObjectInfoFileIds;
     private Boolean show_label;
-    private String selectedYear;
+    private String selectedKey;
     private Integer realEachIndex;
-    private String templeUrl;
     private SingleMemberImage singleMemberImageView;
     private int staticCoordinatesGet = 0;
-    private AlertDialog singleTempleDialog;
+    private AlertDialog singleMemberDialog;
     private Paint noImageCirclePaint;
+    private String MemberUrl;
 
 
     public SpiralView(Context context) {
@@ -106,18 +105,18 @@ public class SpiralView extends View {
         loadedImages = false;
         spiralCoordinates = new ArrayList<>();
         sizes = new ArrayList<>();
-        onScreenTemples = new ArrayList<>();
-        oneOnScreenTemple = new ArrayList<>();
-        allTempleLinks = new ArrayList<>();
+        onScreenMembers = new ArrayList<>();
+        oneOnScreenMember = new ArrayList<>();
+        allMemberLinks = new ArrayList<>();
         allEventsDates = new ArrayList<>();
         allYears = new ArrayList<>();
         theta = 4400;
-        currentTempleMatrix = new Matrix();
+        currentMemberMatrix = new Matrix();
         coordinatesAndSizesUpdated = FALSE;
         orientationJustChanged = FALSE;
         movingCoordinatesLastTime = new ArrayList<>();
         yearDisplayPaint = new Paint();
-        selectedYear = "";
+        selectedKey = "";
 
         noImageCirclePaint = new Paint();
         noImageCirclePaint.setColor(Color.parseColor("#17252a"));
@@ -153,22 +152,22 @@ public class SpiralView extends View {
 
     public void readLinksFile() {
         try {
-            InputStream allTempleLinksFile =  getContext().getResources().openRawResource(R.raw.all_objects_links);
-            if (allTempleLinksFile != null)
+            InputStream allMemberLinksFile =  getContext().getResources().openRawResource(R.raw.all_objects_links);
+            if (allMemberLinksFile != null)
             {
-                InputStreamReader ir = new InputStreamReader(allTempleLinksFile);
+                InputStreamReader ir = new InputStreamReader(allMemberLinksFile);
                 BufferedReader br = new BufferedReader(ir);
                 String line;
                 //read each line
                 int atThisLine = 0;
                 while (( line = br.readLine()) != null) {
-                    allTempleLinks.add(line+"\n");
+                    allMemberLinks.add(line+"\n");
                     if (atThisLine < memberObjects.size()) {
                         memberObjects.get(atThisLine).setLink(line+"\n");
                         atThisLine ++;
                     }
                 }
-                allTempleLinksFile.close();
+                allMemberLinksFile.close();
             }
         }
         catch (java.io.FileNotFoundException e)
@@ -179,22 +178,21 @@ public class SpiralView extends View {
         {
             Log.d("TestFile", e.getMessage());
         }
-        //Log.d("allTempleLinks is ", allTempleLinks.get(1) + "");
     }
 
     public void readOneInfoFile(int id) {
         try {
-            InputStream allTempleInfoFile =  this.getResources().openRawResource(id);
-            if (allTempleInfoFile != null)
+            InputStream allMemberInfoFile =  this.getResources().openRawResource(id);
+            if (allMemberInfoFile != null)
             {
-                InputStreamReader ir = new InputStreamReader(allTempleInfoFile);
+                InputStreamReader ir = new InputStreamReader(allMemberInfoFile);
                 BufferedReader br = new BufferedReader(ir);
                 String line;
                 //read each line
                 while (( line = br.readLine()) != null) {
-                    oneTempleInfo = oneTempleInfo + line + "\n";
+                    oneMemberInfo = oneMemberInfo + line + "\n";
                 }
-                allTempleInfoFile.close();
+                allMemberInfoFile.close();
             }
         }
         catch (java.io.FileNotFoundException e)
@@ -209,10 +207,10 @@ public class SpiralView extends View {
 
     public void readInfoFile() {
         try {
-            InputStream allTempleInfoFile =  this.getResources().openRawResource(R.raw.all_objects_summaries);
-            if (allTempleInfoFile != null)
+            InputStream allMemberInfoFile =  this.getResources().openRawResource(R.raw.all_objects_summaries);
+            if (allMemberInfoFile != null)
             {
-                InputStreamReader ir = new InputStreamReader(allTempleInfoFile);
+                InputStreamReader ir = new InputStreamReader(allMemberInfoFile);
                 BufferedReader br = new BufferedReader(ir);
                 String line;
                 //read each line
@@ -220,7 +218,7 @@ public class SpiralView extends View {
                     allEventsDates.add(line+"\n");
                     allYears.add(line.substring(line.length() - 5));
                 }
-                allTempleInfoFile.close();
+                allMemberInfoFile.close();
 
             }
         }
@@ -250,7 +248,7 @@ public class SpiralView extends View {
             movingCoordinatesLastTime.add(downX);
             movingCoordinatesLastTime.add(downY);
             //Log.d("DOWN",  " finger down on screen at |||||||||||||||" + downX + " " + downY );
-            touchDownOnScreenTempleView = TRUE;
+            touchDownOnScreenMemberView = TRUE;
             downTime = System.currentTimeMillis();
         }
 
@@ -344,41 +342,32 @@ public class SpiralView extends View {
         if (m.getAction() == MotionEvent.ACTION_UP) {
             long upTime = System.currentTimeMillis();
             long period = upTime - downTime;
-            touchDownOnScreenTempleView = FALSE;
-            //helper--time test
-            //Long timeLong = System.currentTimeMillis();
-            //String time = String.valueOf(timeLong);
-            //Toast.makeText(getContext(), "current time is " + time, Toast.LENGTH_SHORT).show();
+            touchDownOnScreenMemberView = FALSE;
             float x = m.getX();
             float y = m.getY();
-            //Toast.makeText(getContext(), "touched a circle when UP at " + x + " " + y, Toast.LENGTH_SHORT).show();
 
             if (y < 9 * screenHeight / 10 && period < 100) {
-                boolean singleTempleViewOpened = false;
+                boolean singleMemberViewOpened = false;
 
-                Collections.reverse(onScreenTemples);
-                for (ArrayList<Float> eachOnScreenTemple : onScreenTemples) {
+                Collections.reverse(onScreenMembers);
+                for (ArrayList<Float> eachOnScreenMember : onScreenMembers) {
                     //remember each Float in inner class is a object, when convert it to int you need to use some method.
-                    eachIndex = (int)(eachOnScreenTemple.get(0).floatValue());
-                    float eachXCoordinate = eachOnScreenTemple.get(1);
-                    float eachYCoordinate = eachOnScreenTemple.get(2);
-                    float eachSize = eachOnScreenTemple.get(3);
+                    eachIndex = (int)(eachOnScreenMember.get(0).floatValue());
+                    float eachXCoordinate = eachOnScreenMember.get(1);
+                    float eachYCoordinate = eachOnScreenMember.get(2);
+                    float eachSize = eachOnScreenMember.get(3);
                     float distanceToCurrentCoordinate = (float) (Math.sqrt(Math.pow(Math.abs(x - eachXCoordinate), 2) + Math.pow(Math.abs(y - eachYCoordinate), 2)));
 
                     if (distanceToCurrentCoordinate < eachSize) {
-                        //Toast.makeText(getContext(), "touched a circle at " + x + " " + y + " and eachIndex here is " + eachIndex , Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getContext(), "how many onScreenTemples last time? " + onScreenTemples.size(), Toast.LENGTH_SHORT).show();
-                        //Log.d("singleTempleViewOpen? ", singleTempleViewOpened + "");
-                        if (singleTempleViewOpened == false) {
+                        if (singleMemberViewOpened == false) {
                             if (eachIndex <= 144) { // it's useless here, it;'s for the older version of the app, this number should be equal the the number of objects - 1, so that all circles can b bring up detail dialog.
-                                singleTempleViewOpened = true;
+                                singleMemberViewOpened = true;
                                 //Log.d("eachIndex is ", eachIndex + " when click on circle");
-                                singleTempleDialog();
+                                singleMemberDialog();
                             } else {
                                 //no link
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setTitle("Nothing Here");
-                                builder.setMessage("future temples to come!");
                                 builder.setIcon(R.mipmap.ic_launcher_round);
                                 builder.setCancelable(true);
                                 final AlertDialog dialog = builder.create();
@@ -387,7 +376,7 @@ public class SpiralView extends View {
                         }
                     }
                 }
-                Collections.reverse(onScreenTemples);
+                Collections.reverse(onScreenMembers);
             }
         }
         return true;
@@ -395,7 +384,7 @@ public class SpiralView extends View {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("ClickableViewAccessibility")
-    public void singleTempleDialog() {
+    public void singleMemberDialog() {
 
 
         LinearLayout.LayoutParams nice = new LinearLayout.LayoutParams
@@ -428,38 +417,36 @@ public class SpiralView extends View {
         }
 
         singleMemberImageView.setPadding(0,0,0,0);
-        //singleTempleImageView.setBackgroundColor(Color.RED);
 
         // milestone dates
-        oneTempleInfo = "";
-        readOneInfoFile(allTempleInfoFileIds.get(eachIndex));
+        oneMemberInfo = "";
+        readOneInfoFile(allObjectInfoFileIds.get(eachIndex));
 
-        final TextView singleTempleTextView = new TextView(getContext());
-        singleTempleTextView.setText(oneTempleInfo);
-        //singleTempleTextView.setBackgroundColor(Color.BLUE);
-        singleTempleTextView.setGravity(Gravity.CENTER);
-        singleTempleTextView.setLayoutParams(nice);
-        singleTempleTextView.setTextSize(15);
+        final TextView singleMemberTextView = new TextView(getContext());
+        singleMemberTextView.setText(oneMemberInfo);
+        //singleMemberTextView.setBackgroundColor(Color.BLUE);
+        singleMemberTextView.setGravity(Gravity.CENTER);
+        singleMemberTextView.setLayoutParams(nice);
+        singleMemberTextView.setTextSize(15);
 
         ScrollView sv = new ScrollView(getContext());
         //sv.setPadding(100,100,100,100);
-        sv.addView(singleTempleTextView);
+        sv.addView(singleMemberTextView);
 
-        // here is where we get templeUrl, to avoid the eachIndex change error
-        //final String templeUrl = allTempleLinks.get(eachIndex);
+        // here is where we get memberUrl, to avoid the eachIndex change error
         realEachIndex = eachIndex; // we do this because each index is changing for some reason later...
-        templeUrl = memberObjects.get(realEachIndex).link;
+        MemberUrl = memberObjects.get(realEachIndex).link;
 
-        final TextView singleTempleDialogTitleView = new TextView(getContext());
-        singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
-        singleTempleDialogTitleView.setTextSize(20);
-        singleTempleDialogTitleView.setPadding(0,20,0,0);
-        singleTempleDialogTitleView.setTextColor(Color.BLACK);
-        singleTempleDialogTitleView.setGravity(Gravity.CENTER);
+        final TextView singleMemberDialogTitleView = new TextView(getContext());
+        singleMemberDialogTitleView.setText(allEventsDates.get(realEachIndex));
+        singleMemberDialogTitleView.setTextSize(20);
+        singleMemberDialogTitleView.setPadding(0,20,0,0);
+        singleMemberDialogTitleView.setTextColor(Color.BLACK);
+        singleMemberDialogTitleView.setGravity(Gravity.CENTER);
 
         final long[] timeStamp = new long[1];
         timeStamp[0] = 0;
-        // view last or next temple buttons
+        // view last or next member buttons
         Button left = new Button(getContext());
         left.setWidth((int)screenWidth / 10);
         left.setText(">");
@@ -474,19 +461,19 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
                             singleMemberImageView.moveImage("left");
-                            int nextTempleId = 0;
+                            int nextMemberId = 0;
                             if (realEachIndex + 1 > 144) {
-                                nextTempleId = allLargeImageIds.get(realEachIndex);
+                                nextMemberId = allLargeImageIds.get(realEachIndex);
                             } else {
-                                nextTempleId = allLargeImageIds.get(realEachIndex + 1);
+                                nextMemberId = allLargeImageIds.get(realEachIndex + 1);
                             }
-                            singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), nextTempleId);
-                            templeUrl = memberObjects.get(realEachIndex).link;
-                            singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
-                            oneTempleInfo = "";
-                            readOneInfoFile(allTempleInfoFileIds.get(realEachIndex));
-                            singleTempleTextView.setText(oneTempleInfo);
-                            singleTempleTextView.scrollTo(0,0);
+                            singleMemberImageView.updateThreeMembersBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), nextMemberId);
+                            MemberUrl = memberObjects.get(realEachIndex).link;
+                            singleMemberDialogTitleView.setText(allEventsDates.get(realEachIndex));
+                            oneMemberInfo = "";
+                            readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
+                            singleMemberTextView.setText(oneMemberInfo);
+                            singleMemberTextView.scrollTo(0,0);
                             timeStamp[0] = System.currentTimeMillis();
                         }
                     } else {
@@ -512,19 +499,19 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex - 1;
                             singleMemberImageView.moveImage("right");
-                            int lastTempleId = 0;
+                            int lastMemberId = 0;
                             if (realEachIndex - 1 < 0) {
-                                lastTempleId = allLargeImageIds.get(realEachIndex);
+                                lastMemberId = allLargeImageIds.get(realEachIndex);
                             } else {
-                                lastTempleId = allLargeImageIds.get(realEachIndex - 1);
+                                lastMemberId = allLargeImageIds.get(realEachIndex - 1);
                             }
-                            singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), lastTempleId, allLargeImageIds.get(realEachIndex + 1));
-                            templeUrl = memberObjects.get(realEachIndex).link;
-                            singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
-                            oneTempleInfo = "";
-                            readOneInfoFile(allTempleInfoFileIds.get(realEachIndex));
-                            singleTempleTextView.setText(oneTempleInfo);
-                            singleTempleTextView.scrollTo(0,0);
+                            singleMemberImageView.updateThreeMembersBitmapIds(allLargeImageIds.get(realEachIndex), lastMemberId, allLargeImageIds.get(realEachIndex + 1));
+                            MemberUrl = memberObjects.get(realEachIndex).link;
+                            singleMemberDialogTitleView.setText(allEventsDates.get(realEachIndex));
+                            oneMemberInfo = "";
+                            readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
+                            singleMemberTextView.setText(oneMemberInfo);
+                            singleMemberTextView.scrollTo(0,0);
                             timeStamp[0] = System.currentTimeMillis();
                         }
                     } else {
@@ -546,21 +533,21 @@ public class SpiralView extends View {
         lnlH.addView(singleMemberImageView);
         lnlH.addView(left); // lnlH.addView(right);
 
-        lnl.addView(singleTempleDialogTitleView);
-        //singleTempleDialogTitleView.setBackgroundColor(Color.YELLOW);
+        lnl.addView(singleMemberDialogTitleView);
+        //singleMemberDialogTitleView.setBackgroundColor(Color.YELLOW);
         lnl.addView(lnlH);
         //lnlH.setBackgroundColor(Color.GREEN);
 //        lnl.addView(sv);
 //        sv.setBackgroundColor(Color.RED);
-        ((ViewGroup)singleTempleTextView.getParent()).removeView(singleTempleTextView);
-        lnl.addView(singleTempleTextView);
-        //singleTempleTextView.setBackgroundColor(Color.RED);
-        singleTempleTextView.setHeight((int)(Math.min(screenWidth, screenHeight) * 0.3));
-        singleTempleTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        ((ViewGroup)singleMemberTextView.getParent()).removeView(singleMemberTextView);
+        lnl.addView(singleMemberTextView);
+        //singleMemberTextView.setBackgroundColor(Color.RED);
+        singleMemberTextView.setHeight((int)(Math.min(screenWidth, screenHeight) * 0.3));
+        singleMemberTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        // singleTempleDialog
+        // singleMemberDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        //builder.setTitle(allTempleInfo.get(realEachIndex*3));
+        //builder.setTitle(allMemberInfo.get(realEachIndex*3));
         builder.setView(lnl);
         builder.setCancelable(true);
         builder.setCancelable(true);
@@ -574,11 +561,11 @@ public class SpiralView extends View {
                 //set onclick method for this button below
             }
         });
-        singleTempleDialog = builder.create();
-        singleTempleDialog.show();
+        singleMemberDialog = builder.create();
+        singleMemberDialog.show();
 
-        //singleTempleDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        WindowManager.LayoutParams params = singleTempleDialog.getWindow().getAttributes();
+        //singleMemberDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        WindowManager.LayoutParams params = singleMemberDialog.getWindow().getAttributes();
         int h = 0;
         int w = 0;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -590,64 +577,25 @@ public class SpiralView extends View {
         }
         params.height = h;
         params.width =  w;
-        singleTempleDialog.getWindow().setAttributes(params);
-        singleTempleDialog.show();
+        singleMemberDialog.getWindow().setAttributes(params);
+        singleMemberDialog.show();
 
-//        Button btnPositive = singleTempleDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        Button btnNegative = singleTempleDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        Button btnNegative = singleMemberDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         LinearLayout.LayoutParams mNegativeButtonLL = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
         mNegativeButtonLL.gravity = Gravity.CENTER;
         mNegativeButtonLL.width = ViewGroup.LayoutParams.MATCH_PARENT;
         btnNegative.setLayoutParams(mNegativeButtonLL);
 
 
-//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
-//        layoutParams.weight = 10;
-//        btnPositive.setLayoutParams(layoutParams);
-//        btnNegative.setLayoutParams(layoutParams);
-
-//        singleTempleDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //singleTempleDialog.dismiss();
-//                //singleTempleDialog stays when click on website button
-//
-//                // for some reason, i don't why, but each index is changed in here,
-//                // so we get templeUrl before this, according to the correct eachIndex
-//                //String templeUrl = allTempleLinks.get(eachIndex);
-//                //Log.d("eachIndex is ", eachIndex + " when click on website button");
-//                //Log.d("templeUrl is ", templeUrl + "");
-//
-//                if (templeUrl.equals("" + "\n")) {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                    builder.setTitle("No Link Available");
-//                    builder.setMessage("Member does not have a website yet");
-//                    builder.setIcon(R.mipmap.ic_launcher_round);
-//                    //点击对话框以外的区域是否让对话框消失
-//                    builder.setCancelable(true);
-//                    final AlertDialog dialog = builder.create();
-//                    dialog.show();
-//
-//                } else {
-//                    Intent eachTemplePage= new Intent();
-//                    eachTemplePage.setAction("android.intent.action.VIEW");
-//                    Uri eachTemplePage_url = Uri.parse(templeUrl);
-//                    eachTemplePage.setData(eachTemplePage_url);
-//                    getContext().startActivity(eachTemplePage);
-//                }
-//            }
-//        });
     }
 
     public void orientationJustChanged(boolean b) {
         orientationJustChanged = b;
-        //singleTempleImageView.updatePositionAndSizeOnceOrientationChanged();
-        if (singleMemberImageView != null) { // the rotate phone without clicking on a temple
+        if (singleMemberImageView != null) { // the rotate phone without clicking on a member
             singleMemberImageView.orientationJustChanged(b);
-            //singleTempleImageView.invalidate();
 
-            // reset single temple dialog size according to screen size once orientation change happens
-            WindowManager.LayoutParams params = singleTempleDialog.getWindow().getAttributes();
+            // reset single member dialog size according to screen size once orientation change happens
+            WindowManager.LayoutParams params = singleMemberDialog.getWindow().getAttributes();
             int h = 0;
             int w = 0;
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -659,7 +607,7 @@ public class SpiralView extends View {
             }
             params.height = h;
             params.width =  w;
-            singleTempleDialog.getWindow().setAttributes(params);
+            singleMemberDialog.getWindow().setAttributes(params);
         }
 
     }
@@ -674,8 +622,6 @@ public class SpiralView extends View {
     }
     @Override
     public void onDraw(Canvas c) {
-        //Toast.makeText(getContext(), "onscreen temples" + onScreenTemples.size(), Toast.LENGTH_SHORT).show();
-        //Log.d("onscreen temples ", "" + onScreenTemples.size());
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             screenWidth = c.getWidth() / 2;
             screenHeight = c.getHeight();
@@ -778,7 +724,7 @@ public class SpiralView extends View {
         //we just want to load the images once, we don't have to load it every time when we re-draw. otherwise the program is gonna be so slow
         if (loadedImages == false) {
             loadedImages = true;
-            //get the temple images in array list
+            //get the member images in array list
 
             //when app launches, images are loaded according to screen width
             //when launches landscape, according to window height
@@ -791,175 +737,109 @@ public class SpiralView extends View {
             ImageCache.init(getResources(), temp, screenHeight);
 
             allLargeImageIds = ImageCache.getAllLargeImagesIds();
-            allTempleInfoFileIds = ImageCache.getAllInfoFilesIds();
+            allObjectInfoFileIds = ImageCache.getAllInfoFilesIds();
 
-            //temples = ImageCache.getTemplesList();
-            memberObjects = ImageCache.getTempleObjectsList(); // more OO
+            memberObjects = ImageCache.getMemberObjectsList(); // more OO
 
             readLinksFile();
             readInfoFile();
 
-
-//            for (Member t: memberObjects) {
-//                t.setLink(allTempleLinks.get(memberObjects.indexOf(t)));
-//            }
 
             yearDisplayPaint.setColor(Color.parseColor("#def2f1"));
             yearDisplayPaint.setStyle(Paint.Style.FILL);
             yearDisplayPaint.setTextAlign(Paint.Align.CENTER);
         }
 
-        //helper
-        //c.drawText("Screen Width and Height are " + screenWidth + " " + screenHeight, 0, screenHeight - 100, bluePaint);
-        //c.drawText("how many temples " + temples.size() + " ", 0, screenHeight - 200, redPaint);
-        //c.drawRect(0,3 * screenHeight/4, screenWidth, 3 * screenHeight/4 + 10, bluePaint);
-        //the middle circle image is here ==============================================
-        //drawMiddleCircle(c);
-
         placeAllCircles(c);
-
-        //c.drawText( "slider progress is: " + theta, screenWidth / 2, 39 * screenHeight / 40, yearDisplayPaint);
-        //c.drawText( allYears.get(allYears.size()-1).length() + "", screenWidth / 2, 39 * screenHeight / 40, yearDisplayPaint);
 
 
     }
 
-    public void drawTempleLabels(float ts, Member t, Canvas c) { // more OO
+    public void drawMemberLabels(float ts, Member t, Canvas c) { // more OO
 
-        float newCurrentTempleRadius = t.size * screenWidth / 2;
+        float newCurrentMemberRadius = t.size * screenWidth / 2;
 
-        Paint thisTempleLabelPaint = new Paint();
+        Paint thisMemberLabelPaint = new Paint();
 
-        thisTempleLabelPaint.setColor(Color.parseColor("#def2f1"));
-        thisTempleLabelPaint.setStyle(Paint.Style.FILL);
-        thisTempleLabelPaint.setTextSize((int)(newCurrentTempleRadius/3));  //if we are drawing the years as main object , before: ((int)(newCurrentTempleRadius/3))
-        thisTempleLabelPaint.setTextAlign(Paint.Align.CENTER);
-        thisTempleLabelPaint.setShadowLayer(20,0,0,Color.BLACK);
+        thisMemberLabelPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberLabelPaint.setStyle(Paint.Style.FILL);
+        thisMemberLabelPaint.setTextSize((int)(newCurrentMemberRadius/3));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
+        thisMemberLabelPaint.setTextAlign(Paint.Align.CENTER);
+        thisMemberLabelPaint.setShadowLayer(20,0,0,Color.BLACK);
 
-//        int thisTempleIndex = temples.indexOf(t);
-        int thisTempleIndex = memberObjects.indexOf(t); // more OO
+        int thisMemberIndex = memberObjects.indexOf(t); // more OO
 
-        String thisTempleName = allEventsDates.get(thisTempleIndex);
+        String thisMemberName = allEventsDates.get(thisMemberIndex);
 
 
         if (sliderMoving == false && show_label) {
-            c.drawText(thisTempleName.substring(thisTempleName.length() - 5), t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize()/2, thisTempleLabelPaint);
+            c.drawText(thisMemberName.substring(thisMemberName.length() - 5), t.x, t.y + newCurrentMemberRadius - thisMemberLabelPaint.getTextSize()/2, thisMemberLabelPaint);
         }
 
-
-
-
-//        Locale curLocale = getResources().getConfiguration().locale;
-//
-//        String thisTempleLocation = "";
-//        //通过Locale的equals方法，判断出当前语言环境
-//        if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
-//            //中文
-//            thisTempleLocation = thisTempleName.substring(0, thisTempleName.length() - 3);
-//        } else {
-//            //英文
-//            thisTempleLocation = thisTempleName.substring(0, thisTempleName.length() - 7);
-//        }
-//        //String thisTempleLocation = thisTempleName ;//.substring(0, thisTempleName.length() - 7);
-//
-//        String[] thisTempleLocationWords = thisTempleLocation.split(" ");
-//
-//        String thisTempleNameOne = "";
-//        String thisTempleNameTwo = "";
-//        if (thisTempleLocationWords.length % 2 == 0) { // if there are even number of words in location, then each line has the same number of words
-//            for (int i = 0; i < thisTempleLocationWords.length / 2; i ++) {
-//                thisTempleNameOne += thisTempleLocationWords[i] + " ";
-//            }
-//            for (int i = thisTempleLocationWords.length / 2; i < thisTempleLocationWords.length ; i ++) {
-//                thisTempleNameTwo += thisTempleLocationWords[i] + " ";
-//            }
-//        } else { // if there are odd number of words in location, then first line has one more line than second line
-//            for (int i = 0; i < thisTempleLocationWords.length / 2 + 1; i ++) {
-//                thisTempleNameOne += thisTempleLocationWords[i] + " ";
-//            }
-//            for (int i = thisTempleLocationWords.length / 2 + 1; i < thisTempleLocationWords.length ; i ++) {
-//                thisTempleNameTwo += thisTempleLocationWords[i] + " ";
-//            }
-//        }
-//
-//        if (sliderMoving == false && ts < 200 && thisTempleIndex < 185 && show_label) {
-//            //c.drawText(thisTempleName, currentTempleX, currentTempleY + newCurrentTempleRadius + thisTempleLabelPaint.getTextSize(), thisTempleLabelPaint);
-//            c.drawText(thisTempleNameOne, t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize(), thisTempleLabelPaint);
-//            c.drawText(thisTempleNameTwo, t.x, t.y + newCurrentTempleRadius, thisTempleLabelPaint);
-//        }
     }
 
-    public void getSelectedYear(String s) {
-        selectedYear = s;
+    public void getSelectedKey(String s) {
+        selectedKey = s;
     }
 
-    public void actuallyDrawing(Member t, Canvas c, int thisTempleIndex) { // more OO
+    public void actuallyDrawing(Member t, Canvas c, int thisMemberIndex) { // more OO
 
 
-        float newCurrentTempleRadius = t.size * screenWidth / 2;
+        float newCurrentMemberRadius = t.size * screenWidth / 2;
 
-        currentTempleMatrix.setScale(4 * t.size, 4 * t.size);
-//        currentTempleMatrix.postTranslate(currentTempleX - t.getWidth()  *currentTempleSize*2, currentTempleY - t.getHeight() * currentTempleSize*2);
-        currentTempleMatrix.postTranslate(t.x - t.image.getWidth()  * t.size * 2, t.y - t.image.getHeight() * t.size * 2); // more OO
+        currentMemberMatrix.setScale(4 * t.size, 4 * t.size);
+        currentMemberMatrix.postTranslate(t.x - t.image.getWidth()  * t.size * 2, t.y - t.image.getHeight() * t.size * 2); // more OO
 
-        Paint selectedYearTempleFramePaint = new Paint();
-        selectedYearTempleFramePaint.setColor(Color.parseColor("#287a78"));
-        selectedYearTempleFramePaint.setStyle(Paint.Style.FILL);
+        Paint selectedKeyMemberFramePaint = new Paint();
+        selectedKeyMemberFramePaint.setColor(Color.parseColor("#287a78"));
+        selectedKeyMemberFramePaint.setStyle(Paint.Style.FILL);
 
-        // if current temple is with selected year then draw a circle frame
-        if (allYears.get(thisTempleIndex).equals(selectedYear)) {
-            c.drawCircle(t.x, t.y, newCurrentTempleRadius * 1.1f , selectedYearTempleFramePaint);
+        // if current member is with selected year then draw a circle frame
+        if (allYears.get(thisMemberIndex).equals(selectedKey)) {
+            c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1.1f , selectedKeyMemberFramePaint);
 
         } else {
             // do nothing
         }
 
-//        c.drawBitmap(t, currentTempleMatrix, null);
-
-        // we are not drawing the images!!! because we don't have photos...
-        c.drawBitmap(t.image, currentTempleMatrix, null); // more OO
-        //c.drawCircle(t.x, t.y, newCurrentTempleRadius, noImageCirclePaint);
+        c.drawBitmap(t.image, currentMemberMatrix, null); // more OO
 
     }
 
     public void placeAllCircles(Canvas c) {
-        //place all circles, and get the index of on screen temples
+        //place all circles, and get the index of on screen members
         //this method also call actualDrawing method to draw
 
-        //Log.d("spiralcoors: ", " in placeallcircles " + spiralCoordinates + " ");
-        //Log.d("spiralcoors: ", " in placeallcircles " + spiralCoordinates + " ");
-
-        onScreenTemples.clear();
-        for (Member t : memberObjects) { //more OO: for (Bitmap t : temples) {
-            int thisTempleIndex = memberObjects.indexOf(t); // more OO: int thisTempleIndex = temples.indexOf(t);
-            float ts = theta - 30 * memberObjects.indexOf(t); // more OO: float ts = theta - 30 * temples.indexOf(t);
+        onScreenMembers.clear();
+        for (Member t : memberObjects) {
+            int thisMemberIndex = memberObjects.indexOf(t);
+            float ts = theta - 30 * memberObjects.indexOf(t);
             if (ts > 0 && ts < spiralCoordinates.size() - 1) {
 
-                // set this temple's size, x and y once we know it should be on screen
+                // set this member's size, x and y once we know it should be on screen
                 t.size = sizes.get((int) (ts));
                 t.x = spiralCoordinates.get((int) (ts)).get(0);
                 t.y = spiralCoordinates.get((int) (ts)).get(1);
 
-                actuallyDrawing(t, c, thisTempleIndex);
-                drawTempleLabels(ts, t, c);
+                actuallyDrawing(t, c, thisMemberIndex);
+                drawMemberLabels(ts, t, c);
 
-                //add all on screen temples index to a array list once the slider stopped moving,
-                float currentTempleRadius = t.size * screenWidth / 2;
-                //inner array list: (this onScreenTemple index, x coordinate, y coordinate, temple radius at this position)
-                oneOnScreenTemple.add((float)thisTempleIndex);
-                oneOnScreenTemple.add(t.x);
-                oneOnScreenTemple.add(t.y);
-                oneOnScreenTemple.add(currentTempleRadius);
+                //add all on screen members index to a array list once the slider stopped moving,
+                float currentMemberRadius = t.size * screenWidth / 2;
+                //inner array list: (this onScreenMember index, x coordinate, y coordinate, member radius at this position)
+                oneOnScreenMember.add((float)thisMemberIndex);
+                oneOnScreenMember.add(t.x);
+                oneOnScreenMember.add(t.y);
+                oneOnScreenMember.add(currentMemberRadius);
                 //be aware of adding one array list to another array list of array list then clear old one, remember you must copy.
-                ArrayList<Float> oneOnScreenTempleCopy = new ArrayList<>();
-                oneOnScreenTempleCopy.addAll(oneOnScreenTemple);
-                onScreenTemples.add(oneOnScreenTempleCopy);
-                oneOnScreenTemple.clear();
+                ArrayList<Float> oneOnScreenMemberCopy = new ArrayList<>();
+                oneOnScreenMemberCopy.addAll(oneOnScreenMember);
+                onScreenMembers.add(oneOnScreenMemberCopy);
+                oneOnScreenMember.clear();
             }
         }
-        // we need this line of code, so that in 3 d view, only the front temple opens when user clicks
-        Collections.reverse(onScreenTemples);
-        //Log.d("onscreen temples ", "" + onScreenTemples.size());
+        // we need this line of code, so that in 3 d view, only the front member opens when user clicks
+        Collections.reverse(onScreenMembers);
     }
 
 

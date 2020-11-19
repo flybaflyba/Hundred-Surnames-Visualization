@@ -32,7 +32,7 @@ public class ImageCache {
         return Bitmap.createScaledBitmap(original, (int)newWidth, (int)newHeight, true);
     }
 
-    public static ArrayList<Member> getTempleObjectsList() {
+    public static ArrayList<Member> getMemberObjectsList() {
 
         ArrayList<Member> allObjectsList = new ArrayList<>();
 

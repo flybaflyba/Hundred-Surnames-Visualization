@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private String selectedYear;
     private int selectedYearIndex;
     private String yearPickerString;
-    private ArrayList<Integer> templeYearsThetaFriends = new ArrayList<Integer>();
+    private ArrayList<Integer> memberKeysThetaFriends = new ArrayList<Integer>();
     private AlertDialog.Builder yearPickerDialogBuilder;
     private boolean yearPickerDialogDismissedByPositiveButton;
     private String spaceDependingOnLanguage = "";
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message m) {
             //Log.d("My Timer here ", "My Timer ****************" + " ");
 
-            if (tv.touchDownOnScreenTempleView == TRUE) {
+            if (tv.touchDownOnScreenMemberView == TRUE) {
                 progress = lastProgress;
             }
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         //(245, 300, 325, 340, 380, 420, 450, 490, 520, 540, 570, 610, 680, 715, 750, 780, 810, 850, 890, 1070, 1290, 1430, 1520, 1540, 1575, 1630, 1660, 1700, 1710, 1755, 1850, 1890, 2315, 3330, 3540, 3720, 3800, 3850, 3950, 4030, 4110, 4200, 4300, 4400, 4520, 4540, 4650, 4785, 4935, 5100, 5110, 5320, 5330, 5800, 6990)
         List<Integer> temporaryHolder = Arrays.asList(60, 80, 100, 160, 220, 250, 280, 310, 360, 390, 420, 540, 600, 630, 740, 770, 830, 860, 920, 970, 1000, 1060, 1090, 1120, 1180, 1230, 1260, 1380, 1410, 1440, 1530, 1560, 1580, 1610, 1640, 1730, 1760, 1830, 1870, 1960, 2190, 2270, 2360, 2690, 2840, 3240, 3610, 3910, 4130, 4400);
         for (int i : temporaryHolder) {
-            templeYearsThetaFriends.add(i);
+            memberKeysThetaFriends.add(i);
         }
         yearPickerDialogBuilder = new AlertDialog.Builder(this);
         yearPickerDialogDismissedByPositiveButton = false;
@@ -489,7 +489,7 @@ public class MainActivity extends AppCompatActivity {
         yearPickerPicker.setValue(selectedYearIndex);
 
         if (selectedYear == null) {
-            selectedYear = allYearsWithoutDuplicates.get(allYearsWithoutDuplicates.size()-1); // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in TempleView through method.
+            selectedYear = allYearsWithoutDuplicates.get(allYearsWithoutDuplicates.size()-1); // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in SpiralView through method.
         }
         //yearPickerPicker.setTextColor(Color.GRAY);
 
@@ -535,19 +535,18 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(mContext, yearPickerString, Toast.LENGTH_SHORT).show();
                 //we can use this selected year value to update spiral
                 //Toast.makeText(mContext, "selectedYearIndex: " + selectedYearIndex, Toast.LENGTH_SHORT).show();
-                progress = templeYearsThetaFriends.get(selectedYearIndex);
+                progress = memberKeysThetaFriends.get(selectedYearIndex);
                 slider.setProgress(lastProgress);
                 tv.setDegree(slider.getProgress());
                 tv.invalidate();
                 //Toast.makeText(mContext, "selectedYear: " + selectedYear, Toast.LENGTH_SHORT).show();
-                tv.getSelectedYear(selectedYear);
+                tv.getSelectedKey(selectedYear);
                 yearPickerDialogDismissedByPositiveButton = true;
             }
         });
         yearPickerDialogBuilder.setNegativeButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // do nothing
-                //Toast.makeText(mContext, "Year Picker Dismissed" + templeYearsThetaFriends.size(), Toast.LENGTH_SHORT).show();
             }
         });
         yearPickerDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
