@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">BYU-H 历史</string>
+
+    <string-array name="SpiralEffect">
+        <item>默认</item>
+        <item>旋转</item>
+        <item>变焦</item>
+        <item>3D</item>
+    </string-array>
+    <string-array name="SpiralEffect_value">
+        <item>static</item>
+        <item>spin</item>
+        <item>zoom</item>
+        <item>threeD</item>
+    </string-array>+
+
+    <string name="SpiralEffectTitle">螺旋效果</string>
+    <string name="SpiralEffectSummary">为螺旋选择一个动画样式</string>
+
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+
+    <string name="years_of_temples">圣殿奉献时间:</string>
+    <string name="welcome_to_view">欢迎欣赏</string>
+    <string name="lds_temples">后期圣殿！</string>
+    <string name="future_temples">即将奉献的圣殿</string>
+
+    <string name="about_content_one">此应用由杨百翰大学夏威夷分校学生张力天在杰弗里·德拉普尔教授指导下编写。</string>
+    <string name="about_content_two">访问应用网站</string>
+    <string name="about_content_three">圣殿图片知识版权由耶稣基督后期圣徒教会所有，此应用在经其许可的条件下使用。</string>
+    <string name="about_content_four">此应用是由杨百翰大学夏威夷分校资助的研究项目。</string>
+
+    <string name="return_button">返回</string>
+    <string name="website_button">网站</string>
+
+
+    <string-array name="language_prefs">
+        <item>中文</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="language_prefs_value">
+        <item>chinese</item>
+        <item>english</item>
+    </string-array>
+
+    <string name="language_prefs_title">语言</string>
+    <string name="language_prefs_summary">选择应用显示语言</string>
+
+    <string name="show_label_title">时间年份</string>
+    <string name="show_label_on">事件年份会在每张照片上显示</string>
+    <string name="show_label_off">隐藏事件年份</string>
+    <string name="temples_under_construction">建设中的圣殿</string>
+    <string name="view_temples_dedicated_In">奉献的圣殿</string>
+    <string name="view">显示</string>
+    <string name="you_didnt_pick_any_year">你没有选择任何年份</string>
+    <string name="year">年</string>
+    <string name="first_temple">第一座圣殿奉献于：</string>
+    <string name="app_website_link">http://latterdaytemples.litianzhang.com/android-chinese/</string>
+    <string name="kirtland_temple_is_the_oldest_temple">这是BYU-H历史上第一件事件</string>
+    <string name="dubai_temple_is_the_most_recent_temple">这是BYU-H历史上最近一次记录的事件</string>
+    <string name="events">事件</string>
+
+</resources>
