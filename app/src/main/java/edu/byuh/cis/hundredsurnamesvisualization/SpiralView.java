@@ -39,7 +39,7 @@ import static java.lang.Boolean.TRUE;
 
 public class SpiralView extends View {
 
-    private Paint bluePaint, redPaint, spiralPaint, yearDisplayPaint;
+    private Paint bluePaint, redPaint, spiralPaint;
     private float screenWidth, screenHeight;
     public float theta;
     private Path spiralLine;
@@ -115,7 +115,6 @@ public class SpiralView extends View {
         coordinatesAndSizesUpdated = FALSE;
         orientationJustChanged = FALSE;
         movingCoordinatesLastTime = new ArrayList<>();
-        yearDisplayPaint = new Paint();
         selectedKey = "";
 
         noImageCirclePaint = new Paint();
@@ -628,14 +627,12 @@ public class SpiralView extends View {
             centerX = screenWidth / 2 + 3 * screenWidth / 16;
             centerY = screenHeight / 2;
             ultimateScreenWidth = Math.min(windowHeight, windowWidth);
-            yearDisplayPaint.setTextSize((int)(2 * screenHeight / 25));
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             screenWidth = c.getWidth();
             screenHeight = c.getHeight();
             centerX = screenWidth / 2;
             centerY = screenHeight / 2;
             ultimateScreenWidth = screenWidth;
-            yearDisplayPaint.setTextSize((int)(screenHeight / 25));
             //Log.d("PORTRAIT ", "|||||||||||||||||||||||||||||" + screenWidth);
         }
         //Log.d("CENTER X ", centerX + " ");
@@ -734,20 +731,15 @@ public class SpiralView extends View {
             } else {
                 temp = screenWidth;
             }
-            ImageCache.init(getResources(), temp, screenHeight);
 
-            allLargeImageIds = ImageCache.getAllLargeImagesIds();
-            allObjectInfoFileIds = ImageCache.getAllInfoFilesIds();
-
-            memberObjects = ImageCache.getMemberObjectsList(); // more OO
+            DataHolder dataHolder = new DataHolder(getContext(), temp/4);
+            allLargeImageIds = dataHolder.allLargeImageIds;
+            allObjectInfoFileIds = dataHolder.allObjectInfoFileIds;
+            memberObjects = dataHolder.memberObjects;
 
             readLinksFile();
             readInfoFile();
 
-
-            yearDisplayPaint.setColor(Color.parseColor("#def2f1"));
-            yearDisplayPaint.setStyle(Paint.Style.FILL);
-            yearDisplayPaint.setTextAlign(Paint.Align.CENTER);
         }
 
         placeAllCircles(c);
@@ -755,7 +747,7 @@ public class SpiralView extends View {
 
     }
 
-    public void drawMemberLabels(float ts, Member t, Canvas c) { // more OO
+    public void drawMemberLabels(Member t, Canvas c) { // more OO
 
         float newCurrentMemberRadius = t.size * screenWidth / 2;
 
@@ -822,7 +814,7 @@ public class SpiralView extends View {
                 t.y = spiralCoordinates.get((int) (ts)).get(1);
 
                 actuallyDrawing(t, c, thisMemberIndex);
-                drawMemberLabels(ts, t, c);
+                drawMemberLabels(t, c);
 
                 //add all on screen members index to a array list once the slider stopped moving,
                 float currentMemberRadius = t.size * screenWidth / 2;
