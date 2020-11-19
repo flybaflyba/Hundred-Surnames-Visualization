@@ -498,7 +498,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView tx = new TextView(this);
         tx.setGravity(Gravity.CENTER);
 
-        yearPickerString = getResources().getString(R.string.view) + selectedYear + " " + getResources().getString(R.string.events); //英文
+        yearPickerString = getResources().getString(R.string.view) + selectedYear + " " + getResources().getString(R.string.objects); //英文
 
         tx.setText(yearPickerString);
         tx.setTextSize(20);
@@ -510,7 +510,7 @@ public class MainActivity extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int i, int i1) {
                 selectedYear = temporary[i1]; // pass this selected value to dialog button, we can use a field so that it can be accessed from inner class
                 selectedYearIndex = i1;
-                yearPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.events); //英文
+                yearPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.objects); //英文
                 tx.setText(yearPickerString);
             }
         });
@@ -555,7 +555,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDismiss(DialogInterface dialog) {
                 //处理监听事件
                 if(!yearPickerDialogDismissedByPositiveButton) {
-                    Toast.makeText(mContext, getResources().getString(R.string.you_didnt_pick_any_year), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.you_didnt_pick_any), Toast.LENGTH_SHORT).show();
                 }
                 yearPickerDialogDismissedByPositiveButton = false;
             }

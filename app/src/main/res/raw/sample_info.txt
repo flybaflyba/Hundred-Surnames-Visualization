@@ -1,0 +1,3 @@
+This is a smaple info file. 
+If need, each object has a info file. 
+The content of this file can be shown once an object is clicked.
