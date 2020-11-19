@@ -134,7 +134,7 @@
         android:id="@+id/seekBar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="4400"
+
         android:progress="0"
         android:progressDrawable="@drawable/slider"
         android:thumb="@drawable/slider_button"

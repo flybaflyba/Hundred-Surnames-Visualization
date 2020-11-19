@@ -24,7 +24,7 @@ public class DataHolder {
 
     private ArrayList<Integer> getAllLargeImagesIds() {
         ArrayList<Integer> allLargeImagesIds = new ArrayList<>();
-        for (int i = 0; i <= 144; i ++) {
+        for (int i = 0; i <= 99; i ++) {
             allLargeImagesIds.add(R.drawable.no_image_replacement);
             // repeat this step to add all large images' id to a list
         }
@@ -34,7 +34,7 @@ public class DataHolder {
     private ArrayList<Integer> getAllInfoFilesIds() {
 
         ArrayList<Integer> allInfoFilesIds = new ArrayList<>();
-        for (int i = 0; i <= 144; i ++) {
+        for (int i = 0; i <= 99; i ++) {
             allInfoFilesIds.add(R.raw.sample_info);
             // repeat this step to add all large images' id to a list
         }
@@ -48,7 +48,7 @@ public class DataHolder {
 
         ArrayList<Member> allObjectsList = new ArrayList<>();
 
-        for (int i = 0; i <= 144; i ++) {
+        for (int i = 0; i <= 99; i ++) {
             allObjectsList.add(new Member(empty, 0f, 0f, 0f));
             // repeat this step to create objects with all resized bitmaps
         }

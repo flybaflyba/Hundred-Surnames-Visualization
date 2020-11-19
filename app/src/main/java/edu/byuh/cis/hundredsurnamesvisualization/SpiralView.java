@@ -55,7 +55,7 @@ public class SpiralView extends View {
     private ArrayList<Float> sizes;
     private ArrayList<String> allMemberLinks;
     private ArrayList<String> allEventsDates;
-    public ArrayList<String> allYears;
+    public ArrayList<String> allKeys;
     private int eachIndex;
     private Matrix currentMemberMatrix;
     private float topCoordinateInSpiralX;
@@ -84,11 +84,13 @@ public class SpiralView extends View {
     private AlertDialog singleMemberDialog;
     private Paint noImageCirclePaint;
     private String MemberUrl;
+    private int numOfMembers;
 
 
-    public SpiralView(Context context) {
+    public SpiralView(Context context, int num) {
         super(context);
 
+        numOfMembers = num;
         bluePaint = new Paint();
         bluePaint.setColor(Color.parseColor("#17252a"));
         bluePaint.setStyle(Paint.Style.FILL);
@@ -109,8 +111,8 @@ public class SpiralView extends View {
         oneOnScreenMember = new ArrayList<>();
         allMemberLinks = new ArrayList<>();
         allEventsDates = new ArrayList<>();
-        allYears = new ArrayList<>();
-        theta = 4400;
+        allKeys = new ArrayList<>();
+        theta = 0;
         currentMemberMatrix = new Matrix();
         coordinatesAndSizesUpdated = FALSE;
         orientationJustChanged = FALSE;
@@ -215,7 +217,7 @@ public class SpiralView extends View {
                 //read each line
                 while (( line = br.readLine()) != null) {
                     allEventsDates.add(line+"\n");
-                    allYears.add(line.substring(line.length() - 5));
+                    allKeys.add(line.substring(line.length() - 5));
                 }
                 allMemberInfoFile.close();
 
@@ -359,7 +361,7 @@ public class SpiralView extends View {
 
                     if (distanceToCurrentCoordinate < eachSize) {
                         if (singleMemberViewOpened == false) {
-                            if (eachIndex <= 144) { // it's useless here, it;'s for the older version of the app, this number should be equal the the number of objects - 1, so that all circles can b bring up detail dialog.
+                            if (eachIndex <= numOfMembers - 1) { // it's useless here, it;'s for the older version of the app, this number should be equal the the number of objects - 1, so that all circles can b bring up detail dialog.
                                 singleMemberViewOpened = true;
                                 //Log.d("eachIndex is ", eachIndex + " when click on circle");
                                 singleMemberDialog();
@@ -408,7 +410,7 @@ public class SpiralView extends View {
 
         if (eachIndex == 0) {
             singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex + 1));
-        } else if (eachIndex == 144){
+        } else if (eachIndex == numOfMembers - 1){
             singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex)); // no next event
         } else {
             singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
@@ -456,12 +458,12 @@ public class SpiralView extends View {
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     // do nothing
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    if (realEachIndex < 144) {
+                    if (realEachIndex < numOfMembers - 1) {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
                             singleMemberImageView.moveImage("left");
                             int nextMemberId = 0;
-                            if (realEachIndex + 1 > 144) {
+                            if (realEachIndex + 1 > numOfMembers - 1) {
                                 nextMemberId = allLargeImageIds.get(realEachIndex);
                             } else {
                                 nextMemberId = allLargeImageIds.get(realEachIndex + 1);
@@ -624,7 +626,8 @@ public class SpiralView extends View {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             screenWidth = c.getWidth() / 2;
             screenHeight = c.getHeight();
-            centerX = screenWidth / 2 + 3 * screenWidth / 16;
+            centerX = screenWidth;
+//            centerX = screenWidth / 2 + 3 * screenWidth / 16;
             centerY = screenHeight / 2;
             ultimateScreenWidth = Math.min(windowHeight, windowWidth);
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -787,7 +790,7 @@ public class SpiralView extends View {
         selectedKeyMemberFramePaint.setStyle(Paint.Style.FILL);
 
         // if current member is with selected year then draw a circle frame
-        if (allYears.get(thisMemberIndex).equals(selectedKey)) {
+        if (allKeys.get(thisMemberIndex).equals(selectedKey)) {
             c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1.1f , selectedKeyMemberFramePaint);
 
         } else {

@@ -35,8 +35,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.GREEN;
@@ -62,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout lnl;
     private LinearLayout lnlH;
     private Boolean sliderChangedByButton = false;
-    private String selectedYear;
-    private int selectedYearIndex;
-    private String yearPickerString;
-    private ArrayList<Integer> memberKeysThetaFriends = new ArrayList<Integer>();
-    private AlertDialog.Builder yearPickerDialogBuilder;
-    private boolean yearPickerDialogDismissedByPositiveButton;
+    private String selectedKey;
+    private int selectedKeyIndex;
+    private String keyPickerString;
+//    private ArrayList<Integer> memberKeysThetaFriends = new ArrayList<Integer>(); // use this if there the same key has more than one members
+    private AlertDialog.Builder keyPickerDialogBuilder;
+    private boolean keyPickerDialogDismissedByPositiveButton;
     private String spaceDependingOnLanguage = "";
     private int mainColor = Color.parseColor("#931b34");
     private int sliderButtonColor = Color.parseColor("#932b34");
@@ -139,13 +137,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         //(245, 300, 325, 340, 380, 420, 450, 490, 520, 540, 570, 610, 680, 715, 750, 780, 810, 850, 890, 1070, 1290, 1430, 1520, 1540, 1575, 1630, 1660, 1700, 1710, 1755, 1850, 1890, 2315, 3330, 3540, 3720, 3800, 3850, 3950, 4030, 4110, 4200, 4300, 4400, 4520, 4540, 4650, 4785, 4935, 5100, 5110, 5320, 5330, 5800, 6990)
-        List<Integer> temporaryHolder = Arrays.asList(60, 80, 100, 160, 220, 250, 280, 310, 360, 390, 420, 540, 600, 630, 740, 770, 830, 860, 920, 970, 1000, 1060, 1090, 1120, 1180, 1230, 1260, 1380, 1410, 1440, 1530, 1560, 1580, 1610, 1640, 1730, 1760, 1830, 1870, 1960, 2190, 2270, 2360, 2690, 2840, 3240, 3610, 3910, 4130, 4400);
-        for (int i : temporaryHolder) {
-            memberKeysThetaFriends.add(i);
-        }
-        yearPickerDialogBuilder = new AlertDialog.Builder(this);
-        yearPickerDialogDismissedByPositiveButton = false;
-        selectedYearIndex = 49;
+        // use this if there the same key has more than one members
+//        List<Integer> temporaryHolder = Arrays.asList(60, 80, 100, 160, 220, 250, 280, 310, 360, 390, 420, 540, 600, 630, 740, 770, 830, 860, 920, 970, 1000, 1060, 1090, 1120, 1180, 1230, 1260, 1380, 1410, 1440, 1530, 1560, 1580, 1610, 1640, 1730, 1760, 1830, 1870, 1960, 2190, 2270, 2360, 2690, 2840, 3240, 3610, 3910, 4130, 4400);
+//        for (int i : temporaryHolder) {
+//            memberKeysThetaFriends.add(i);
+//        }
+
+        keyPickerDialogBuilder = new AlertDialog.Builder(this);
+        keyPickerDialogDismissedByPositiveButton = false;
+        selectedKeyIndex = 0;
 
 
 
@@ -161,21 +161,35 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT, 1);
 
-        tv = new SpiralView(this);
+
+        // this number must be consist with the number of bitmaps, info files we load in data holder
+        // if we load less in data holder, app will crash when click on the last member
+        // if we load more, app won't crash, but the extra member won't enter the spiral as slider reaches its end
+        // we could do this automatically by counting the lines of members summary file... maybe later, too much for today, HaHa
+        int numOfMembers = 100;
+
+        tv = new SpiralView(this, numOfMembers);
         tv.getWindowSize(width, height);
         tv.setLayoutParams(nice);
         slider = findViewById(R.id.seekBar3);
         //slider.setBackgroundColor(Color.parseColor("#669cff"));
         //slider.setBackgroundColor(Color.parseColor("#202224"));
         slider.setBackgroundColor(mainColor);
-        slider.setProgress(4400);
+
+        int sliderMax = numOfMembers * 30;
+
+        slider.setMax(sliderMax);
+        slider.setProgress(0);
         //slider.setBackgroundColor(Color.parseColor("#292d30"));
 
         //android:progressDrawable="@drawable/slider"
 
         timA = new MyTimer();
 
-        progress = 4400;
+        progress = 0;
+//        android:max="4400"
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             slider.setMin(30);
@@ -420,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
                 showAboutDialog();
                 break;
             case BLUE:
-                showYearPickerDialog();
+                showKeyPickerDialog();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -461,106 +475,107 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public void showYearPickerDialog() {
+    public void showKeyPickerDialog() {
 
-        final NumberPicker yearPickerPicker = new NumberPicker(this);
+        final NumberPicker keyPickerPicker = new NumberPicker(this);
 
-        final ArrayList<String> allYearsWithoutDuplicates = new ArrayList<>();
-        for (int i=0; i<tv.allYears.size(); i++) {
-            String toBeAdded = tv.allYears.get(i);
-            if(!allYearsWithoutDuplicates.contains(toBeAdded)) {
-                allYearsWithoutDuplicates.add(toBeAdded);
+        final ArrayList<String> allKeysWithoutDuplicates = new ArrayList<>();
+        for (int i = 0; i<tv.allKeys.size(); i++) {
+            String toBeAdded = tv.allKeys.get(i);
+            if(!allKeysWithoutDuplicates.contains(toBeAdded)) {
+                allKeysWithoutDuplicates.add(toBeAdded);
             }
         }
-        // i have to use this for loop to covert allYears arraylist to String[], I used toArray() on the arraylist, but did work
-        final String[] temporary = new String[allYearsWithoutDuplicates.size()];
-        for (int i = 0; i < allYearsWithoutDuplicates.size(); i++) {
-            temporary[i] = allYearsWithoutDuplicates.get(i);
+        // i have to use this for loop to covert allKeys arraylist to String[], I used toArray() on the arraylist, but did work
+        final String[] temporary = new String[allKeysWithoutDuplicates.size()];
+        for (int i = 0; i < allKeysWithoutDuplicates.size(); i++) {
+            temporary[i] = allKeysWithoutDuplicates.get(i);
         }
 
 
         //Toast.makeText(mContext, "temporary length is: " + temporary.length + "", Toast.LENGTH_SHORT).show();
-        //Toast.makeText(mContext, "allYeas size: " + tv.allYears.size() + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "allYeas size: " + tv.allKeys.size() + "", Toast.LENGTH_SHORT).show();
         //Toast.makeText(mContext, temporary[100] + "", Toast.LENGTH_SHORT).show();
 
-        yearPickerPicker.setDisplayedValues(temporary); //设置文字
-        yearPickerPicker.setMaxValue(temporary.length - 1); //设置最大值
-        //yearPickerPicker.setValue(0);
-        yearPickerPicker.setValue(selectedYearIndex);
+        keyPickerPicker.setDisplayedValues(temporary); //设置文字
+        keyPickerPicker.setMaxValue(temporary.length - 1); //设置最大值
+        //keyPickerPicker.setValue(0);
+        keyPickerPicker.setValue(selectedKeyIndex);
 
-        if (selectedYear == null) {
-            selectedYear = allYearsWithoutDuplicates.get(allYearsWithoutDuplicates.size()-1); // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in SpiralView through method.
+        if (selectedKey == null) {
+            selectedKey = allKeysWithoutDuplicates.get(allKeysWithoutDuplicates.size()-1); // we need this here, other wise, selectedKey is null when first time open key keyPickerPicker dialog and not moving the keyPickerPicker when passed in SpiralView through method.
         }
-        //yearPickerPicker.setTextColor(Color.GRAY);
+        //keyPickerPicker.setTextColor(Color.GRAY);
 
         // we can use this text view to pass over want ever year is selected, or we can use a field so that it can be accessed from inner class
         // this text view is the title
         final TextView tx = new TextView(this);
         tx.setGravity(Gravity.CENTER);
 
-        yearPickerString = getResources().getString(R.string.view) + selectedYear + " " + getResources().getString(R.string.objects); //英文
+        keyPickerString = getResources().getString(R.string.view) + selectedKey + " " + getResources().getString(R.string.objects); //英文
 
-        tx.setText(yearPickerString);
+        tx.setText(keyPickerString);
         tx.setTextSize(20);
         tx.setPadding(5,20,5,5);
         tx.setTextColor(Color.BLACK);
 
-        yearPickerPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        keyPickerPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int i, int i1) {
-                selectedYear = temporary[i1]; // pass this selected value to dialog button, we can use a field so that it can be accessed from inner class
-                selectedYearIndex = i1;
-                yearPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.objects); //英文
-                tx.setText(yearPickerString);
+                selectedKey = temporary[i1]; // pass this selected value to dialog button, we can use a field so that it can be accessed from inner class
+                selectedKeyIndex = i1;
+                keyPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.objects); //英文
+                tx.setText(keyPickerString);
             }
         });
 
-        LinearLayout yearPickerView = new LinearLayout(this);
-        yearPickerView.setOrientation(LinearLayout.VERTICAL);
-        yearPickerView.addView(tx);
-        yearPickerView.addView(yearPickerPicker);
+        LinearLayout keyPickerView = new LinearLayout(this);
+        keyPickerView.setOrientation(LinearLayout.VERTICAL);
+        keyPickerView.addView(tx);
+        keyPickerView.addView(keyPickerPicker);
 
         //builder.setTitle("hi");
-        yearPickerDialogBuilder.setView(yearPickerView);
-        yearPickerDialogBuilder.setCancelable(true);
+        keyPickerDialogBuilder.setView(keyPickerView);
+        keyPickerDialogBuilder.setCancelable(true);
 
         // user cannot enter a value
-        //yearPickerPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        //keyPickerPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
-        yearPickerDialogBuilder.setPositiveButton(getResources().getString(R.string.view), new DialogInterface.OnClickListener() {
+        keyPickerDialogBuilder.setPositiveButton(getResources().getString(R.string.view), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // this enables year yearPickerPicker setOnValueChangedListener get called when click on positive button after entering a value.
-                yearPickerPicker.clearFocus();
+                // this enables year keyPickerPicker setOnValueChangedListener get called when click on positive button after entering a value.
+                keyPickerPicker.clearFocus();
                 //set onclick method for this button below
                 //Toast.makeText(mContext, yearPickerString, Toast.LENGTH_SHORT).show();
                 //we can use this selected year value to update spiral
                 //Toast.makeText(mContext, "selectedYearIndex: " + selectedYearIndex, Toast.LENGTH_SHORT).show();
-                progress = memberKeysThetaFriends.get(selectedYearIndex);
+//                progress = memberKeysThetaFriends.get(selectedKeyIndex); // use this if there the same key has more than one members
+                progress = 30 * selectedKeyIndex;
                 slider.setProgress(lastProgress);
                 tv.setDegree(slider.getProgress());
                 tv.invalidate();
                 //Toast.makeText(mContext, "selectedYear: " + selectedYear, Toast.LENGTH_SHORT).show();
-                tv.getSelectedKey(selectedYear);
-                yearPickerDialogDismissedByPositiveButton = true;
+                tv.getSelectedKey(selectedKey);
+                keyPickerDialogDismissedByPositiveButton = true;
             }
         });
-        yearPickerDialogBuilder.setNegativeButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
+        keyPickerDialogBuilder.setNegativeButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // do nothing
             }
         });
-        yearPickerDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        keyPickerDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 //处理监听事件
-                if(!yearPickerDialogDismissedByPositiveButton) {
+                if(!keyPickerDialogDismissedByPositiveButton) {
                     Toast.makeText(mContext, getResources().getString(R.string.you_didnt_pick_any), Toast.LENGTH_SHORT).show();
                 }
-                yearPickerDialogDismissedByPositiveButton = false;
+                keyPickerDialogDismissedByPositiveButton = false;
             }
         });
 
-        final AlertDialog dialog = yearPickerDialogBuilder.create();
+        final AlertDialog dialog = keyPickerDialogBuilder.create();
         dialog.show();
 
         Button btnPositive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
