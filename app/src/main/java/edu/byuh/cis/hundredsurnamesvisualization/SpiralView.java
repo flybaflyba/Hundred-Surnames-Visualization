@@ -54,7 +54,7 @@ public class SpiralView extends View {
     private ArrayList<ArrayList<Float>> spiralCoordinates;
     private ArrayList<Float> sizes;
     private ArrayList<String> allMemberLinks;
-    private ArrayList<String> allEventsDates;
+    private ArrayList<String> allSummaries;
     public ArrayList<String> allKeys;
     private int eachIndex;
     private Matrix currentMemberMatrix;
@@ -110,7 +110,7 @@ public class SpiralView extends View {
         onScreenMembers = new ArrayList<>();
         oneOnScreenMember = new ArrayList<>();
         allMemberLinks = new ArrayList<>();
-        allEventsDates = new ArrayList<>();
+        allSummaries = new ArrayList<>();
         allKeys = new ArrayList<>();
         theta = 0;
         currentMemberMatrix = new Matrix();
@@ -216,8 +216,8 @@ public class SpiralView extends View {
                 String line;
                 //read each line
                 while (( line = br.readLine()) != null) {
-                    allEventsDates.add(line+"\n");
-                    allKeys.add(line.substring(line.length() - 5));
+                    allSummaries.add(line+"\n");
+                    allKeys.add(line+"\n");
                 }
                 allMemberInfoFile.close();
 
@@ -439,7 +439,7 @@ public class SpiralView extends View {
         MemberUrl = memberObjects.get(realEachIndex).link;
 
         final TextView singleMemberDialogTitleView = new TextView(getContext());
-        singleMemberDialogTitleView.setText(allEventsDates.get(realEachIndex));
+        singleMemberDialogTitleView.setText(allSummaries.get(realEachIndex));
         singleMemberDialogTitleView.setTextSize(20);
         singleMemberDialogTitleView.setPadding(0,20,0,0);
         singleMemberDialogTitleView.setTextColor(Color.BLACK);
@@ -470,7 +470,7 @@ public class SpiralView extends View {
                             }
                             singleMemberImageView.updateThreeMembersBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), nextMemberId);
                             MemberUrl = memberObjects.get(realEachIndex).link;
-                            singleMemberDialogTitleView.setText(allEventsDates.get(realEachIndex));
+                            singleMemberDialogTitleView.setText(allSummaries.get(realEachIndex));
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
                             singleMemberTextView.setText(oneMemberInfo);
@@ -508,7 +508,7 @@ public class SpiralView extends View {
                             }
                             singleMemberImageView.updateThreeMembersBitmapIds(allLargeImageIds.get(realEachIndex), lastMemberId, allLargeImageIds.get(realEachIndex + 1));
                             MemberUrl = memberObjects.get(realEachIndex).link;
-                            singleMemberDialogTitleView.setText(allEventsDates.get(realEachIndex));
+                            singleMemberDialogTitleView.setText(allSummaries.get(realEachIndex));
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
                             singleMemberTextView.setText(oneMemberInfo);
@@ -764,11 +764,11 @@ public class SpiralView extends View {
 
         int thisMemberIndex = memberObjects.indexOf(t); // more OO
 
-        String thisMemberName = allEventsDates.get(thisMemberIndex);
+        String thisMemberName = allSummaries.get(thisMemberIndex);
 
 
         if (sliderMoving == false && show_label) {
-            c.drawText(thisMemberName.substring(thisMemberName.length() - 5), t.x, t.y + newCurrentMemberRadius - thisMemberLabelPaint.getTextSize()/2, thisMemberLabelPaint);
+            c.drawText(thisMemberName, t.x, t.y + newCurrentMemberRadius - thisMemberLabelPaint.getTextSize()/2, thisMemberLabelPaint);
         }
 
     }

@@ -11,7 +11,7 @@ public class DataHolder {
 
     public ArrayList<Integer> allLargeImageIds;
     public ArrayList<Integer> allObjectInfoFileIds;
-    public ArrayList<Member> memberObjects = new ArrayList<>();
+    public ArrayList<Member> memberObjects;
 
     public DataHolder(Context context, float w) {
 
