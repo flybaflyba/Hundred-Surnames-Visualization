@@ -781,8 +781,6 @@ public class SpiralView extends View {
 
     public void actuallyDrawing(Member t, Canvas c, int thisMemberIndex) { // more OO
 
-
-
         float newCurrentMemberRadius = t.size * screenWidth / 2;
 
         Paint thisMemberPaint = new Paint();
@@ -791,16 +789,14 @@ public class SpiralView extends View {
         thisMemberPaint.setTextSize((int)(newCurrentMemberRadius));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
         thisMemberPaint.setTextAlign(Paint.Align.CENTER);
 
-        currentMemberMatrix.setScale(4 * t.size, 4 * t.size);
+//        currentMemberMatrix.setScale(4 * t.size, 4 * t.size);
 //        currentMemberMatrix.postTranslate(t.x - t.image.getWidth()  * t.size * 2, t.y - t.image.getHeight() * t.size * 2); // more OO
 
-        currentMemberMatrix.postTranslate(t.x - t.size * t.size * 2, t.y - t.size * t.size * 2); // more OO
-
+        // if current member is with selected year then draw a circle frame
         Paint selectedKeyMemberFramePaint = new Paint();
         selectedKeyMemberFramePaint.setColor(Color.parseColor("#287a78"));
         selectedKeyMemberFramePaint.setStyle(Paint.Style.FILL);
 
-        // if current member is with selected year then draw a circle frame
         if (allKeys.get(thisMemberIndex).equals(selectedKey)) {
             c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1.1f , selectedKeyMemberFramePaint);
 

@@ -550,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
                 //we can use this selected year value to update spiral
                 //Toast.makeText(mContext, "selectedYearIndex: " + selectedYearIndex, Toast.LENGTH_SHORT).show();
 //                progress = memberKeysThetaFriends.get(selectedKeyIndex); // use this if there the same key has more than one members
-                progress = 30 * selectedKeyIndex;
+                progress = 30 * (selectedKeyIndex+1);
                 slider.setProgress(lastProgress);
                 tv.setDegree(slider.getProgress());
                 tv.invalidate();
