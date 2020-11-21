@@ -3,6 +3,7 @@ package edu.byuh.cis.hundredsurnamesvisualization;
 import android.graphics.Bitmap;
 
 public class Member {
+    String text;
     Bitmap image;
     Float size;
     Float x;
@@ -12,6 +13,15 @@ public class Member {
 
     public Member(Bitmap imageP, Float sizeP, Float xP, Float yP) {
         image = imageP;
+        size = sizeP;
+        x = xP;
+        y = yP;
+        role = "";
+        link = "";
+    }
+
+    public Member(String textP, Float sizeP, Float xP, Float yP) {
+        text = textP;
         size = sizeP;
         x = xP;
         y = yP;

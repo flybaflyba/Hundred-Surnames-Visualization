@@ -206,33 +206,33 @@ public class SpiralView extends View {
         }
     }
 
-    public void readInfoFile() {
-        try {
-            InputStream allMemberInfoFile =  this.getResources().openRawResource(R.raw.all_objects_summaries);
-            if (allMemberInfoFile != null)
-            {
-                InputStreamReader ir = new InputStreamReader(allMemberInfoFile);
-                BufferedReader br = new BufferedReader(ir);
-                String line;
-                //read each line
-                while (( line = br.readLine()) != null) {
-                    allSummaries.add(line+"\n");
-                    allKeys.add(line+"\n");
-                }
-                allMemberInfoFile.close();
-
-            }
-        }
-        catch (java.io.FileNotFoundException e)
-        {
-            Log.d("TestFile", "The File doesn't not exist.");
-        }
-        catch (IOException e)
-        {
-            Log.d("TestFile", e.getMessage());
-        }
-
-    }
+//    public void readInfoFile() {
+//        try {
+//            InputStream allMemberInfoFile =  this.getResources().openRawResource(R.raw.all_objects_summaries);
+//            if (allMemberInfoFile != null)
+//            {
+//                InputStreamReader ir = new InputStreamReader(allMemberInfoFile);
+//                BufferedReader br = new BufferedReader(ir);
+//                String line;
+//                //read each line
+//                while (( line = br.readLine()) != null) {
+//                    allSummaries.add(line+"\n");
+//                    allKeys.add(line+"\n");
+//                }
+//                allMemberInfoFile.close();
+//
+//            }
+//        }
+//        catch (java.io.FileNotFoundException e)
+//        {
+//            Log.d("TestFile", "The File doesn't not exist.");
+//        }
+//        catch (IOException e)
+//        {
+//            Log.d("TestFile", e.getMessage());
+//        }
+//
+//    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -741,7 +741,9 @@ public class SpiralView extends View {
             memberObjects = dataHolder.memberObjects;
 
             readLinksFile();
-            readInfoFile();
+//            readInfoFile();
+            allSummaries = dataHolder.allSummaries;
+            allKeys = dataHolder.allKeys;
 
         }
 
