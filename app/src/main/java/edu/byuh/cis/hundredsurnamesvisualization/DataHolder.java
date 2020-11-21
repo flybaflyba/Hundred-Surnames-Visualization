@@ -24,8 +24,9 @@ public class DataHolder {
 
         allLargeImageIds = getAllLargeImagesIds();
         allObjectInfoFileIds = getAllInfoFilesIds();
-        memberObjects = getMemberObjectsList(context, w);
+
         readInfoFile(context);
+        memberObjects = getMemberObjectsList(context, w);
 
 
     }
@@ -52,10 +53,15 @@ public class DataHolder {
     private ArrayList<Member> getMemberObjectsList(Context context, float w) {
         ArrayList<Member> allObjectsList = new ArrayList<>();
 
-        Bitmap empty;
-        empty = loadAndScale(context.getResources(),R.drawable.no_image_replacement,w);
-        for (int i = 0; i <= 99; i ++) {
-            allObjectsList.add(new Member(empty, 0f, 0f, 0f));
+//        Bitmap empty;
+//        empty = loadAndScale(context.getResources(),R.drawable.no_image_replacement,w);
+//        for (int i = 0; i <= 99; i ++) {
+//            allObjectsList.add(new Member(empty, 0f, 0f, 0f));
+//            // repeat this step to create objects with all resized bitmaps
+//        }
+
+        for (String s:allSummaries) {
+            allObjectsList.add(new Member(s, 0f, 0f, 0f));
             // repeat this step to create objects with all resized bitmaps
         }
 

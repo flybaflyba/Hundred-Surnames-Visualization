@@ -782,10 +782,19 @@ public class SpiralView extends View {
     public void actuallyDrawing(Member t, Canvas c, int thisMemberIndex) { // more OO
 
 
+
         float newCurrentMemberRadius = t.size * screenWidth / 2;
 
+        Paint thisMemberPaint = new Paint();
+        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberPaint.setStyle(Paint.Style.FILL);
+        thisMemberPaint.setTextSize((int)(newCurrentMemberRadius));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
+        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
+
         currentMemberMatrix.setScale(4 * t.size, 4 * t.size);
-        currentMemberMatrix.postTranslate(t.x - t.image.getWidth()  * t.size * 2, t.y - t.image.getHeight() * t.size * 2); // more OO
+//        currentMemberMatrix.postTranslate(t.x - t.image.getWidth()  * t.size * 2, t.y - t.image.getHeight() * t.size * 2); // more OO
+
+        currentMemberMatrix.postTranslate(t.x - t.size * t.size * 2, t.y - t.size * t.size * 2); // more OO
 
         Paint selectedKeyMemberFramePaint = new Paint();
         selectedKeyMemberFramePaint.setColor(Color.parseColor("#287a78"));
@@ -799,7 +808,18 @@ public class SpiralView extends View {
             // do nothing
         }
 
-        c.drawBitmap(t.image, currentMemberMatrix, null); // more OO
+
+
+
+        Paint.FontMetrics fontMetrics=thisMemberPaint.getFontMetrics();
+        float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
+        float baseline=t.y+distance;
+
+//        c.drawBitmap(t.image, currentMemberMatrix, null); // more OO
+//        c.drawBitmap(t.image, currentMemberMatrix, null);
+        c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1f, bluePaint);
+        c.drawText(t.text, t.x + newCurrentMemberRadius * 0.1f, baseline, thisMemberPaint);
+
 
     }
 
