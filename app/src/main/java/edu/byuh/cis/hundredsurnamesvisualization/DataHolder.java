@@ -16,8 +16,8 @@ public class DataHolder {
     public ArrayList<Member> memberObjects;
     public ArrayList<String> surnameCharactersSimplified;
     public ArrayList<String> surnameCharactersTraditional;
-
-    public ArrayList<String> surnamesPinyinSimplified;
+    public ArrayList<String> surnamePinyinsSimplified;
+    public ArrayList<String> surnamePinyinsCantonese;
 
 
     public DataHolder(Context context) {
@@ -26,9 +26,10 @@ public class DataHolder {
         allObjectInfoFileIds = getAllInfoFilesIds();
         surnameCharactersSimplified = readFile(context, R.raw.surname_characters_simplified);
         surnameCharactersTraditional = readFile(context, R.raw.surname_characters_traditional);
-        surnamesPinyinSimplified = readFile(context, R.raw.surnames_pinyin_simplified);
+        surnamePinyinsSimplified = readFile(context, R.raw.surname_pinyins_simplified);
+        surnamePinyinsCantonese = readFile(context, R.raw.surname_pinyins_cantonese);
 
-        memberObjects = getMemberObjectsList(surnameCharactersSimplified, surnamesPinyinSimplified);
+        memberObjects = getMemberObjectsList(surnameCharactersSimplified, surnamePinyinsSimplified);
 
 
     }
@@ -58,7 +59,7 @@ public class DataHolder {
 //        }
 
         for (int i=0; i<surnameCharactersSimplified.size(); i++) {
-            allObjectsList.add(new Member(surnameCharactersSimplified.get(i), surnamesPinyinSimplified.get(i), surnameCharactersTraditional.get(i),0f, 0f, 0f));
+            allObjectsList.add(new Member(surnameCharactersSimplified.get(i), surnamesPinyinSimplified.get(i), surnameCharactersTraditional.get(i), surnamePinyinsCantonese.get(i),0f, 0f, 0f));
         }
 
         return allObjectsList;

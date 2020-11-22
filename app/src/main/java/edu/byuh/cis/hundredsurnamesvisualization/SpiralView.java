@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -89,6 +87,7 @@ public class SpiralView extends View {
     private String MemberUrl;
     private int numOfMembers;
     private String character_option = "simplified";
+    private String pinyin_option = "simplified";
     private Paint thisMemberPaint;
 
 
@@ -447,7 +446,17 @@ public class SpiralView extends View {
 
         final TextView singleMemberDialogTitleView = new TextView(getContext());
 //        singleMemberDialogTitleView.setText(surnameCharactersSimplified.get(realEachIndex));
-        singleMemberDialogTitleView.setText(memberObjects.get(realEachIndex).pinyin);
+        String title = "N/A";
+        if (sliderMoving == false && show_label) {
+            if(pinyin_option.equals("simplified")){
+                title = memberObjects.get(realEachIndex).pinyin;
+            } else if(pinyin_option.equals("cantonese")){
+                title = memberObjects.get(realEachIndex).pinyinCantonese;
+            } else {
+                title = "N/A";
+            }
+        }
+        singleMemberDialogTitleView.setText(title);
         singleMemberDialogTitleView.setTextSize(20);
         singleMemberDialogTitleView.setPadding(0,20,0,0);
         singleMemberDialogTitleView.setTextColor(Color.BLACK);
@@ -490,7 +499,17 @@ public class SpiralView extends View {
 
                             MemberUrl = memberObjects.get(realEachIndex).link;
 //                            singleMemberDialogTitleView.setText(surnameCharactersSimplified.get(realEachIndex));
-                            singleMemberDialogTitleView.setText(memberObjects.get(realEachIndex).pinyin);
+                            String title = "N/A";
+                            if (sliderMoving == false && show_label) {
+                                if(pinyin_option.equals("simplified")){
+                                    title = memberObjects.get(realEachIndex).pinyin;
+                                } else if(pinyin_option.equals("cantonese")){
+                                    title = memberObjects.get(realEachIndex).pinyinCantonese;
+                                } else {
+                                    title = "N/A";
+                                }
+                            }
+                            singleMemberDialogTitleView.setText(title);
 
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
@@ -545,7 +564,17 @@ public class SpiralView extends View {
 
                             MemberUrl = memberObjects.get(realEachIndex).link;
 //                            singleMemberDialogTitleView.setText(surnameCharactersSimplified.get(realEachIndex));
-                            singleMemberDialogTitleView.setText(memberObjects.get(realEachIndex).pinyin);
+                            String title = "N/A";
+                            if (sliderMoving == false && show_label) {
+                                if(pinyin_option.equals("simplified")){
+                                    title = memberObjects.get(realEachIndex).pinyin;
+                                } else if(pinyin_option.equals("cantonese")){
+                                    title = memberObjects.get(realEachIndex).pinyinCantonese;
+                                } else {
+                                    title = "N/A";
+                                }
+                            }
+                            singleMemberDialogTitleView.setText(title);
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
                             // TODO
@@ -686,7 +715,8 @@ public class SpiralView extends View {
         show_label = PrefsActivity.getShowLabelPref(getContext());
         //Log.d("spiral effect ", spiral_effect + " ");
 
-        character_option = PrefsActivity.getCharactersOptionPref(getContext());
+        character_option = PrefsActivity.getCharacterOptionPref(getContext());
+        pinyin_option = PrefsActivity.getPinyinOptionPref(getContext());
 
 
         if (spiral_effect.equalsIgnoreCase("static") && staticCoordinatesGet <= 10) {
@@ -787,7 +817,7 @@ public class SpiralView extends View {
 //            readInfoFile();
             surnameCharactersSimplified = dataHolder.surnameCharactersSimplified;
 
-            allKeys = dataHolder.surnamesPinyinSimplified;
+            allKeys = dataHolder.surnamePinyinsSimplified;
 
         }
 
@@ -809,7 +839,13 @@ public class SpiralView extends View {
         thisMemberLabelPaint.setShadowLayer(20,0,0,Color.BLACK);
 
         if (sliderMoving == false && show_label) {
-            c.drawText(t.pinyin, t.x, t.y - newCurrentMemberRadius + thisMemberLabelPaint.getTextSize(), thisMemberLabelPaint);
+            if(pinyin_option.equals("simplified")){
+                c.drawText(t.pinyin, t.x, t.y - newCurrentMemberRadius + thisMemberLabelPaint.getTextSize(), thisMemberLabelPaint);
+            } else if(pinyin_option.equals("cantonese")){
+                c.drawText(t.pinyinCantonese, t.x, t.y - newCurrentMemberRadius + thisMemberLabelPaint.getTextSize(), thisMemberLabelPaint);
+            } else {
+                c.drawText("N/A", t.x, t.y - newCurrentMemberRadius + thisMemberLabelPaint.getTextSize(), thisMemberLabelPaint);
+            }
         }
 
     }

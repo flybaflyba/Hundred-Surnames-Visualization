@@ -14,7 +14,8 @@ public class PrefsActivity extends PreferenceActivity {
 
     public static final String SPIRAL_EFFECT= "SPIRAL_EFFECT";
     public static final String SHOW_LABEL= "SHOW_LABEL";
-    public static final String CHARACTER_OPTION = "CHARACTER";
+    public static final String CHARACTER_OPTION = "CHARACTER_OPTION";
+    public static final String PINYIN_OPTION = "PINYIN";
 
     @Override
     public void onCreate(Bundle b) {
@@ -39,14 +40,24 @@ public class PrefsActivity extends PreferenceActivity {
         show_label.setChecked(true);
         screen.addPreference(show_label);
 
-        ListPreference characters_option = new ListPreference(this);
-        characters_option.setTitle("Characters");
-        characters_option.setSummary("Choose Your Character Preference");
-        characters_option.setKey(CHARACTER_OPTION);
-        characters_option.setEntries(R.array.CharactersOption);
-        characters_option.setEntryValues(R.array.CharactersOption_value);
-        characters_option.setValue("simplified");
-        screen.addPreference(characters_option);
+        ListPreference character_option = new ListPreference(this);
+        character_option.setTitle("Character");
+        character_option.setSummary("Choose Your Character Preference");
+        character_option.setKey(CHARACTER_OPTION);
+        character_option.setEntries(R.array.CharactersOption);
+        character_option.setEntryValues(R.array.CharactersOption_value);
+        character_option.setValue("simplified");
+        screen.addPreference(character_option);
+
+        ListPreference pinyin_option = new ListPreference(this);
+        pinyin_option.setTitle("Pinyin");
+        pinyin_option.setSummary("Choose Your Pinyin Preference");
+        pinyin_option.setKey(PINYIN_OPTION);
+        pinyin_option.setEntries(R.array.PinyinsOption);
+        pinyin_option.setEntryValues(R.array.PinyinsOption_value);
+        pinyin_option.setValue("simplified");
+        screen.addPreference(pinyin_option);
+
 
         setPreferenceScreen(screen);
 
@@ -64,9 +75,14 @@ public class PrefsActivity extends PreferenceActivity {
         return PreferenceManager.getDefaultSharedPreferences(c).getBoolean(SHOW_LABEL, true);
     }
 
-    public static String getCharactersOptionPref(Context c) {
-        String effect = PreferenceManager.
-                getDefaultSharedPreferences(c).getString(CHARACTER_OPTION, "simplified");
-        return effect;
+    public static String getCharacterOptionPref(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getString(CHARACTER_OPTION, "simplified");
+
     }
+
+    public static String getPinyinOptionPref(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getString(PINYIN_OPTION, "simplified");
+
+    }
+
 }

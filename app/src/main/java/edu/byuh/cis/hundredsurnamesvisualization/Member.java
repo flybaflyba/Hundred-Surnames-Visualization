@@ -4,6 +4,7 @@ public class Member {
     String simplified;
     String traditional;
     String pinyin;
+    String pinyinCantonese;
     Float size;
     Float x;
     Float y;
@@ -11,10 +12,11 @@ public class Member {
     String link;
 
 
-    public Member(String simplifiedP, String pinyinP, String traditionalP, Float sizeP, Float xP, Float yP) {
+    public Member(String simplifiedP, String pinyinP, String traditionalP, String pinyinCantoneseP, Float sizeP, Float xP, Float yP) {
         simplified = simplifiedP;
         traditional = traditionalP;
         pinyin = pinyinP;
+        pinyinCantonese = pinyinCantoneseP;
         size = sizeP;
         x = xP;
         y = yP;
@@ -22,16 +24,9 @@ public class Member {
         link = "";
     }
 
-    public void setRole(String r) {
-        role = r;
-    }
-
     public void setLink(String l) {
         link = l;
     }
-
-    public void changeText(String s) {
-        simplified = s;}
 
 
 }

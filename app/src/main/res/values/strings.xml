@@ -16,12 +16,22 @@
 
     <string-array name="CharactersOption">
         <item>Simplified</item>
-        <item>Tradition</item>
+        <item>Traditional</item>
     </string-array>
     <string-array name="CharactersOption_value">
         <item>simplified</item>
         <item>traditional</item>
     </string-array>
+
+    <string-array name="PinyinsOption">
+        <item>Simplified</item>
+        <item>Cantonese</item>
+    </string-array>
+    <string-array name="PinyinsOption_value">
+        <item>simplified</item>
+        <item>cantonese</item>
+    </string-array>
+
 
     <string name="SpiralEffectTitle">Spiral Effect</string>
     <string name="SpiralEffectSummary">Select an animation style for the spiral</string>
