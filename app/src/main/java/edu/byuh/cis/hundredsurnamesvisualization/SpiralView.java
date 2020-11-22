@@ -750,7 +750,7 @@ public class SpiralView extends View {
         thisMemberLabelPaint.setShadowLayer(20,0,0,Color.BLACK);
 
         if (sliderMoving == false && show_label) {
-            c.drawText(t.pinyin, t.x, t.y + newCurrentMemberRadius - thisMemberLabelPaint.getTextSize()/2, thisMemberLabelPaint);
+            c.drawText(t.pinyin, t.x, t.y - newCurrentMemberRadius + thisMemberLabelPaint.getTextSize(), thisMemberLabelPaint);
         }
 
     }
