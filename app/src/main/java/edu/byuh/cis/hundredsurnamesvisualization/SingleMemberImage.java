@@ -50,6 +50,8 @@ public class SingleMemberImage extends View {
     private float canvasHeight;
     private boolean orientationJustChanged = false;
 
+    private boolean animationWorking = false;
+
     public SingleMemberImage(Context context, String s, String sLast, String sNext) {
         super(context);
         this.text = s;
@@ -77,13 +79,18 @@ public class SingleMemberImage extends View {
         canvasCenterX = canvasWidth / 2;
         canvasCenterY = canvasHeight / 2;
 
-        imageSize = Math.min(canvasWidth, canvasHeight) * 1f;
+        imageSize = Math.min(canvasWidth, canvasHeight);
+
+        if(!animationWorking) {
+            x = canvasCenterX;
+            y = canvasCenterY;
+        }
+
 
         if (firstTimeDraw || orientationJustChanged) {
             threeShows.clear();
 
-            x = canvasCenterX;
-            y = canvasCenterY;
+
 
             currentShow = new Show(text);
             lastShow = new Show(textLast);
@@ -174,13 +181,16 @@ public class SingleMemberImage extends View {
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                animationWorking = true;
                 if (orientationJustChanged) {
                     endOfAnimationAction();
+                    animationWorking = false;
                 } else {
                     x = (float) animation.getAnimatedValue();
                     invalidate();
                     if(x == finalSign * canvasWidth + (canvasCenterX)) {
                        endOfAnimationAction();
+                       animationWorking = false;
                     }
                 }
             }

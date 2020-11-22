@@ -14,10 +14,14 @@ import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -370,6 +374,7 @@ public class SpiralView extends View {
     @SuppressLint("ClickableViewAccessibility")
     public void singleMemberDialog() {
 
+        final WebView wv = new WebView(getContext());
 
         LinearLayout.LayoutParams nice = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT,
@@ -377,6 +382,9 @@ public class SpiralView extends View {
         LinearLayout.LayoutParams niceTwo = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT, 2);
+        LinearLayout.LayoutParams niceThree = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 3);
         LinearLayout.LayoutParams niceFour = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT, 4);
@@ -510,6 +518,7 @@ public class SpiralView extends View {
                                 }
                             }
                             singleMemberDialogTitleView.setText(title);
+                            wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
 
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
@@ -575,6 +584,8 @@ public class SpiralView extends View {
                                 }
                             }
                             singleMemberDialogTitleView.setText(title);
+                            wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
+
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
                             // TODO
@@ -594,13 +605,42 @@ public class SpiralView extends View {
         singleMemberImageView.setLayoutParams(nice);
         left.setLayoutParams(niceFour);
         right.setLayoutParams(niceFour);
-        lnlH.setLayoutParams(nice);
-
+        lnlH.setLayoutParams(niceFour);
 
         // the left button is actually on the right and the right button is actually on the left.
         lnlH.addView(right); // lnlH.addView(left);
         lnlH.addView(singleMemberImageView);
         lnlH.addView(left); // lnlH.addView(right);
+
+        singleMemberTextView.setLayoutParams(niceFour);
+
+        LinearLayout lnlWebView = new LinearLayout(getContext());
+        lnlWebView.setOrientation(LinearLayout.VERTICAL);
+        lnlWebView.setLayoutParams(nice);
+        lnlWebView.setMinimumHeight((int)(Math.min(screenWidth, screenHeight) * 0.7));
+
+        wv.setWebViewClient(new WebViewClient());
+        wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
+        WebSettings settings = wv.getSettings();
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+        wv.setLayoutParams(nice);
+        lnlWebView.addView(wv);
+
+//        setContentView(R.layout.activity_main);
+//        LinearLayout lnlSinglePage = findViewById(R.id.sliderLabel);
+//
+//        LinearLayout lnlTitle = findViewById(R.id.LinearLayoutTitle);
+//        LinearLayout lnlBig = findViewById(R.id.LinearLayoutBig);
+//        LinearLayout lnlWeb = findViewById(R.id.LinearLayoutWeb);
+
+
+//        lnlTitle.addView(singleMemberDialogTitleView);
+//        lnlSinglePage.addView(lnlTitle);
+//        lnlSinglePage.addView(lnlBig);
+//        lnlSinglePage.addView(lnlWeb);
+
+
 
         lnl.addView(singleMemberDialogTitleView);
         //singleMemberDialogTitleView.setBackgroundColor(Color.YELLOW);
@@ -608,17 +648,19 @@ public class SpiralView extends View {
         //lnlH.setBackgroundColor(Color.GREEN);
 //        lnl.addView(sv);
 //        sv.setBackgroundColor(Color.RED);
-        ((ViewGroup)singleMemberTextView.getParent()).removeView(singleMemberTextView);
-        lnl.addView(singleMemberTextView);
-        //singleMemberTextView.setBackgroundColor(Color.RED);
-        singleMemberTextView.setHeight((int)(Math.min(screenWidth, screenHeight) * 0.3));
-        singleMemberTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        lnl.addView(lnlWebView);
+
+//        ((ViewGroup)singleMemberTextView.getParent()).removeView(singleMemberTextView);
+//        lnl.addView(singleMemberTextView);
+//        //singleMemberTextView.setBackgroundColor(Color.RED);
+//        singleMemberTextView.setHeight((int)(Math.min(screenWidth, screenHeight) * 0.7));
+//        singleMemberTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         // singleMemberDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         //builder.setTitle(allMemberInfo.get(realEachIndex*3));
         builder.setView(lnl);
-        builder.setCancelable(true);
+//        builder.setView(lnlSinglePage);
         builder.setCancelable(true);
 //        builder.setPositiveButton(getResources().getString(R.string.website_button), new DialogInterface.OnClickListener() {
 //            public void onClick(DialogInterface dialog, int id) {
@@ -628,9 +670,13 @@ public class SpiralView extends View {
         builder.setNegativeButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
+                Log.d("click dismiss ", "hi");
+
             }
         });
         singleMemberDialog = builder.create();
+
+//        singleMemberDialog.setContentView(R.layout.single_view);
         singleMemberDialog.show();
 
         //singleMemberDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
