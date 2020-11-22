@@ -774,7 +774,8 @@ public class SpiralView extends View {
             readLinksFile();
 //            readInfoFile();
             surnameCharactersSimplified = dataHolder.surnameCharactersSimplified;
-            allKeys = dataHolder.allKeys;
+
+            allKeys = dataHolder.surnamesPinyinSimplified;
 
         }
 

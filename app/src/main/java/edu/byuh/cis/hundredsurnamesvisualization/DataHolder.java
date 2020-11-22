@@ -16,7 +16,7 @@ public class DataHolder {
     public ArrayList<Member> memberObjects;
     public ArrayList<String> surnameCharactersSimplified;
     public ArrayList<String> surnameCharactersTraditional;
-    public ArrayList<String> allKeys;
+
     public ArrayList<String> surnamesPinyinSimplified;
 
 
@@ -27,7 +27,7 @@ public class DataHolder {
         surnameCharactersSimplified = readFile(context, R.raw.surname_characters_simplified);
         surnameCharactersTraditional = readFile(context, R.raw.surname_characters_traditional);
         surnamesPinyinSimplified = readFile(context, R.raw.surnames_pinyin_simplified);
-        allKeys = surnameCharactersSimplified; // for this app, key (in picker) is just the summary (title in dialog), which is the name
+
         memberObjects = getMemberObjectsList(surnameCharactersSimplified, surnamesPinyinSimplified);
 
 
