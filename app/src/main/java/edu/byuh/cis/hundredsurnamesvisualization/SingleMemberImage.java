@@ -24,12 +24,12 @@ public class SingleMemberImage extends View {
     private float canvasCenterX;
     private float canvasCenterY;
     private float imageSize;
-    private int id;
-    private int idLast;
-    private int idNext;
-    private int idStore;
-    private int idLastStore;
-    private int idNextStore;
+//    private int id;
+//    private int idLast;
+//    private int idNext;
+//    private int idStore;
+//    private int idLastStore;
+//    private int idNextStore;
 
     private String text;
     private String textLast;
@@ -46,17 +46,17 @@ public class SingleMemberImage extends View {
     private float canvasHeight;
     private boolean orientationJustChanged = false;
 
-    public SingleMemberImage(Context context, int id, int idLast, int idNext) {
-        super(context);
-        this.id = id;
-        this.idLast = idLast;
-        this.idNext = idNext;
-
-        threeMembers = new ArrayList<>();
-
-        textPaint = new Paint();
-        textPaint.setTextSize(50);
-    }
+//    public SingleMemberImage(Context context, int id, int idLast, int idNext) {
+//        super(context);
+//        this.id = id;
+//        this.idLast = idLast;
+//        this.idNext = idNext;
+//
+//        threeMembers = new ArrayList<>();
+//
+//        textPaint = new Paint();
+//        textPaint.setTextSize(50);
+//    }
 
     public SingleMemberImage(Context context, String text, String textLast, String textNext) {
         super(context);
@@ -71,17 +71,20 @@ public class SingleMemberImage extends View {
     }
 
 
-    private Bitmap loadAndScale(Resources res, int id, float newWidth) {
-        Bitmap original = BitmapFactory.decodeResource(res, id);
-        float aspectRatio = (float)original.getHeight()/(float)original.getWidth();
-        float newHeight = newWidth * aspectRatio;
-        return Bitmap.createScaledBitmap(original, (int)newWidth, (int)newHeight, true);
-    }
+//    private Bitmap loadAndScale(Resources res, int id, float newWidth) {
+//        Bitmap original = BitmapFactory.decodeResource(res, id);
+//        float aspectRatio = (float)original.getHeight()/(float)original.getWidth();
+//        float newHeight = newWidth * aspectRatio;
+//        return Bitmap.createScaledBitmap(original, (int)newWidth, (int)newHeight, true);
+//    }
 
-    public void updateThreeMembersBitmapIds(int id, int idLast, int idNext) {
-        this.idStore = id;
-        this.idLastStore = idLast;
-        this.idNextStore = idNext;
+    public void updateThreeMembersBitmapIds(String text, String textLast, String textNext) {
+//        this.idStore = id;
+//        this.idLastStore = idLast;
+//        this.idNextStore = idNext;
+        this.text = text;
+        this.textLast = textLast;
+        this.textNext = textNext;
     }
 
     @Override
@@ -173,12 +176,12 @@ public class SingleMemberImage extends View {
                 t.setRole("current");
             }
         }
-        id = idStore;
-        idLast = idLastStore;
-        idNext = idNextStore;
-        Bitmap b = loadAndScale(getResources(), id, imageSize);
-        Bitmap bLast = loadAndScale(getResources(), idLast, imageSize);
-        Bitmap bNext = loadAndScale(getResources(), idNext, imageSize);
+//        id = idStore;
+//        idLast = idLastStore;
+//        idNext = idNextStore;
+//        Bitmap b = loadAndScale(getResources(), id, imageSize);
+//        Bitmap bLast = loadAndScale(getResources(), idLast, imageSize);
+//        Bitmap bNext = loadAndScale(getResources(), idNext, imageSize);
 
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {

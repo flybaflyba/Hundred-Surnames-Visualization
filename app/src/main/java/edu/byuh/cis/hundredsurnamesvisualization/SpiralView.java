@@ -440,13 +440,13 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
                             singleMemberImageView.moveImage("left");
-                            int nextMemberId = 0;
+                            String nextMemberId = "N/A";
                             if (realEachIndex + 1 > numOfMembers - 1) {
-                                nextMemberId = allLargeImageIds.get(realEachIndex);
+                                nextMemberId = memberObjects.get(realEachIndex).text;
                             } else {
-                                nextMemberId = allLargeImageIds.get(realEachIndex + 1);
+                                nextMemberId = memberObjects.get(realEachIndex + 1).text;
                             }
-                            singleMemberImageView.updateThreeMembersBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), nextMemberId);
+                            singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex).text, memberObjects.get(realEachIndex-1).text, nextMemberId);
                             MemberUrl = memberObjects.get(realEachIndex).link;
                             singleMemberDialogTitleView.setText(allSummaries.get(realEachIndex));
                             oneMemberInfo = "";
@@ -478,13 +478,13 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex - 1;
                             singleMemberImageView.moveImage("right");
-                            int lastMemberId = 0;
+                            String lastMemberId = "N/A";
                             if (realEachIndex - 1 < 0) {
-                                lastMemberId = allLargeImageIds.get(realEachIndex);
+                                lastMemberId = memberObjects.get(realEachIndex).text;
                             } else {
-                                lastMemberId = allLargeImageIds.get(realEachIndex - 1);
+                                lastMemberId = memberObjects.get(realEachIndex - 1).text;
                             }
-                            singleMemberImageView.updateThreeMembersBitmapIds(allLargeImageIds.get(realEachIndex), lastMemberId, allLargeImageIds.get(realEachIndex + 1));
+                            singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex).text, lastMemberId, memberObjects.get(realEachIndex + 1).text);
                             MemberUrl = memberObjects.get(realEachIndex).link;
                             singleMemberDialogTitleView.setText(allSummaries.get(realEachIndex));
                             oneMemberInfo = "";
