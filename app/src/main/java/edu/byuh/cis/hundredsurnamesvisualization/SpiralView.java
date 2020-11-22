@@ -206,35 +206,6 @@ public class SpiralView extends View {
         }
     }
 
-//    public void readInfoFile() {
-//        try {
-//            InputStream allMemberInfoFile =  this.getResources().openRawResource(R.raw.all_objects_summaries);
-//            if (allMemberInfoFile != null)
-//            {
-//                InputStreamReader ir = new InputStreamReader(allMemberInfoFile);
-//                BufferedReader br = new BufferedReader(ir);
-//                String line;
-//                //read each line
-//                while (( line = br.readLine()) != null) {
-//                    allSummaries.add(line+"\n");
-//                    allKeys.add(line+"\n");
-//                }
-//                allMemberInfoFile.close();
-//
-//            }
-//        }
-//        catch (java.io.FileNotFoundException e)
-//        {
-//            Log.d("TestFile", "The File doesn't not exist.");
-//        }
-//        catch (IOException e)
-//        {
-//            Log.d("TestFile", e.getMessage());
-//        }
-//
-//    }
-
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean onTouchEvent(MotionEvent m) {
@@ -408,13 +379,20 @@ public class SpiralView extends View {
         LinearLayout lnlH = new LinearLayout(getContext());
         lnlH.setOrientation(LinearLayout.HORIZONTAL);
 
-        if (eachIndex == 0) {
-            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex + 1));
-        } else if (eachIndex == numOfMembers - 1){
-            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex)); // no next event
-        } else {
-            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
+//        if (eachIndex == 0) {
+//            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex + 1));
+//        } else if (eachIndex == numOfMembers - 1){
+//            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex)); // no next event
+//        } else {
+//            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
+//        }
 
+        if (eachIndex == 0) {
+            singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).text, memberObjects.get(eachIndex).text, memberObjects.get(eachIndex+1).text);
+        } else if (eachIndex == numOfMembers - 1){
+            singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).text, memberObjects.get(eachIndex-1).text, memberObjects.get(eachIndex).text); // no next event
+        } else {
+            singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).text, memberObjects.get(eachIndex-1).text, memberObjects.get(eachIndex+1).text);
         }
 
         singleMemberImageView.setPadding(0,0,0,0);
@@ -783,11 +761,7 @@ public class SpiralView extends View {
 
         float newCurrentMemberRadius = t.size * screenWidth / 2;
 
-        Paint thisMemberPaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
-        thisMemberPaint.setStyle(Paint.Style.FILL);
-        thisMemberPaint.setTextSize((int)(newCurrentMemberRadius));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
-        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
+
 
 //        currentMemberMatrix.setScale(4 * t.size, 4 * t.size);
 //        currentMemberMatrix.postTranslate(t.x - t.image.getWidth()  * t.size * 2, t.y - t.image.getHeight() * t.size * 2); // more OO
@@ -804,8 +778,11 @@ public class SpiralView extends View {
             // do nothing
         }
 
-
-
+        Paint thisMemberPaint = new Paint();
+        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberPaint.setStyle(Paint.Style.FILL);
+        thisMemberPaint.setTextSize((int)(newCurrentMemberRadius));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
+        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
 
         Paint.FontMetrics fontMetrics=thisMemberPaint.getFontMetrics();
         float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
@@ -854,8 +831,6 @@ public class SpiralView extends View {
         // we need this line of code, so that in 3 d view, only the front member opens when user clicks
         Collections.reverse(onScreenMembers);
     }
-
-
 
     public void getCoordinates() {
         //spiral are impacted a lot by initialR.

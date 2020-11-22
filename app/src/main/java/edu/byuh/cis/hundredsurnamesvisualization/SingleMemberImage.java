@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
@@ -29,6 +30,10 @@ public class SingleMemberImage extends View {
     private int idStore;
     private int idLastStore;
     private int idNextStore;
+
+    private String text;
+    private String textLast;
+    private String textNext;
 
     private Member currentMember;
     private Member lastMember;
@@ -53,6 +58,19 @@ public class SingleMemberImage extends View {
         textPaint.setTextSize(50);
     }
 
+    public SingleMemberImage(Context context, String text, String textLast, String textNext) {
+        super(context);
+        this.text = text;
+        this.textLast = textLast;
+        this.textNext = textNext;
+
+        threeMembers = new ArrayList<>();
+
+        textPaint = new Paint();
+        textPaint.setTextSize(50);
+    }
+
+
     private Bitmap loadAndScale(Resources res, int id, float newWidth) {
         Bitmap original = BitmapFactory.decodeResource(res, id);
         float aspectRatio = (float)original.getHeight()/(float)original.getWidth();
@@ -74,20 +92,25 @@ public class SingleMemberImage extends View {
         canvasCenterX = canvasWidth / 2;
         canvasCenterY = canvasHeight / 2;
 
-        imageSize = Math.min(canvasWidth, canvasHeight) * 0.9f;
+        imageSize = Math.min(canvasWidth, canvasHeight) * 1f;
 
         if (firstTimeDraw || orientationJustChanged) {
             threeMembers.clear();
 
-            x = canvasCenterX - imageSize / 2;
-            y = canvasCenterY - imageSize / 2;
+//            x = canvasCenterX - imageSize / 2;
+//            y = canvasCenterY - imageSize / 2;
+            x = canvasCenterX;
+            y = canvasCenterY;
 
-            Bitmap b = loadAndScale(getResources(), id, imageSize);
-            Bitmap bLast = loadAndScale(getResources(), idLast, imageSize);
-            Bitmap bNext = loadAndScale(getResources(), idNext, imageSize);
-            currentMember = new Member(b, 0f, 0f, 0f);
-            lastMember = new Member(bLast, 0f, 0f, 0f);
-            nextMember = new Member(bNext, 0f, 0f, 0f);
+//            Bitmap b = loadAndScale(getResources(), id, imageSize);
+//            Bitmap bLast = loadAndScale(getResources(), idLast, imageSize);
+//            Bitmap bNext = loadAndScale(getResources(), idNext, imageSize);
+//            currentMember = new Member(b, 0f, 0f, 0f);
+//            lastMember = new Member(bLast, 0f, 0f, 0f);
+//            nextMember = new Member(bNext, 0f, 0f, 0f);
+            currentMember = new Member(text, 0f, 0f, 0f);
+            lastMember = new Member(textLast, 0f, 0f, 0f);
+            nextMember = new Member(textNext, 0f, 0f, 0f);
             threeMembers.add(currentMember);
             threeMembers.add(lastMember);
             threeMembers.add(nextMember);
@@ -104,13 +127,30 @@ public class SingleMemberImage extends View {
 //        c.drawText(imageSize + ":imageSize", 100, 180, textPaint);
 //
 
+        Paint thisMemberPaint = new Paint();
+        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberPaint.setStyle(Paint.Style.FILL);
+        thisMemberPaint.setTextSize((int)(imageSize));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
+//        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
+
+        Paint.FontMetrics fontMetrics=thisMemberPaint.getFontMetrics();
+        float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
+        float baseline=y+distance;
+
+
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {
-                c.drawBitmap(t.image, x, y, null);
+//                c.drawBitmap(t.image, x, y, null);
+                c.drawCircle(x, y, imageSize * 0.5f, thisMemberPaint);
+//                c.drawText(t.text, x + imageSize * 0.1f, baseline, thisMemberPaint);
             } else if (t.role.equals("last")) {
-                c.drawBitmap(t.image, x - canvasWidth, y, null);
+//                c.drawBitmap(t.image, x - canvasWidth, y, null);
+                c.drawCircle(x - canvasWidth, y, imageSize * 0.5f, thisMemberPaint);
+//                c.drawText(t.text, x + imageSize * 0.1f, baseline, thisMemberPaint);
             } else if (t.role.equals("next")) {
-                c.drawBitmap(t.image, x + canvasWidth, y, null);
+//                c.drawBitmap(t.image, x + canvasWidth, y, null);
+                c.drawCircle(x + canvasWidth, y, imageSize * 0.5f, thisMemberPaint);
+//                c.drawText(t.text, x + imageSize * 0.1f, baseline, thisMemberPaint);
             }
         }
     }
@@ -120,7 +160,7 @@ public class SingleMemberImage extends View {
     }
 
     public void endOfAnimationAction() {
-        x = canvasCenterX - imageSize / 2;
+        x = canvasCenterX;
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {
                 t.setRole("last");
@@ -139,11 +179,14 @@ public class SingleMemberImage extends View {
 
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {
-                t.changeImage(b);
+//                t.changeImage(b);
+                t.changeText(text);
             } else if (t.role.equals("last")) {
-                t.changeImage(bLast);
+//                t.changeImage(bLast);
+                t.changeText(textLast);
             } else if (t.role.equals("next")) {
-                t.changeImage(bNext);
+//                t.changeImage(bNext);
+                t.changeText(textNext);
             }
         }
     }
@@ -159,7 +202,7 @@ public class SingleMemberImage extends View {
         }
 
         ValueAnimator valueAnimator;
-        valueAnimator = ValueAnimator.ofObject(new FloatEvaluator(), x, sign * canvasWidth + (canvasCenterX - imageSize / 2));
+        valueAnimator = ValueAnimator.ofObject(new FloatEvaluator(), x, sign * canvasWidth + (canvasCenterX ));
         valueAnimator.setDuration(1500);
         valueAnimator.setInterpolator(new FastOutSlowInInterpolator());
         final float finalSign = sign;
@@ -171,7 +214,7 @@ public class SingleMemberImage extends View {
                 } else {
                     x = (float) animation.getAnimatedValue();
                     invalidate();
-                    if(x == finalSign * canvasWidth + (canvasCenterX - imageSize / 2)) {
+                    if(x == finalSign * canvasWidth + (canvasCenterX)) {
                        endOfAnimationAction();
                     }
                 }

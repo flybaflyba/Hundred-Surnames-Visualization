@@ -41,5 +41,7 @@ public class Member {
         image = b;
     }
 
+    public void changeText(String s) {text = s;}
+
 
 }
