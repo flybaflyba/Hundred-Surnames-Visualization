@@ -623,6 +623,8 @@ public class SpiralView extends View {
         wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
         WebSettings settings = wv.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+     
+
 
         wv.setLayoutParams(nice);
         lnlWebView.addView(wv);
@@ -639,8 +641,6 @@ public class SpiralView extends View {
 //        lnlSinglePage.addView(lnlTitle);
 //        lnlSinglePage.addView(lnlBig);
 //        lnlSinglePage.addView(lnlWeb);
-
-
 
         lnl.addView(singleMemberDialogTitleView);
         //singleMemberDialogTitleView.setBackgroundColor(Color.YELLOW);
@@ -662,20 +662,27 @@ public class SpiralView extends View {
         builder.setView(lnl);
 //        builder.setView(lnlSinglePage);
         builder.setCancelable(true);
-//        builder.setPositiveButton(getResources().getString(R.string.website_button), new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                //do nothing
-//            }
-//        });
+        builder.setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Log.d("click mahalo ", "mahalo");
+            }
+        });
         builder.setNegativeButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
-                Log.d("click dismiss ", "hi");
+                Log.d("click dismiss ", "dismiss");
 
             }
         });
-        singleMemberDialog = builder.create();
+        builder.setNeutralButton("Neutral", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //set onclick method for this button below
+                Log.d("click aloha ", "aloha");
 
+            }
+        });
+
+        singleMemberDialog = builder.create();
 //        singleMemberDialog.setContentView(R.layout.single_view);
         singleMemberDialog.show();
 
@@ -695,11 +702,45 @@ public class SpiralView extends View {
         singleMemberDialog.getWindow().setAttributes(params);
         singleMemberDialog.show();
 
+        // this overrides the buttons actions above
+        singleMemberDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //singleTempleDialog.dismiss();
+                //singleTempleDialog stays when click on website button
+                Log.d("click ", "positive");
+
+            }
+        });
+        singleMemberDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //singleTempleDialog.dismiss();
+                //singleTempleDialog stays when click on website button
+                Log.d("click ", "negative");
+
+            }
+        });
+        singleMemberDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //singleTempleDialog.dismiss();
+                //singleTempleDialog stays when click on website button
+                Log.d("click ", "neutral");
+
+            }
+        });
+
+
+        Button btnPositive = singleMemberDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         Button btnNegative = singleMemberDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-        LinearLayout.LayoutParams mNegativeButtonLL = (LinearLayout.LayoutParams) btnNegative.getLayoutParams();
-        mNegativeButtonLL.gravity = Gravity.CENTER;
-        mNegativeButtonLL.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        btnNegative.setLayoutParams(mNegativeButtonLL);
+        Button btnNeutral = singleMemberDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.weight = 10;
+        btnPositive.setLayoutParams(layoutParams);
+        btnNegative.setLayoutParams(layoutParams);
+        btnNeutral.setLayoutParams(layoutParams);
 
 
     }
