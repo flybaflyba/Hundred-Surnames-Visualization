@@ -12,6 +12,19 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import java.util.ArrayList;
 
+class Show {
+    String text;
+    String role;
+    public Show(String s) {
+        text = s;
+    }
+    public void setRole(String r) {
+        role = r;
+    }
+    public void changeText(String s) { text = s;}
+
+}
+
 
 public class SingleMemberImage extends View {
 
@@ -22,37 +35,38 @@ public class SingleMemberImage extends View {
     private float canvasCenterY;
     private float imageSize;
 
-    private Member member;
-    private Member memberLast;
-    private Member memberNext;
+    private String text;
+    private String textLast;
+    private String textNext;
 
-    private Member currentMember;
-    private Member lastMember;
-    private Member nextMember;
+    private Show currentShow;
+    private Show lastShow;
+    private Show nextShow;
 
-    private ArrayList<Member> threeMembers;
+    private ArrayList<Show> threeShows;
 
     private Paint textPaint;
     private float canvasWidth;
     private float canvasHeight;
     private boolean orientationJustChanged = false;
 
-    public SingleMemberImage(Context context, Member member, Member memberLast, Member memberNext) {
+    public SingleMemberImage(Context context, String s, String sLast, String sNext) {
         super(context);
-        this.member = member;
-        this.memberLast = memberLast;
-        this.memberNext = memberNext;
+        this.text = s;
+        this.textLast = sLast;
+        this.textNext = sNext;
 
-        threeMembers = new ArrayList<>();
+        threeShows = new ArrayList<>();
 
         textPaint = new Paint();
         textPaint.setTextSize(50);
     }
 
-    public void updateThreeMembersBitmapIds(Member member, Member memberLast, Member memberNext) {
-        this.member = member;
-        this.memberLast = memberLast;
-        this.memberNext = memberNext;
+    public void updateThreeMembersBitmapIds(String s, String sLast, String sNext) {
+        this.text = s;
+        this.textLast = sLast;
+        this.textNext = sNext;
+
     }
 
     @Override
@@ -66,20 +80,22 @@ public class SingleMemberImage extends View {
         imageSize = Math.min(canvasWidth, canvasHeight) * 1f;
 
         if (firstTimeDraw || orientationJustChanged) {
-            threeMembers.clear();
+            threeShows.clear();
 
             x = canvasCenterX;
             y = canvasCenterY;
 
-            currentMember = new Member(member.simplified, member.pinyin, 0f, 0f, 0f);
-            lastMember = new Member(memberLast.simplified, memberLast.pinyin, 0f, 0f, 0f);
-            nextMember = new Member(memberNext.simplified, memberLast.pinyin, 0f, 0f, 0f);
-            threeMembers.add(currentMember);
-            threeMembers.add(lastMember);
-            threeMembers.add(nextMember);
-            currentMember.setRole("current");
-            lastMember.setRole("last");
-            nextMember.setRole("next");
+            currentShow = new Show(text);
+            lastShow = new Show(textLast);
+            nextShow = new Show(textNext);
+
+            threeShows.add(currentShow);
+            threeShows.add(lastShow);
+            threeShows.add(nextShow);
+
+            currentShow.setRole("current");
+            lastShow.setRole("last");
+            nextShow.setRole("next");
 
             firstTimeDraw = false;
             orientationJustChanged = false;
@@ -99,16 +115,16 @@ public class SingleMemberImage extends View {
         thisMemberPaint.setStyle(Paint.Style.FILL);
 
 
-        for (Member t: threeMembers) {
+        for (Show t: threeShows) {
             if (t.role.equals("current")) {
                 c.drawCircle(x, y, imageSize * 0.5f, thisCirclePaint);
-                c.drawText(t.simplified, x-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
+                c.drawText(t.text, x-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             } else if (t.role.equals("last")) {
                 c.drawCircle(x - canvasWidth, y, imageSize * 0.5f, thisCirclePaint);
-                c.drawText(t.simplified, x - canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
+                c.drawText(t.text, x - canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             } else if (t.role.equals("next")) {
                 c.drawCircle(x + canvasWidth, y, imageSize * 0.5f, thisCirclePaint);
-                c.drawText(t.simplified, x + canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
+                c.drawText(t.text, x + canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             }
         }
     }
@@ -119,7 +135,7 @@ public class SingleMemberImage extends View {
 
     public void endOfAnimationAction() {
         x = canvasCenterX;
-        for (Member t: threeMembers) {
+        for (Show t: threeShows) {
             if (t.role.equals("current")) {
                 t.setRole("last");
             } else if (t.role.equals("last")) {
@@ -129,13 +145,13 @@ public class SingleMemberImage extends View {
             }
         }
 
-        for (Member t: threeMembers) {
+        for (Show t: threeShows) {
             if (t.role.equals("current")) {
-                t.changeText(member.simplified);
+                t.changeText(text);
             } else if (t.role.equals("last")) {
-                t.changeText(memberLast.simplified);
+                t.changeText(textLast);
             } else if (t.role.equals("next")) {
-                t.changeText(memberNext.simplified);
+                t.changeText(textNext);
             }
         }
     }

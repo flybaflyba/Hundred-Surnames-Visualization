@@ -2,6 +2,7 @@ package edu.byuh.cis.hundredsurnamesvisualization;
 
 public class Member {
     String simplified;
+    String traditional;
     String pinyin;
     Float size;
     Float x;
@@ -10,8 +11,9 @@ public class Member {
     String link;
 
 
-    public Member(String simplifiedP, String pinyinP, Float sizeP, Float xP, Float yP) {
+    public Member(String simplifiedP, String pinyinP, String traditionalP, Float sizeP, Float xP, Float yP) {
         simplified = simplifiedP;
+        traditional = traditionalP;
         pinyin = pinyinP;
         size = sizeP;
         x = xP;

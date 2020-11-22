@@ -7,11 +7,6 @@ import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Locale;
 
 
 public class PrefsActivity extends PreferenceActivity {
@@ -19,11 +14,11 @@ public class PrefsActivity extends PreferenceActivity {
 
     public static final String SPIRAL_EFFECT= "SPIRAL_EFFECT";
     public static final String SHOW_LABEL= "SHOW_LABEL";
+    public static final String CHARACTER_OPTION = "CHARACTER";
 
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-
 
         PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(this);
 
@@ -44,6 +39,15 @@ public class PrefsActivity extends PreferenceActivity {
         show_label.setChecked(true);
         screen.addPreference(show_label);
 
+        ListPreference characters_option = new ListPreference(this);
+        characters_option.setTitle("Characters");
+        characters_option.setSummary("Choose Your Character Preference");
+        characters_option.setKey(CHARACTER_OPTION);
+        characters_option.setEntries(R.array.CharactersOption);
+        characters_option.setEntryValues(R.array.CharactersOption_value);
+        characters_option.setValue("simplified");
+        screen.addPreference(characters_option);
+
         setPreferenceScreen(screen);
 
         //Log.d("Prefs ", "preference screen here ");
@@ -58,5 +62,11 @@ public class PrefsActivity extends PreferenceActivity {
 
     public static boolean getShowLabelPref(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c).getBoolean(SHOW_LABEL, true);
+    }
+
+    public static String getCharactersOptionPref(Context c) {
+        String effect = PreferenceManager.
+                getDefaultSharedPreferences(c).getString(CHARACTER_OPTION, "simplified");
+        return effect;
     }
 }

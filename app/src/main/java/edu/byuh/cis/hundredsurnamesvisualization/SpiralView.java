@@ -85,6 +85,7 @@ public class SpiralView extends View {
     private Paint noImageCirclePaint;
     private String MemberUrl;
     private int numOfMembers;
+    private String character_option = "simplified";
 
 
     public SpiralView(Context context, int num) {
@@ -387,19 +388,33 @@ public class SpiralView extends View {
 //            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
 //        }
 
-        if (eachIndex == 0) {
-            singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex), memberObjects.get(eachIndex), memberObjects.get(eachIndex+1));
-        } else if (eachIndex == numOfMembers - 1){
-            singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex), memberObjects.get(eachIndex-1), memberObjects.get(eachIndex)); // no next event
-        } else {
-            singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex), memberObjects.get(eachIndex-1), memberObjects.get(eachIndex+1));
+        if(character_option.equals("simplified")){
+            if (eachIndex == 0) {
+                singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).simplified, memberObjects.get(eachIndex).simplified, memberObjects.get(eachIndex+1).simplified);
+            } else if (eachIndex == numOfMembers - 1){
+                singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).simplified, memberObjects.get(eachIndex-1).simplified, memberObjects.get(eachIndex).simplified); // no next event
+            } else {
+                singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).simplified, memberObjects.get(eachIndex-1).simplified, memberObjects.get(eachIndex+1).simplified);
+            }
+        } else if (character_option.equals("traditional")) {
+            if (eachIndex == 0) {
+                singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).traditional, memberObjects.get(eachIndex).traditional, memberObjects.get(eachIndex+1).traditional);
+            } else if (eachIndex == numOfMembers - 1){
+                singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).traditional, memberObjects.get(eachIndex-1).traditional, memberObjects.get(eachIndex).traditional); // no next event
+            } else {
+                singleMemberImageView = new SingleMemberImage(getContext(), memberObjects.get(eachIndex).traditional, memberObjects.get(eachIndex-1).traditional, memberObjects.get(eachIndex+1).traditional);
+            }
         }
+
+
 
         singleMemberImageView.setPadding(0,0,0,0);
 
         // milestone dates
         oneMemberInfo = "";
         readOneInfoFile(allObjectInfoFileIds.get(eachIndex));
+        // TODO
+        oneMemberInfo = (eachIndex+1) + "";
 
 
 
@@ -443,19 +458,32 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
                             singleMemberImageView.moveImage("left");
-                            Member nextMemberId;
-                            if (realEachIndex + 1 > numOfMembers - 1) {
-                                nextMemberId = memberObjects.get(realEachIndex);
-                            } else {
-                                nextMemberId = memberObjects.get(realEachIndex + 1);
+                            String nextMemberId;
+                            if(character_option.equals("simplified")){
+                                if (realEachIndex + 1 > numOfMembers - 1) {
+                                    nextMemberId = memberObjects.get(realEachIndex).simplified;
+                                } else {
+                                    nextMemberId = memberObjects.get(realEachIndex + 1).simplified;
+                                }
+                                singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex).simplified, memberObjects.get(realEachIndex-1).simplified, nextMemberId);
+                            } else if(character_option.equals("traditional")){
+                                if (realEachIndex + 1 > numOfMembers - 1) {
+                                    nextMemberId = memberObjects.get(realEachIndex).traditional;
+                                } else {
+                                    nextMemberId = memberObjects.get(realEachIndex + 1).traditional;
+                                }
+                                singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex).traditional, memberObjects.get(realEachIndex-1).traditional, nextMemberId);
                             }
-                            singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex), memberObjects.get(realEachIndex-1), nextMemberId);
+
+
                             MemberUrl = memberObjects.get(realEachIndex).link;
 //                            singleMemberDialogTitleView.setText(surnameCharactersSimplified.get(realEachIndex));
                             singleMemberDialogTitleView.setText(memberObjects.get(realEachIndex).pinyin);
 
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
+                            // TODO
+                            oneMemberInfo = (realEachIndex+1) + "";
                             singleMemberTextView.setText(oneMemberInfo);
                             singleMemberTextView.scrollTo(0,0);
                             timeStamp[0] = System.currentTimeMillis();
@@ -483,18 +511,33 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex - 1;
                             singleMemberImageView.moveImage("right");
-                            Member lastMemberId;
-                            if (realEachIndex - 1 < 0) {
-                                lastMemberId = memberObjects.get(realEachIndex);
-                            } else {
-                                lastMemberId = memberObjects.get(realEachIndex - 1);
+                            String lastMemberId;
+
+                            if(character_option.equals("simplified")){
+                                if (realEachIndex - 1 < 0) {
+                                    lastMemberId = memberObjects.get(realEachIndex).simplified;
+                                } else {
+                                    lastMemberId = memberObjects.get(realEachIndex - 1).simplified;
+                                }
+                                singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex).simplified, lastMemberId, memberObjects.get(realEachIndex + 1).simplified);
+                            } else if(character_option.equals("traditional")){
+                                if (realEachIndex - 1 < 0) {
+                                    lastMemberId = memberObjects.get(realEachIndex).traditional;
+                                } else {
+                                    lastMemberId = memberObjects.get(realEachIndex - 1).traditional;
+                                }
+                                singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex).traditional, lastMemberId, memberObjects.get(realEachIndex + 1).traditional);
                             }
-                            singleMemberImageView.updateThreeMembersBitmapIds(memberObjects.get(realEachIndex), lastMemberId, memberObjects.get(realEachIndex + 1));
+
+
+
                             MemberUrl = memberObjects.get(realEachIndex).link;
 //                            singleMemberDialogTitleView.setText(surnameCharactersSimplified.get(realEachIndex));
                             singleMemberDialogTitleView.setText(memberObjects.get(realEachIndex).pinyin);
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
+                            // TODO
+                            oneMemberInfo = (realEachIndex+1) + "";
                             singleMemberTextView.setText(oneMemberInfo);
                             singleMemberTextView.scrollTo(0,0);
                             timeStamp[0] = System.currentTimeMillis();
@@ -630,6 +673,9 @@ public class SpiralView extends View {
         String spiral_effect = PrefsActivity.getSpiralEffectPref(getContext());
         show_label = PrefsActivity.getShowLabelPref(getContext());
         //Log.d("spiral effect ", spiral_effect + " ");
+
+        character_option = PrefsActivity.getCharactersOptionPref(getContext());
+
 
         if (spiral_effect.equalsIgnoreCase("static") && staticCoordinatesGet <= 10) {
             spiralCoordinates.clear();
@@ -793,7 +839,15 @@ public class SpiralView extends View {
 //        c.drawBitmap(t.image, currentMemberMatrix, null); // more OO
 //        c.drawBitmap(t.image, currentMemberMatrix, null);
         c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1f, bluePaint);
-        c.drawText(t.simplified, t.x + newCurrentMemberRadius * 0.1f, baseline, thisMemberPaint);
+
+        if(character_option.equals("simplified")) {
+            c.drawText(t.simplified, t.x + newCurrentMemberRadius * 0.1f, baseline, thisMemberPaint);
+        } else if (character_option.equals("traditional")) {
+            c.drawText(t.traditional, t.x + newCurrentMemberRadius * 0.1f, baseline, thisMemberPaint);
+        } else {
+            c.drawText("N/A", t.x + newCurrentMemberRadius * 0.1f, baseline, thisMemberPaint);
+        }
+
 
 
     }

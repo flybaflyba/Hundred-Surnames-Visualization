@@ -14,6 +14,15 @@
         <item>threeD</item>
     </string-array>
 
+    <string-array name="CharactersOption">
+        <item>Simplified</item>
+        <item>Tradition</item>
+    </string-array>
+    <string-array name="CharactersOption_value">
+        <item>simplified</item>
+        <item>traditional</item>
+    </string-array>
+
     <string name="SpiralEffectTitle">Spiral Effect</string>
     <string name="SpiralEffectSummary">Select an animation style for the spiral</string>
 
