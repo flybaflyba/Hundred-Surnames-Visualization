@@ -132,25 +132,28 @@ public class SingleMemberImage extends View {
         thisMemberPaint.setStyle(Paint.Style.FILL);
         thisMemberPaint.setTextSize((int)(imageSize));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
 //        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
-
         Paint.FontMetrics fontMetrics=thisMemberPaint.getFontMetrics();
         float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
         float baseline=y+distance;
+
+        Paint thisCirclePaint = new Paint();
+        thisMemberPaint.setColor(Color.parseColor("#def661"));
+        thisMemberPaint.setStyle(Paint.Style.FILL);
 
 
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {
 //                c.drawBitmap(t.image, x, y, null);
-                c.drawCircle(x, y, imageSize * 0.5f, thisMemberPaint);
-//                c.drawText(t.text, x + imageSize * 0.1f, baseline, thisMemberPaint);
+                c.drawCircle(x, y, imageSize * 0.5f, thisCirclePaint);
+                c.drawText(t.text, x-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             } else if (t.role.equals("last")) {
 //                c.drawBitmap(t.image, x - canvasWidth, y, null);
-                c.drawCircle(x - canvasWidth, y, imageSize * 0.5f, thisMemberPaint);
-//                c.drawText(t.text, x + imageSize * 0.1f, baseline, thisMemberPaint);
+                c.drawCircle(x - canvasWidth, y, imageSize * 0.5f, thisCirclePaint);
+                c.drawText(t.text, x - canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             } else if (t.role.equals("next")) {
 //                c.drawBitmap(t.image, x + canvasWidth, y, null);
-                c.drawCircle(x + canvasWidth, y, imageSize * 0.5f, thisMemberPaint);
-//                c.drawText(t.text, x + imageSize * 0.1f, baseline, thisMemberPaint);
+                c.drawCircle(x + canvasWidth, y, imageSize * 0.5f, thisCirclePaint);
+                c.drawText(t.text, x + canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             }
         }
     }
