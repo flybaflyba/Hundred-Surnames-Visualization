@@ -26,7 +26,7 @@ public class DataHolder {
         allObjectInfoFileIds = getAllInfoFilesIds();
 
         readInfoFile(context);
-        memberObjects = getMemberObjectsList(context, w);
+        memberObjects = getMemberObjectsList();
 
 
     }
@@ -35,7 +35,6 @@ public class DataHolder {
         ArrayList<Integer> allLargeImagesIds = new ArrayList<>();
         for (int i = 0; i <= 99; i ++) {
             allLargeImagesIds.add(R.drawable.no_image_replacement);
-            // repeat this step to add all large images' id to a list
         }
         return allLargeImagesIds;
     }
@@ -45,35 +44,21 @@ public class DataHolder {
         ArrayList<Integer> allInfoFilesIds = new ArrayList<>();
         for (int i = 0; i <= 99; i ++) {
             allInfoFilesIds.add(R.raw.sample_info);
-            // repeat this step to add all large images' id to a list
         }
         return allInfoFilesIds;
     }
 
-    private ArrayList<Member> getMemberObjectsList(Context context, float w) {
+    private ArrayList<Member> getMemberObjectsList() {
         ArrayList<Member> allObjectsList = new ArrayList<>();
-
-//        Bitmap empty;
-//        empty = loadAndScale(context.getResources(),R.drawable.no_image_replacement,w);
-//        for (int i = 0; i <= 99; i ++) {
-//            allObjectsList.add(new Member(empty, 0f, 0f, 0f));
-//            // repeat this step to create objects with all resized bitmaps
-//        }
 
         for (String s:allSummaries) {
             allObjectsList.add(new Member(s, 0f, 0f, 0f));
-            // repeat this step to create objects with all resized bitmaps
         }
 
         return allObjectsList;
     }
 
-    private Bitmap loadAndScale(Resources res, int id, float newWidth) {
-        Bitmap original = BitmapFactory.decodeResource(res, id);
-        float aspectRatio = (float)original.getHeight()/(float)original.getWidth();
-        float newHeight = newWidth * aspectRatio;
-        return Bitmap.createScaledBitmap(original, (int)newWidth, (int)newHeight, true);
-    }
+
 
     public void readInfoFile(Context context) {
         try {

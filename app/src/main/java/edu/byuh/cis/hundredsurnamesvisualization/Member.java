@@ -4,21 +4,12 @@ import android.graphics.Bitmap;
 
 public class Member {
     String text;
-    Bitmap image;
     Float size;
     Float x;
     Float y;
     String role;
     String link;
 
-    public Member(Bitmap imageP, Float sizeP, Float xP, Float yP) {
-        image = imageP;
-        size = sizeP;
-        x = xP;
-        y = yP;
-        role = "";
-        link = "";
-    }
 
     public Member(String textP, Float sizeP, Float xP, Float yP) {
         text = textP;
@@ -35,10 +26,6 @@ public class Member {
 
     public void setLink(String l) {
         link = l;
-    }
-
-    public void changeImage(Bitmap b) {
-        image = b;
     }
 
     public void changeText(String s) {text = s;}
