@@ -623,7 +623,7 @@ public class SpiralView extends View {
         wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
         WebSettings settings = wv.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-     
+        wv.scrollTo(0, 500);
 
 
         wv.setLayoutParams(nice);
