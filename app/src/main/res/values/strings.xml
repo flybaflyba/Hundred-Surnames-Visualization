@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">app_name</string>
+    <string name="app_name">HSN</string>
 
     <string-array name="SpiralEffect">
         <item>Default</item>
@@ -30,25 +30,24 @@
     <string name="about">About</string>
 
 
-    <string name="about_content_one">about_content_one</string>
-    <string name="about_content_two">about_content_two</string>
-    <string name="about_content_three">about_content_three</string>
-    <string name="about_content_four">about_content_four</string>
+    <string name="about_content_one">Programming by Litian Zhang and Tsz Chin Lam under the supervision of Dr. Geoffrey Draper at Brigham Young University--Hawaii.</string>
+    <string name="about_content_two">Surnames order is based on </string>
+    <string name="about_content_three">The Report on National Names, 2019 (二〇一九年全国姓名报告发布)</string>
+    <string name="about_content_four">published by The Ministry of Public Security of the People\'s Republic of China.</string>
+
+    <string name="surnames_order_source_link">https://app.mps.gov.cn/gdnps/pc/content.jsp?id=7478899</string>
 
     <string name="return_button">Dismiss</string>
     <string name="website_button">Website</string>
 
-    <string name="show_label_title">show_label_title</string>
-    <string name="show_label_on">show_label_on</string>
-    <string name="show_label_off">show_label_off</string>
-    <string name="view">view</string>
-    <string name="you_didnt_pick_any">you_didnt_pick_any</string>
-    <string name="year">Year</string>
-    <string name="first_object">first_object</string>
+    <string name="show_label_title">Show Lable</string>
+    <string name="show_label_on">Characters have Pinyin Labels</string>
+    <string name="show_label_off">Characters don\'t have Pinyin Labels</string>
+    <string name="view">View</string>
+    <string name="you_didnt_pick_any">You didn\'t pick anything</string>
     <string name="app_website_link">http://litianzhang.com/</string>
-    <string name="first_is_the_first">first_is_the_first</string>
-    <string name="last_is_the_last">last_is_the_last</string>
-    <string name="objects">objects</string>
+    <string name="first_is_the_first">This is the first name</string>
+    <string name="last_is_the_last">This is the last name</string>
 
 
 </resources>

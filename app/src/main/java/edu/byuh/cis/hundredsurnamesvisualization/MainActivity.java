@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
         MenuItem item=menu.add(0,BLUE,0,"hi");
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);//主要是这句话
         //item.setOnMenuItemClickListener(listener);//添加监听事件
-        item.setIcon(R.drawable.calendar);//设置图标
+        item.setIcon(R.drawable.picker_button);//设置图标
 
         return true;
     }
@@ -443,7 +443,11 @@ public class MainActivity extends AppCompatActivity {
     public void showAboutDialog() {
 
         String html = getResources().getString(R.string.about_content_one) + "<br><br>";
-        html += getResources().getString(R.string.about_content_four);
+        html += getResources().getString(R.string.about_content_two) + " ";
+        html += "<a href='" + getResources().getString(R.string.surnames_order_source_link) + "'>" + getResources().getString(R.string.about_content_three)+ "</a> ";
+        html += getResources().getString(R.string.about_content_four) + "<br>";
+
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.app_name));
@@ -512,7 +516,9 @@ public class MainActivity extends AppCompatActivity {
         final TextView tx = new TextView(this);
         tx.setGravity(Gravity.CENTER);
 
-        keyPickerString = getResources().getString(R.string.view) + selectedKey + " " + getResources().getString(R.string.objects); //英文
+//        keyPickerString = getResources().getString(R.string.view) + selectedKey + " " + getResources().getString(R.string.objects); //英文
+
+        keyPickerString = "Pick a Surname";
 
         tx.setText(keyPickerString);
         tx.setTextSize(20);
@@ -524,7 +530,7 @@ public class MainActivity extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int i, int i1) {
                 selectedKey = temporary[i1]; // pass this selected value to dialog button, we can use a field so that it can be accessed from inner class
                 selectedKeyIndex = i1;
-                keyPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.objects); //英文
+//                keyPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.objects); //英文
                 tx.setText(keyPickerString);
             }
         });

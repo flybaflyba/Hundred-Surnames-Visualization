@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -23,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.RequiresApi;
 
@@ -86,6 +89,7 @@ public class SpiralView extends View {
     private String MemberUrl;
     private int numOfMembers;
     private String character_option = "simplified";
+    private Paint thisMemberPaint;
 
 
     public SpiralView(Context context, int num) {
@@ -123,6 +127,14 @@ public class SpiralView extends View {
         noImageCirclePaint = new Paint();
         noImageCirclePaint.setColor(Color.parseColor("#17252a"));
         noImageCirclePaint.setStyle(Paint.Style.FILL);
+
+        thisMemberPaint = new Paint();
+        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberPaint.setStyle(Paint.Style.FILL);
+        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
+//        AssetManager assetManager = getContext().getAssets();
+//        Typeface chops = Typeface.createFromAsset(assetManager, "fonts/TengXiangFanXiaoGeJianFan.ttf");
+//        thisMemberPaint.setTypeface(chops);
 
     }
 
@@ -827,11 +839,8 @@ public class SpiralView extends View {
             // do nothing
         }
 
-        Paint thisMemberPaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
-        thisMemberPaint.setStyle(Paint.Style.FILL);
+
         thisMemberPaint.setTextSize((int)(newCurrentMemberRadius));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
-        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
 
         Paint.FontMetrics fontMetrics=thisMemberPaint.getFontMetrics();
         float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;

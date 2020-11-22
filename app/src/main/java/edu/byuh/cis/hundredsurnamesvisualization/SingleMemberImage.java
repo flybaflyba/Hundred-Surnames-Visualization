@@ -104,7 +104,7 @@ public class SingleMemberImage extends View {
         Paint thisMemberPaint = new Paint();
         thisMemberPaint.setColor(Color.parseColor("#def2f1"));
         thisMemberPaint.setStyle(Paint.Style.FILL);
-        thisMemberPaint.setTextSize((int)(imageSize));
+        thisMemberPaint.setTextSize((int)(imageSize * 0.8));
 //        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
         Paint.FontMetrics fontMetrics=thisMemberPaint.getFontMetrics();
         float distance=(fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
