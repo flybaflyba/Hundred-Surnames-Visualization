@@ -1,9 +1,8 @@
 package edu.byuh.cis.hundredsurnamesvisualization;
 
-import android.graphics.Bitmap;
-
 public class Member {
-    String text;
+    String simplified;
+    String pinyin;
     Float size;
     Float x;
     Float y;
@@ -11,8 +10,9 @@ public class Member {
     String link;
 
 
-    public Member(String textP, Float sizeP, Float xP, Float yP) {
-        text = textP;
+    public Member(String simplifiedP, String pinyinP, Float sizeP, Float xP, Float yP) {
+        simplified = simplifiedP;
+        pinyin = pinyinP;
         size = sizeP;
         x = xP;
         y = yP;
@@ -28,7 +28,8 @@ public class Member {
         link = l;
     }
 
-    public void changeText(String s) {text = s;}
+    public void changeText(String s) {
+        simplified = s;}
 
 
 }

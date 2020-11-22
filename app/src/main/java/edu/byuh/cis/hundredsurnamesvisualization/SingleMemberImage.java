@@ -22,9 +22,9 @@ public class SingleMemberImage extends View {
     private float canvasCenterY;
     private float imageSize;
 
-    private String text;
-    private String textLast;
-    private String textNext;
+    private Member member;
+    private Member memberLast;
+    private Member memberNext;
 
     private Member currentMember;
     private Member lastMember;
@@ -37,11 +37,11 @@ public class SingleMemberImage extends View {
     private float canvasHeight;
     private boolean orientationJustChanged = false;
 
-    public SingleMemberImage(Context context, String text, String textLast, String textNext) {
+    public SingleMemberImage(Context context, Member member, Member memberLast, Member memberNext) {
         super(context);
-        this.text = text;
-        this.textLast = textLast;
-        this.textNext = textNext;
+        this.member = member;
+        this.memberLast = memberLast;
+        this.memberNext = memberNext;
 
         threeMembers = new ArrayList<>();
 
@@ -49,10 +49,10 @@ public class SingleMemberImage extends View {
         textPaint.setTextSize(50);
     }
 
-    public void updateThreeMembersBitmapIds(String text, String textLast, String textNext) {
-        this.text = text;
-        this.textLast = textLast;
-        this.textNext = textNext;
+    public void updateThreeMembersBitmapIds(Member member, Member memberLast, Member memberNext) {
+        this.member = member;
+        this.memberLast = memberLast;
+        this.memberNext = memberNext;
     }
 
     @Override
@@ -71,9 +71,9 @@ public class SingleMemberImage extends View {
             x = canvasCenterX;
             y = canvasCenterY;
 
-            currentMember = new Member(text, 0f, 0f, 0f);
-            lastMember = new Member(textLast, 0f, 0f, 0f);
-            nextMember = new Member(textNext, 0f, 0f, 0f);
+            currentMember = new Member(member.simplified, member.pinyin, 0f, 0f, 0f);
+            lastMember = new Member(memberLast.simplified, memberLast.pinyin, 0f, 0f, 0f);
+            nextMember = new Member(memberNext.simplified, memberLast.pinyin, 0f, 0f, 0f);
             threeMembers.add(currentMember);
             threeMembers.add(lastMember);
             threeMembers.add(nextMember);
@@ -102,13 +102,13 @@ public class SingleMemberImage extends View {
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {
                 c.drawCircle(x, y, imageSize * 0.5f, thisCirclePaint);
-                c.drawText(t.text, x-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
+                c.drawText(t.simplified, x-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             } else if (t.role.equals("last")) {
                 c.drawCircle(x - canvasWidth, y, imageSize * 0.5f, thisCirclePaint);
-                c.drawText(t.text, x - canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
+                c.drawText(t.simplified, x - canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             } else if (t.role.equals("next")) {
                 c.drawCircle(x + canvasWidth, y, imageSize * 0.5f, thisCirclePaint);
-                c.drawText(t.text, x + canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
+                c.drawText(t.simplified, x + canvasWidth-thisMemberPaint.getTextSize()/2, baseline, thisMemberPaint);
             }
         }
     }
@@ -131,11 +131,11 @@ public class SingleMemberImage extends View {
 
         for (Member t: threeMembers) {
             if (t.role.equals("current")) {
-                t.changeText(text);
+                t.changeText(member.simplified);
             } else if (t.role.equals("last")) {
-                t.changeText(textLast);
+                t.changeText(memberLast.simplified);
             } else if (t.role.equals("next")) {
-                t.changeText(textNext);
+                t.changeText(memberNext.simplified);
             }
         }
     }
@@ -172,5 +172,5 @@ public class SingleMemberImage extends View {
         valueAnimator.start();
 
     }
-    
+
 }

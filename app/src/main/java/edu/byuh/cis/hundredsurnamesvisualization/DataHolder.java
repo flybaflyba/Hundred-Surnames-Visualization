@@ -1,9 +1,6 @@
 package edu.byuh.cis.hundredsurnamesvisualization;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -17,16 +14,19 @@ public class DataHolder {
     public ArrayList<Integer> allLargeImageIds;
     public ArrayList<Integer> allObjectInfoFileIds;
     public ArrayList<Member> memberObjects;
-    public ArrayList<String> allSummaries = new ArrayList<>();
-    public ArrayList<String> allKeys = new ArrayList<>();
+    public ArrayList<String> surnameCharactersSimplified;
+    public ArrayList<String> allKeys;
+    public ArrayList<String> surnamesPinyinSimplified;
 
-    public DataHolder(Context context, float w) {
+
+    public DataHolder(Context context) {
 
         allLargeImageIds = getAllLargeImagesIds();
         allObjectInfoFileIds = getAllInfoFilesIds();
-
-        readInfoFile(context);
-        memberObjects = getMemberObjectsList();
+        surnameCharactersSimplified = readFile(context, R.raw.surname_characters_simplified);
+        surnamesPinyinSimplified = readFile(context, R.raw.surnames_pinyin_simplified);
+        allKeys = surnameCharactersSimplified; // for this app, key (in picker) is just the summary (title in dialog), which is the name
+        memberObjects = getMemberObjectsList(surnameCharactersSimplified, surnamesPinyinSimplified);
 
 
     }
@@ -48,11 +48,15 @@ public class DataHolder {
         return allInfoFilesIds;
     }
 
-    private ArrayList<Member> getMemberObjectsList() {
+    private ArrayList<Member> getMemberObjectsList(ArrayList<String> surnameCharactersSimplified, ArrayList<String> surnamesPinyinSimplified) {
         ArrayList<Member> allObjectsList = new ArrayList<>();
 
-        for (String s:allSummaries) {
-            allObjectsList.add(new Member(s, 0f, 0f, 0f));
+//        for (String s:surnameCharactersSimplified) {
+//            allObjectsList.add(new Member(s,0f, 0f, 0f));
+//        }
+
+        for (int i=0; i<surnameCharactersSimplified.size(); i++) {
+            allObjectsList.add(new Member(surnameCharactersSimplified.get(i), surnamesPinyinSimplified.get(i),0f, 0f, 0f));
         }
 
         return allObjectsList;
@@ -60,9 +64,12 @@ public class DataHolder {
 
 
 
-    public void readInfoFile(Context context) {
+    public ArrayList<String> readFile(Context context, int fileId) {
+
+        ArrayList<String> allSummaries = new ArrayList<>();
+
         try {
-            InputStream allMemberInfoFile = context.getResources().openRawResource(R.raw.all_objects_summaries);
+            InputStream allMemberInfoFile = context.getResources().openRawResource(fileId);
             if (allMemberInfoFile != null)
             {
                 InputStreamReader ir = new InputStreamReader(allMemberInfoFile);
@@ -71,7 +78,6 @@ public class DataHolder {
                 //read each line
                 while (( line = br.readLine()) != null) {
                     allSummaries.add(line+"\n");
-                    allKeys.add(line+"\n");
                 }
                 allMemberInfoFile.close();
             }
@@ -84,6 +90,8 @@ public class DataHolder {
         {
             Log.d("TestFile", e.getMessage());
         }
+
+        return allSummaries;
     }
 
 }
