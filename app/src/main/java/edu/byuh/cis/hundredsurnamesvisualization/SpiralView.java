@@ -678,12 +678,14 @@ public class SpiralView extends View {
         builder.setView(lnl);
 //        builder.setView(lnlSinglePage);
         builder.setCancelable(true);
+
+//        getResources().getString(R.string.return_button) // this is the return button text
         builder.setPositiveButton("Positive", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Log.d("click mahalo ", "mahalo");
             }
         });
-        builder.setNegativeButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Negative", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
                 Log.d("click dismiss ", "dismiss");
