@@ -11,6 +11,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
@@ -527,6 +528,14 @@ public class SpiralView extends View {
                             singleMemberTextView.setText(oneMemberInfo);
                             singleMemberTextView.scrollTo(0,0);
                             timeStamp[0] = System.currentTimeMillis();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    wv.scrollTo(0, 500);
+                                }
+                            },900); // 延时
+
                         }
                     } else {
                         Toast.makeText(getContext(), getResources().getString(R.string.last_is_the_last), Toast.LENGTH_SHORT).show();
@@ -593,6 +602,13 @@ public class SpiralView extends View {
                             singleMemberTextView.setText(oneMemberInfo);
                             singleMemberTextView.scrollTo(0,0);
                             timeStamp[0] = System.currentTimeMillis();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    wv.scrollTo(0, 500);
+                                }
+                            },900); // 延时
                         }
                     } else {
                         Toast.makeText(getContext(), getResources().getString(R.string.first_is_the_first), Toast.LENGTH_SHORT).show();
