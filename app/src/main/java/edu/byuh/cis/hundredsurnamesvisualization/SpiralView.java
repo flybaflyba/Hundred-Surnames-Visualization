@@ -4,22 +4,21 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -39,7 +38,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Locale;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -745,7 +743,18 @@ public class SpiralView extends View {
             public void onClick(View v) {
                 Log.d("click ", "negative");
 
-                // tried tts again, not working with chinese... 
+                try {
+                    AssetFileDescriptor afd = getContext().getAssets().openFd("audios/" + "xiang_1" + ".mp3");
+                    MediaPlayer mMediaPlayer = new MediaPlayer();
+                    mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                    afd.close();
+                    mMediaPlayer.prepare();
+                    mMediaPlayer.start();
+                } catch (Exception ex) {
+                    Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+                // tried tts again, not working with chinese...
 //                textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
 //                    @Override
 //                    public void onInit(int status) {
