@@ -745,13 +745,13 @@ public class SpiralView extends View {
             public void onClick(View v) {
                 Log.d("click ", "negative");
 
-//                does not support chinese .... may vary from phones ...
+                // tried tts again, not working with chinese... 
 //                textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
 //                    @Override
 //                    public void onInit(int status) {
 //                        if(status == TextToSpeech.SUCCESS){
 //                            Log.d("tts ", "success");
-//                            int result = textToSpeech.setLanguage(Locale.ENGLISH);
+//                            int result = textToSpeech.setLanguage(Locale.SIMPLIFIED_CHINESE);
 //                            if(result != textToSpeech.LANG_COUNTRY_AVAILABLE && result != TextToSpeech.LANG_AVAILABLE){
 //                                Toast.makeText(getContext(), "TTS暂时不支持这种语音的朗读！", Toast.LENGTH_SHORT).show();
 //                            }
@@ -759,9 +759,10 @@ public class SpiralView extends View {
 //                            Log.d("tts ", "fail");
 //                        }
 //                        Log.d("status ", status + "");
+//                        Toast.makeText(getContext(), status + " status", Toast.LENGTH_SHORT).show();
 //                    }
 //                });
-////                onInit(0);
+//
 //                new Handler().postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {
