@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private String spaceDependingOnLanguage = "";
     private int mainColor = Color.parseColor("#931b34");
     private int sliderButtonColor = Color.parseColor("#932b34");
+
 
     public class MyTimer extends Handler {
 

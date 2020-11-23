@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
@@ -38,11 +39,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
-
+//implements TextToSpeech.OnInitListener
 public class SpiralView extends View {
 
     private Paint bluePaint, redPaint, spiralPaint;
@@ -94,11 +96,13 @@ public class SpiralView extends View {
     private String character_option = "simplified";
     private String pinyin_option = "simplified";
     private Paint thisMemberPaint;
+    private TextToSpeech textToSpeech;
 
 
     public SpiralView(Context context, int num) {
         super(context);
 
+//        textToSpeech = new TextToSpeech(context, this);
         numOfMembers = num;
         bluePaint = new Paint();
         bluePaint.setColor(Color.parseColor("#17252a"));
@@ -732,8 +736,6 @@ public class SpiralView extends View {
         singleMemberDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //singleTempleDialog.dismiss();
-                //singleTempleDialog stays when click on website button
                 Log.d("click ", "positive");
 
             }
@@ -741,17 +743,38 @@ public class SpiralView extends View {
         singleMemberDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //singleTempleDialog.dismiss();
-                //singleTempleDialog stays when click on website button
                 Log.d("click ", "negative");
+
+//                does not support chinese .... may vary from phones ...
+//                textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+//                    @Override
+//                    public void onInit(int status) {
+//                        if(status == TextToSpeech.SUCCESS){
+//                            Log.d("tts ", "success");
+//                            int result = textToSpeech.setLanguage(Locale.ENGLISH);
+//                            if(result != textToSpeech.LANG_COUNTRY_AVAILABLE && result != TextToSpeech.LANG_AVAILABLE){
+//                                Toast.makeText(getContext(), "TTS暂时不支持这种语音的朗读！", Toast.LENGTH_SHORT).show();
+//                            }
+//                        } else {
+//                            Log.d("tts ", "fail");
+//                        }
+//                        Log.d("status ", status + "");
+//                    }
+//                });
+////                onInit(0);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        textToSpeech.speak("how are you, I'm find, thank you.", TextToSpeech.QUEUE_ADD, null);
+//                    }
+//                },1000); // 延时
+
 
             }
         });
         singleMemberDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //singleTempleDialog.dismiss();
-                //singleTempleDialog stays when click on website button
                 Log.d("click ", "neutral");
 
             }
@@ -1380,4 +1403,17 @@ public class SpiralView extends View {
         //Toast.makeText(getContext(), count + " ", Toast.LENGTH_SHORT).show();
     }
 
+//    @Override
+//    public void onInit(int status) {
+////        if(status == TextToSpeech.SUCCESS){
+////            Log.d("tts ", "success");
+////            int result = textToSpeech.setLanguage(Locale.CHINA);
+////            if(result != textToSpeech.LANG_COUNTRY_AVAILABLE && result != TextToSpeech.LANG_AVAILABLE){
+////                Toast.makeText(getContext(), "TTS暂时不支持这种语音的朗读！", Toast.LENGTH_SHORT).show();
+////            }
+////        } else {
+////            Log.d("tts ", "fail");
+////        }
+////        textToSpeech.speak("你好吗", TextToSpeech.QUEUE_ADD, null);
+//    }
 }
