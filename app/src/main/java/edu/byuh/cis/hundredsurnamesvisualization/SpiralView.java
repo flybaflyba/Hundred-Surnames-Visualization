@@ -742,16 +742,25 @@ public class SpiralView extends View {
             @Override
             public void onClick(View v) {
                 Log.d("click ", "negative");
+                String audioFileName = "" + (realEachIndex + 1);
+                while (audioFileName.length() < 3) {
+                    audioFileName = "0" + audioFileName;
+                }
+                audioFileName = audioFileName + "_" + memberObjects.get(realEachIndex).pinyin;
+                audioFileName = audioFileName.substring(0,audioFileName.length()-1); // there is an extra space in the end. 
+                Log.d("audioFileName ", audioFileName);
+                Log.d("audioFileName length ", audioFileName.length() + "");
 
                 try {
-                    AssetFileDescriptor afd = getContext().getAssets().openFd("audios/" + "xiang_1" + ".mp3");
+                    AssetFileDescriptor afd = getContext().getAssets().openFd("audios/" + audioFileName + ".mp3");
                     MediaPlayer mMediaPlayer = new MediaPlayer();
                     mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                     afd.close();
                     mMediaPlayer.prepare();
                     mMediaPlayer.start();
                 } catch (Exception ex) {
-                    Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "No Audio", Toast.LENGTH_LONG).show();
                 }
 
                 // tried tts again, not working with chinese...
