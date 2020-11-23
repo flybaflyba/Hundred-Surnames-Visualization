@@ -519,7 +519,16 @@ public class SpiralView extends View {
                                 }
                             }
                             singleMemberDialogTitleView.setText(title);
-                            wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
+
+                            String url = "";
+                            if(pinyin_option.equals("simplified")){
+                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
+                            } else if (pinyin_option.equals("cantonese")){
+                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyinCantonese + "_(surname)";
+                            } else {
+                                url = "https://www.google.com/";
+                            }
+                            wv.loadUrl(url);
 
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
@@ -593,7 +602,16 @@ public class SpiralView extends View {
                                 }
                             }
                             singleMemberDialogTitleView.setText(title);
-                            wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
+
+                            String url = "";
+                            if(pinyin_option.equals("simplified")){
+                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
+                            } else if (pinyin_option.equals("cantonese")){
+                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyinCantonese + "_(surname)";
+                            } else {
+                                url = "https://www.google.com/";
+                            }
+                            wv.loadUrl(url);
 
                             oneMemberInfo = "";
                             readOneInfoFile(allObjectInfoFileIds.get(realEachIndex));
@@ -636,7 +654,15 @@ public class SpiralView extends View {
         lnlWebView.setMinimumHeight((int)(Math.min(screenWidth, screenHeight) * 0.7));
 
         wv.setWebViewClient(new WebViewClient());
-        wv.loadUrl("https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)");
+        String url = "";
+        if(pinyin_option.equals("simplified")){
+            url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
+        } else if (pinyin_option.equals("cantonese")){
+            url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyinCantonese + "_(surname)";
+        } else {
+            url = "https://www.google.com/";
+        }
+        wv.loadUrl(url);
         WebSettings settings = wv.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wv.scrollTo(0, 500);
