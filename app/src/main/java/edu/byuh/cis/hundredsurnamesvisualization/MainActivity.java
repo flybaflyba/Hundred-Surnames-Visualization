@@ -179,14 +179,14 @@ public class MainActivity extends AppCompatActivity {
         int sliderMax = numOfMembers * 30;
 
         slider.setMax(sliderMax);
-        slider.setProgress(0);
+        slider.setProgress(sliderMax/2);
         //slider.setBackgroundColor(Color.parseColor("#292d30"));
 
         //android:progressDrawable="@drawable/slider"
 
         timA = new MyTimer();
 
-        progress = 0;
+        progress = sliderMax/2;
 //        android:max="4400"
 
 

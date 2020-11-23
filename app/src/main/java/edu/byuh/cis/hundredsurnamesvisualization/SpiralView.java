@@ -121,7 +121,7 @@ public class SpiralView extends View {
         allMemberLinks = new ArrayList<>();
         surnameCharactersSimplified = new ArrayList<>();
         allKeys = new ArrayList<>();
-        theta = 0;
+        theta = numOfMembers * 30 / 2;
         currentMemberMatrix = new Matrix();
         coordinatesAndSizesUpdated = FALSE;
         orientationJustChanged = FALSE;
