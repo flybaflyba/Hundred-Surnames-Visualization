@@ -521,13 +521,7 @@ public class SpiralView extends View {
                             singleMemberDialogTitleView.setText(title);
 
                             String url = "";
-                            if(pinyin_option.equals("simplified")){
-                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
-                            } else if (pinyin_option.equals("cantonese")){
-                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyinCantonese + "_(surname)";
-                            } else {
-                                url = "https://www.google.com/";
-                            }
+                            url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
                             wv.loadUrl(url);
 
                             oneMemberInfo = "";
@@ -604,13 +598,7 @@ public class SpiralView extends View {
                             singleMemberDialogTitleView.setText(title);
 
                             String url = "";
-                            if(pinyin_option.equals("simplified")){
-                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
-                            } else if (pinyin_option.equals("cantonese")){
-                                url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyinCantonese + "_(surname)";
-                            } else {
-                                url = "https://www.google.com/";
-                            }
+                            url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
                             wv.loadUrl(url);
 
                             oneMemberInfo = "";
@@ -655,13 +643,7 @@ public class SpiralView extends View {
 
         wv.setWebViewClient(new WebViewClient());
         String url = "";
-        if(pinyin_option.equals("simplified")){
-            url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
-        } else if (pinyin_option.equals("cantonese")){
-            url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyinCantonese + "_(surname)";
-        } else {
-            url = "https://www.google.com/";
-        }
+        url = "https://en.wikipedia.org/wiki/" + memberObjects.get(realEachIndex).pinyin + "_(surname)";
         wv.loadUrl(url);
         WebSettings settings = wv.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
