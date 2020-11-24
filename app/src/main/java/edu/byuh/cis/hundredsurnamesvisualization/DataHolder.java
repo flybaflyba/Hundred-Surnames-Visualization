@@ -18,6 +18,7 @@ public class DataHolder {
     public ArrayList<String> surnameCharactersTraditional;
     public ArrayList<String> surnamePinyinsSimplified;
     public ArrayList<String> surnamePinyinsCantonese;
+    public ArrayList<String> famousPeopleList;
 
 
     public DataHolder(Context context) {
@@ -28,6 +29,10 @@ public class DataHolder {
         surnameCharactersTraditional = readFile(context, R.raw.surname_characters_traditional);
         surnamePinyinsSimplified = readFile(context, R.raw.surname_pinyins_simplified);
         surnamePinyinsCantonese = readFile(context, R.raw.surname_pinyins_cantonese);
+
+        famousPeopleList=readFile(context,R.raw.famous_people);
+        System.out.println(famousPeopleList);
+
 
         memberObjects = getMemberObjectsList(surnameCharactersSimplified, surnamePinyinsSimplified);
 

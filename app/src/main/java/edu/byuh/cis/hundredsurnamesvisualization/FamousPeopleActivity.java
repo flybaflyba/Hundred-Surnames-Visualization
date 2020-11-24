@@ -11,14 +11,24 @@ public class FamousPeopleActivity extends AppCompatActivity {
 
 
     private WebView webView;
+    DataHolder dataHolder;
+
+
+
+
+    
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.famous_people_view);
+        DataHolder dataHolder = new DataHolder(this);
 
         webView=(WebView)findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://en.wikipedia.org/wiki/Lin_(surname)");
+        String person=dataHolder.famousPeopleList.get(0);
+        webView.loadUrl("https://en.wikipedia.org/wiki/"+person);
 
     }
 
