@@ -4,37 +4,30 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".FamousPeopleActivity">
 
     <LinearLayout
-        android:id="@+id/LinearLayoutSinglePage"
+        android:id="@+id/LinearLayoutFamousPeoplePage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/LinearLayoutTitle"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:background="#ADFDDD"
-            android:layout_weight="1"
-            android:orientation="vertical" />
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutBig"
+            android:id="@+id/LinearLayoutTop"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:background="#ADFF2F"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:orientation="horizontal" />
 
 
         <LinearLayout
-            android:id="@+id/LinearLayoutWeb"
+            android:id="@+id/LinearLayoutBottom"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:background="#DA70D6"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:orientation="vertical" />
 
     </LinearLayout>

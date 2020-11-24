@@ -16,12 +16,4 @@
         <item name="android:windowBackground">@drawable/launch</item>
     </style>
 
-    <style name="theme_one" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@drawable/launch_bg</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
 </resources>

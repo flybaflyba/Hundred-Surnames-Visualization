@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
@@ -690,19 +691,19 @@ public class SpiralView extends View {
         builder.setCancelable(true);
 
 //        getResources().getString(R.string.return_button) // this is the return button text
-        builder.setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Famous", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Log.d("click mahalo ", "mahalo");
             }
         });
-        builder.setNegativeButton("Negative", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Audio", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
                 Log.d("click dismiss ", "dismiss");
 
             }
         });
-        builder.setNeutralButton("Neutral", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
                 Log.d("click aloha ", "aloha");
@@ -711,7 +712,7 @@ public class SpiralView extends View {
         });
 
         singleMemberDialog = builder.create();
-//        singleMemberDialog.setContentView(R.layout.single_view);
+//        singleMemberDialog.setContentView(R.layout.famous_people_view);
         singleMemberDialog.show();
 
         //singleMemberDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -736,6 +737,9 @@ public class SpiralView extends View {
             public void onClick(View v) {
                 Log.d("click ", "positive");
 
+                Intent famousPeopleScreen = new Intent(getContext(), FamousPeopleActivity.class);
+                getContext().startActivity(famousPeopleScreen);
+
             }
         });
         singleMemberDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
@@ -747,7 +751,7 @@ public class SpiralView extends View {
                     audioFileName = "0" + audioFileName;
                 }
                 audioFileName = audioFileName + "_" + memberObjects.get(realEachIndex).pinyin;
-                audioFileName = audioFileName.substring(0,audioFileName.length()-1); // there is an extra space in the end. 
+                audioFileName = audioFileName.substring(0,audioFileName.length()-1); // there is an extra space in the end.
                 Log.d("audioFileName ", audioFileName);
                 Log.d("audioFileName length ", audioFileName.length() + "");
 
@@ -795,6 +799,7 @@ public class SpiralView extends View {
             @Override
             public void onClick(View v) {
                 Log.d("click ", "neutral");
+                singleMemberDialog.dismiss();
 
             }
         });
@@ -809,6 +814,7 @@ public class SpiralView extends View {
         btnPositive.setLayoutParams(layoutParams);
         btnNegative.setLayoutParams(layoutParams);
         btnNeutral.setLayoutParams(layoutParams);
+
 
 
     }

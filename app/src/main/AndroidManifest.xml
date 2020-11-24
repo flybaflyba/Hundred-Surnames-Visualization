@@ -15,7 +15,7 @@
 
         <activity android:name="edu.byuh.cis.hundredsurnamesvisualization.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/theme_one"
+            android:theme="@style/AppTheme"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +24,9 @@
         </activity>
 
         <activity android:name="edu.byuh.cis.hundredsurnamesvisualization.PrefsActivity">
+        </activity>
+        <activity android:name="edu.byuh.cis.hundredsurnamesvisualization.FamousPeopleActivity"
+            android:theme="@style/AppTheme">
         </activity>
 
     </application>
