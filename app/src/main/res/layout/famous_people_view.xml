@@ -8,26 +8,13 @@
     android:orientation="vertical"
     tools:context=".FamousPeopleActivity">
 
-    <WebView
-        android:id="@+id/webview"
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutFamousPeoplePage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="perhaps person name here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/LinearLayoutFamousPeoplePage"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 <!--        <LinearLayout-->
 <!--            android:id="@+id/LinearLayoutTop"-->
@@ -36,16 +23,55 @@
 <!--            android:background="#ADFF2F"-->
 <!--            android:layout_weight="1"-->
 <!--            android:orientation="horizontal" />-->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="338dp"
+            android:layout_weight="8"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutFamousPeopleIn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/LinearLayoutBottom"-->
-<!--            android:layout_width="fill_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:background="#DA70D6"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical" />-->
+            <Button
+                android:id="@+id/buttonLeft"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="Button" />
 
-<!--    </LinearLayout>-->
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="442dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </WebView>
+
+            <Button
+                android:id="@+id/buttonRight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="Button" />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
 
 </RelativeLayout>
