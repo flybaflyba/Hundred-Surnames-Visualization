@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
@@ -711,7 +712,7 @@ public class SpiralView extends View {
         });
 
         singleMemberDialog = builder.create();
-//        singleMemberDialog.setContentView(R.layout.single_view);
+//        singleMemberDialog.setContentView(R.layout.famous_people_view);
         singleMemberDialog.show();
 
         //singleMemberDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -735,6 +736,9 @@ public class SpiralView extends View {
             @Override
             public void onClick(View v) {
                 Log.d("click ", "positive");
+
+                Intent setting = new Intent(getContext(), FamousPeopleActivity.class);
+                getContext().startActivity(setting);
 
             }
         });
