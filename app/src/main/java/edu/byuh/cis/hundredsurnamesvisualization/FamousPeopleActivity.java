@@ -11,6 +11,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.famous_people_view);
 
+        //let make some changes lol
     }
 
 }

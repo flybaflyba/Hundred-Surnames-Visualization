@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 
 import static android.graphics.Color.BLUE;
@@ -427,7 +426,6 @@ public class MainActivity extends AppCompatActivity {
         switch (id){
             case RED:
                 //Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
-
                 Intent setting = new Intent(this, PrefsActivity.class);
                 this.startActivity(setting);
                 break;
@@ -461,7 +459,6 @@ public class MainActivity extends AppCompatActivity {
         aboutTv.setTextSize(20);
         aboutTv.setPadding(50,50,50,50);
         aboutTv.setBackgroundColor(Color.parseColor("#ffffee"));
-
         builder.setView(aboutTv);
         builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setCancelable(true);
@@ -594,7 +591,6 @@ public class MainActivity extends AppCompatActivity {
         btnPositive.setLayoutParams(layoutParams);
         btnNegative.setLayoutParams(layoutParams);
 
-        // these will override the onclick above
 //        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
