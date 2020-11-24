@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
@@ -7,29 +7,35 @@
     android:orientation="vertical"
     tools:context=".FamousPeopleActivity">
 
-    <LinearLayout
-        android:id="@+id/LinearLayoutFamousPeoplePage"
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/LinearLayoutTop"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:background="#ADFF2F"
-            android:layout_weight="1"
-            android:orientation="horizontal" />
+        android:layout_height="match_parent"/>
 
 
-        <LinearLayout
-            android:id="@+id/LinearLayoutBottom"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:background="#DA70D6"
-            android:layout_weight="1"
-            android:orientation="vertical" />
+<!--    <LinearLayout-->
+<!--        android:id="@+id/LinearLayoutFamousPeoplePage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
 
-    </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:id="@+id/LinearLayoutTop"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="#ADFF2F"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal" />-->
 
-</LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/LinearLayoutBottom"-->
+<!--            android:layout_width="fill_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="#DA70D6"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical" />-->
+
+<!--    </LinearLayout>-->
+
+</RelativeLayout>
