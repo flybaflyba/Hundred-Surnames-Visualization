@@ -737,8 +737,8 @@ public class SpiralView extends View {
             public void onClick(View v) {
                 Log.d("click ", "positive");
 
-                Intent setting = new Intent(getContext(), FamousPeopleActivity.class);
-                getContext().startActivity(setting);
+                Intent famousPeopleScreen = new Intent(getContext(), FamousPeopleActivity.class);
+                getContext().startActivity(famousPeopleScreen);
 
             }
         });
