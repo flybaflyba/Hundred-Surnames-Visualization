@@ -31,7 +31,7 @@ public class DataHolder {
         surnamePinyinsCantonese = readFile(context, R.raw.surname_pinyins_cantonese);
 
         famousPeopleList=readFile(context,R.raw.famous_people);
-        System.out.println(famousPeopleList);
+        //System.out.println(famousPeopleList);
 
 
         memberObjects = getMemberObjectsList(surnameCharactersSimplified, surnamePinyinsSimplified);
