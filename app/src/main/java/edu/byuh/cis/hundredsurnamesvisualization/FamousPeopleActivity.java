@@ -80,10 +80,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
             }
         });
 
-
-
             }
-
 
 
     @Override
