@@ -1,5 +1,6 @@
 package edu.byuh.cis.hundredsurnamesvisualization;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -29,14 +30,19 @@ public class FamousPeopleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.famous_people_view);
         final DataHolder dataHolder = new DataHolder(this);
+        Intent i=getIntent();
+        int index=i.getIntExtra(SpiralView.INDEX,0);
+
+
         nameList=new ArrayList<String>();
-        surnameID=0;
+        surnameID=index;
         personID=0;
 
-        String surname=dataHolder.famousPeopleList.get(personID);
+
+        String surname=dataHolder.famousPeopleList.get(surnameID);
         String[] personName= surname.split("/");
         Collections.addAll(nameList, personName);
-        System.out.println(nameList);
+        //System.out.println(nameList);
         final String person=nameList.get(personID);
 
         webView=(WebView)findViewById(R.id.webview);

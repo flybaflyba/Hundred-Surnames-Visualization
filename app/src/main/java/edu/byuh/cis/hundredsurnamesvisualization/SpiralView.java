@@ -96,6 +96,9 @@ public class SpiralView extends View {
     private String pinyin_option = "simplified";
     private Paint thisMemberPaint;
     private TextToSpeech textToSpeech;
+    public static final String INDEX = "INDEX_OF_MEMBER";
+    public static String INDEXNUM = "REAL_NUMBER";
+    public static int index2;
 
 
     public SpiralView(Context context, int num) {
@@ -736,8 +739,10 @@ public class SpiralView extends View {
             @Override
             public void onClick(View v) {
                 Log.d("click ", "positive");
-
                 Intent famousPeopleScreen = new Intent(getContext(), FamousPeopleActivity.class);
+                int k=realEachIndex;
+                INDEXNUM=Integer.toString(k);
+                famousPeopleScreen.putExtra(INDEX,k);
                 getContext().startActivity(famousPeopleScreen);
 
             }
