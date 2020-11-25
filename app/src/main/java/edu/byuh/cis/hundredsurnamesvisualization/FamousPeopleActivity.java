@@ -51,9 +51,11 @@ public class FamousPeopleActivity extends AppCompatActivity {
         webView.loadUrl("https://en.wikipedia.org/wiki/"+person);
 
         TextView textView = findViewById(R.id.title);
+        String text=nameList.toString();
+
         textView.setText(nameList.toString());
         textView.setTextColor(Color.WHITE);
-        textView.setTextScaleX(1.5f);
+        //textView.setTextScaleX(1.5f);
 
 
         Button buttonLeft = findViewById(R.id.buttonLeft);
