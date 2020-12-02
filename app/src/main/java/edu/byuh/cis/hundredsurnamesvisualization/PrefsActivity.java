@@ -40,6 +40,16 @@ public class PrefsActivity extends PreferenceActivity {
         show_label.setChecked(true);
         screen.addPreference(show_label);
 
+
+        CheckBoxPreference circle = new CheckBoxPreference(this);
+        circle.setTitle(R.string.circle_button_lable);
+        circle.setSummaryOn(R.string.circle_button_on);
+        circle.setSummaryOff(R.string.circle_button_off);
+        circle.setKey("CIRCLE");
+        circle.setChecked(true);
+        screen.addPreference(circle);
+
+
         ListPreference character_option = new ListPreference(this);
         character_option.setTitle("Character");
         character_option.setSummary("Choose Your Character Preference");
@@ -73,6 +83,9 @@ public class PrefsActivity extends PreferenceActivity {
 
     public static boolean getShowLabelPref(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c).getBoolean(SHOW_LABEL, true);
+    }
+    public static boolean getCirclePref(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getBoolean("CIRCLE", false);
     }
 
     public static String getCharacterOptionPref(Context c) {

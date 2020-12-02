@@ -58,6 +58,8 @@
     <string name="app_website_link">http://litianzhang.com/</string>
     <string name="first_is_the_first">This is the first name</string>
     <string name="last_is_the_last">This is the last name</string>
-
+    <string name="circle_button_lable">Circle around the character</string>
+    <string name="circle_button_on">Circle is on</string>
+    <string name="circle_button_off">Circle is off</string>
 
 </resources>

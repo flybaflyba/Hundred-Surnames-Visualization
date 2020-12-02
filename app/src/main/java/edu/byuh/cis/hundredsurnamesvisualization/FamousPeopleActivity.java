@@ -54,7 +54,8 @@ public class FamousPeopleActivity extends AppCompatActivity {
         String text=nameList.toString();
 
         textView.setText(nameList.toString());
-        textView.setTextColor(Color.WHITE);
+        textView.setTextColor(Color.parseColor("#4F4A45"));
+        //textView.setTextColor(Color.WHITE);
         //textView.setTextScaleX(1.5f);
 
 

@@ -67,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder keyPickerDialogBuilder;
     private boolean keyPickerDialogDismissedByPositiveButton;
     private String spaceDependingOnLanguage = "";
-    private int mainColor = Color.parseColor("#931b34");
-    private int sliderButtonColor = Color.parseColor("#932b34");
+    //private int mainColor = Color.parseColor("#931b34");
+    private int mainColor = Color.parseColor("#4F4A45");
+    //private int sliderButtonColor = Color.parseColor("#932b34");
+    private int sliderButtonColor = Color.parseColor("#4F4A45");
 
 
     public class MyTimer extends Handler {

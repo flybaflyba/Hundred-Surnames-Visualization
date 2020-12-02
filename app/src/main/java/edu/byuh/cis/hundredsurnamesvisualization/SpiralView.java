@@ -46,7 +46,7 @@ import static java.lang.Boolean.TRUE;
 //implements TextToSpeech.OnInitListener
 public class SpiralView extends View {
 
-    private Paint bluePaint, redPaint, spiralPaint;
+    private Paint circlePaint, redPaint, spiralPaint;
     private float screenWidth, screenHeight;
     public float theta;
     private Path spiralLine;
@@ -97,24 +97,47 @@ public class SpiralView extends View {
     private Paint thisMemberPaint;
     private TextToSpeech textToSpeech;
     public static final String INDEX="INDEX";
+    public String color1,color2,color3,color4;
 
 
 
     public SpiralView(Context context, int num) {
         super(context);
+        //circle color
+        if(PrefsActivity.getCirclePref(getContext())) {
+            color1 = "#CDAB81";
+            invalidate();
+        }else{
+            color1 = "#DAC3B3";
+            invalidate();
+        }
+        //character color
+        color2="#4F4A45";
+        //background color
+        color3 = "#DAC3B3";
+
+        color4="#BCBABE";
+
+
+
+
 
 //        textToSpeech = new TextToSpeech(context, this);
         numOfMembers = num;
-        bluePaint = new Paint();
-        bluePaint.setColor(Color.parseColor("#17252a"));
-        bluePaint.setStyle(Paint.Style.FILL);
-        bluePaint.setTextSize(35);
+        circlePaint = new Paint();
+        //bluePaint.
+        //circlePaint.setColor(Color.parseColor("#17252a"));
+        circlePaint.setColor(Color.parseColor(color1));
+        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setTextSize(35);
         redPaint = new Paint();
-        redPaint.setColor(Color.RED);
+        //redPaint.setColor(Color.RED);
+        redPaint.setColor(Color.parseColor("#DAC3B3"));
         redPaint.setStyle(Paint.Style.FILL);
         redPaint.setTextSize(60);
         spiralPaint = new Paint();
-        spiralPaint.setColor(Color.RED);
+        spiralPaint.setColor(Color.parseColor("#1995AD"));
+        //spiralPaint.setColor(Color.RED);
         spiralPaint.setStyle(Paint.Style.STROKE);
         spiralPaint.setStrokeWidth(5);
         spiralLine = new Path();
@@ -134,11 +157,14 @@ public class SpiralView extends View {
         selectedKey = "";
 
         noImageCirclePaint = new Paint();
-        noImageCirclePaint.setColor(Color.parseColor("#17252a"));
+        noImageCirclePaint.setColor(Color.parseColor("#DAC3B3"));
+        //noImageCirclePaint.setColor(Color.parseColor("#17252a"));
         noImageCirclePaint.setStyle(Paint.Style.FILL);
 
+        //character paint
         thisMemberPaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberPaint.setColor(Color.parseColor(color2));
+        //thisMemberPaint.setColor(Color.parseColor("#DAC3B3"));
         thisMemberPaint.setStyle(Paint.Style.FILL);
         thisMemberPaint.setTextAlign(Paint.Align.CENTER);
 //        AssetManager assetManager = getContext().getAssets();
@@ -883,6 +909,7 @@ public class SpiralView extends View {
         pinyin_option = PrefsActivity.getPinyinOptionPref(getContext());
 
 
+
         if (spiral_effect.equalsIgnoreCase("static") && staticCoordinatesGet <= 10) {
             spiralCoordinates.clear();
             getCoordinates();
@@ -955,7 +982,7 @@ public class SpiralView extends View {
         //Member View Background color
         //c.drawColor(Color.parseColor("#24292b"));
 //        c.drawColor(Color.parseColor("#17252a"));
-        c.drawColor(Color.parseColor("#c64e67"));
+        c.drawColor(Color.parseColor(color3));
 
         //we just want to load the images once, we don't have to load it every time when we re-draw. otherwise the program is gonna be so slow
         if (loadedImages == false) {
@@ -1048,7 +1075,7 @@ public class SpiralView extends View {
 
 //        c.drawBitmap(t.image, currentMemberMatrix, null); // more OO
 //        c.drawBitmap(t.image, currentMemberMatrix, null);
-        c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1f, bluePaint);
+        c.drawCircle(t.x, t.y, newCurrentMemberRadius * 1f, circlePaint);
 
         if(character_option.equals("simplified")) {
             c.drawText(t.simplified, t.x + newCurrentMemberRadius * 0.1f, baseline, thisMemberPaint);
