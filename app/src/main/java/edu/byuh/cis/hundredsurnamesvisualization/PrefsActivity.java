@@ -52,26 +52,26 @@ public class PrefsActivity extends PreferenceActivity {
 
 
         ListPreference character_option = new ListPreference(this);
-        character_option.setTitle("Character");
-        character_option.setSummary("Choose Your Character Preference");
+        character_option.setTitle(R.string.charactersOption_title);
+        character_option.setSummary(R.string.charactersOption_summary);
         character_option.setKey(CHARACTER_OPTION);
-        character_option.setEntries(R.array.CharactersOption);
-        character_option.setEntryValues(R.array.CharactersOption_value);
+        character_option.setEntries(R.array.charactersOption);
+        character_option.setEntryValues(R.array.charactersOption_value);
         character_option.setValue("simplified");
         screen.addPreference(character_option);
 
         ListPreference pinyin_option = new ListPreference(this);
-        pinyin_option.setTitle("Pinyin");
-        pinyin_option.setSummary("Choose Your Pinyin Preference");
+        pinyin_option.setTitle(R.string.pinyinOption_title);
+        pinyin_option.setSummary(R.string.pinyinOption_summary);
         pinyin_option.setKey(PINYIN_OPTION);
-        pinyin_option.setEntries(R.array.PinyinsOption);
-        pinyin_option.setEntryValues(R.array.PinyinsOption_value);
+        pinyin_option.setEntries(R.array.pinyinsOption);
+        pinyin_option.setEntryValues(R.array.pinyinsOption_value);
         pinyin_option.setValue("simplified");
         screen.addPreference(pinyin_option);
 
         ListPreference color_option = new ListPreference(this);
-        color_option.setTitle("Color theme");
-        color_option.setSummary("Choose Your favourite color theme");
+        color_option.setTitle(R.string.color_title);
+        color_option.setSummary(R.string.color_summary);
         color_option.setKey("COLOR_OPTION");
         color_option.setEntries(R.array.ColorOption);
         color_option.setEntryValues(R.array.ColorOption_value);
