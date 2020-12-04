@@ -310,7 +310,8 @@ public class MainActivity extends AppCompatActivity {
         rightButton.setLayoutParams(two);
         lnlH = new LinearLayout(this);
         lnlH.setOrientation(LinearLayout.HORIZONTAL);
-        lnlH.setBackgroundColor(Color.parseColor("#287a78"));
+        //lnlH.setBackgroundColor(Color.parseColor("#287a78"));
+        lnlH.setBackgroundColor(Color.parseColor("#6C5F5B"));
         ((ViewGroup)leftButton.getParent()).removeView(leftButton);
         lnlH.addView(leftButton);
 
@@ -460,7 +461,8 @@ public class MainActivity extends AppCompatActivity {
         aboutTv.setGravity(Gravity.LEFT);
         aboutTv.setTextSize(20);
         aboutTv.setPadding(50,50,50,50);
-        aboutTv.setBackgroundColor(Color.parseColor("#ffffee"));
+        aboutTv.setBackgroundColor(Color.parseColor("#EFEFEF"));
+        aboutTv.setTextColor(Color.parseColor("#4F4A45"));
         builder.setView(aboutTv);
         builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setCancelable(true);
@@ -468,6 +470,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
+
         final AlertDialog dialog = builder.create();
         dialog.show();
 
