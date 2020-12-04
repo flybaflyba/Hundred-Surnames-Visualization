@@ -104,13 +104,14 @@ public class SpiralView extends View {
     public SpiralView(Context context, int num) {
         super(context);
         //circle color
-        if(PrefsActivity.getCirclePref(getContext())) {
-            color1 = "#CDAB81";
-            invalidate();
-        }else{
-            color1 = "#DAC3B3";
-            invalidate();
-        }
+//        if(PrefsActivity.getCirclePref(getContext())) {
+//            color1 = "#CDAB81";
+//            invalidate();
+//        }else{
+//            color1 = "#DAC3B3";
+//            invalidate();
+//        }
+        color1 = "#CDAB81";
         //character color
         color2="#4F4A45";
         //background color
@@ -905,8 +906,21 @@ public class SpiralView extends View {
         show_label = PrefsActivity.getShowLabelPref(getContext());
         //Log.d("spiral effect ", spiral_effect + " ");
 
+        if(PrefsActivity.getCirclePref(getContext())) {
+            color1 = "#CDAB81";
+            invalidate();
+        }else{
+            color1 = "#DAC3B3";
+            invalidate();
+        }
+        circlePaint.setColor(Color.parseColor(color1));
+
+
+
         character_option = PrefsActivity.getCharacterOptionPref(getContext());
         pinyin_option = PrefsActivity.getPinyinOptionPref(getContext());
+
+
 
 
 

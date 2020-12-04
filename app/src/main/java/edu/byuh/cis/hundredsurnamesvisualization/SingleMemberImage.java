@@ -109,7 +109,7 @@ public class SingleMemberImage extends View {
         }
 
         Paint thisMemberPaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberPaint.setColor(Color.parseColor("#6C5F5B"));
         thisMemberPaint.setStyle(Paint.Style.FILL);
         thisMemberPaint.setTextSize((int)(imageSize * 0.8));
 //        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
@@ -118,8 +118,8 @@ public class SingleMemberImage extends View {
         float baseline=y+distance;
 
         Paint thisCirclePaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor("#def661"));
-        thisMemberPaint.setStyle(Paint.Style.FILL);
+        thisCirclePaint.setColor(Color.parseColor("#DAC3B3"));
+        thisCirclePaint.setStyle(Paint.Style.FILL);
 
 
         for (Show t: threeShows) {

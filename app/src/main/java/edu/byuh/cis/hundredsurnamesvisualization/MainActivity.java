@@ -527,7 +527,7 @@ public class MainActivity extends AppCompatActivity {
         tx.setText(keyPickerString);
         tx.setTextSize(20);
         tx.setPadding(5,20,5,5);
-        tx.setTextColor(Color.BLACK);
+        tx.setTextColor(Color.parseColor("#4F4A45"));
 
         keyPickerPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
