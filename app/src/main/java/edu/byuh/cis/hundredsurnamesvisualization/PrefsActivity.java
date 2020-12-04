@@ -16,6 +16,7 @@ public class PrefsActivity extends PreferenceActivity {
     public static final String SHOW_LABEL= "SHOW_LABEL";
     public static final String CHARACTER_OPTION = "CHARACTER_OPTION";
     public static final String PINYIN_OPTION = "PINYIN";
+    //public static final String COLOR_OPTION = "COLOR80";
 
     @Override
     public void onCreate(Bundle b) {
@@ -68,10 +69,19 @@ public class PrefsActivity extends PreferenceActivity {
         pinyin_option.setValue("simplified");
         screen.addPreference(pinyin_option);
 
+        ListPreference color_option = new ListPreference(this);
+        color_option.setTitle("Color theme");
+        color_option.setSummary("Choose Your favourite color theme");
+        color_option.setKey("COLOR_OPTION");
+        color_option.setEntries(R.array.ColorOption);
+        color_option.setEntryValues(R.array.ColorOption_value);
+        color_option.setValue("COLOR80");
+        screen.addPreference(color_option);
+
 
         setPreferenceScreen(screen);
 
-        //Log.d("Prefs ", "preference screen here ");
+
 
     }
 
@@ -97,5 +107,14 @@ public class PrefsActivity extends PreferenceActivity {
         return PreferenceManager.getDefaultSharedPreferences(c).getString(PINYIN_OPTION, "simplified");
 
     }
+
+    public static int getColorOptionPref(Context c){
+        return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(c).getString("COLOR_OPTION","COLOR80"));
+    }
+
+//    public static String getColorOptionPref(Context c) {
+//        return PreferenceManager.getDefaultSharedPreferences(c).getString(COLOR_OPTION, "COLOR80");
+//
+//    }
 
 }

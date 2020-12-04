@@ -27,6 +27,7 @@ class Show {
 
 
 public class SingleMemberImage extends View {
+    private ColorTheme colorTheme;
 
     private float x;
     private float y;
@@ -62,6 +63,7 @@ public class SingleMemberImage extends View {
 
         textPaint = new Paint();
         textPaint.setTextSize(50);
+        colorTheme =new ColorTheme();
     }
 
     public void updateThreeMembersBitmapIds(String s, String sLast, String sNext) {
@@ -109,7 +111,7 @@ public class SingleMemberImage extends View {
         }
 
         Paint thisMemberPaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor("#6C5F5B"));
+        thisMemberPaint.setColor(Color.parseColor(colorTheme.c3));
         thisMemberPaint.setStyle(Paint.Style.FILL);
         thisMemberPaint.setTextSize((int)(imageSize * 0.8));
 //        thisMemberPaint.setTextAlign(Paint.Align.CENTER);
@@ -118,7 +120,7 @@ public class SingleMemberImage extends View {
         float baseline=y+distance;
 
         Paint thisCirclePaint = new Paint();
-        thisCirclePaint.setColor(Color.parseColor("#DAC3B3"));
+        thisCirclePaint.setColor(Color.parseColor(colorTheme.c1));
         thisCirclePaint.setStyle(Paint.Style.FILL);
 
 

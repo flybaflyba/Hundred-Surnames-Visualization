@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder keyPickerDialogBuilder;
     private boolean keyPickerDialogDismissedByPositiveButton;
     private String spaceDependingOnLanguage = "";
-    //private int mainColor = Color.parseColor("#931b34");
-    private int mainColor = Color.parseColor("#4F4A45");
-    //private int sliderButtonColor = Color.parseColor("#932b34");
-    private int sliderButtonColor = Color.parseColor("#4F4A45");
+    private ColorTheme colorTheme;
+    private int mainColor;
+    private int sliderButtonColor;
+
 
 
     public class MyTimer extends Handler {
@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
+        colorTheme=new ColorTheme();
+        mainColor=Color.parseColor(colorTheme.c4);
+        sliderButtonColor=Color.parseColor(colorTheme.c4);
+
 
 
         //(245, 300, 325, 340, 380, 420, 450, 490, 520, 540, 570, 610, 680, 715, 750, 780, 810, 850, 890, 1070, 1290, 1430, 1520, 1540, 1575, 1630, 1660, 1700, 1710, 1755, 1850, 1890, 2315, 3330, 3540, 3720, 3800, 3850, 3950, 4030, 4110, 4200, 4300, 4400, 4520, 4540, 4650, 4785, 4935, 5100, 5110, 5320, 5330, 5800, 6990)
@@ -175,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
         tv.getWindowSize(width, height);
         tv.setLayoutParams(nice);
         slider = findViewById(R.id.seekBar3);
-        //slider.setBackgroundColor(Color.parseColor("#669cff"));
-        //slider.setBackgroundColor(Color.parseColor("#202224"));
         slider.setBackgroundColor(mainColor);
 
         int sliderMax = numOfMembers * 30;
@@ -310,8 +312,7 @@ public class MainActivity extends AppCompatActivity {
         rightButton.setLayoutParams(two);
         lnlH = new LinearLayout(this);
         lnlH.setOrientation(LinearLayout.HORIZONTAL);
-        //lnlH.setBackgroundColor(Color.parseColor("#287a78"));
-        lnlH.setBackgroundColor(Color.parseColor("#6C5F5B"));
+        lnlH.setBackgroundColor(Color.parseColor(colorTheme.c3));
         ((ViewGroup)leftButton.getParent()).removeView(leftButton);
         lnlH.addView(leftButton);
 
@@ -461,8 +462,7 @@ public class MainActivity extends AppCompatActivity {
         aboutTv.setGravity(Gravity.LEFT);
         aboutTv.setTextSize(20);
         aboutTv.setPadding(50,50,50,50);
-        aboutTv.setBackgroundColor(Color.parseColor("#EFEFEF"));
-        aboutTv.setTextColor(Color.parseColor("#4F4A45"));
+        aboutTv.setTextColor(Color.parseColor(colorTheme.c4));
         builder.setView(aboutTv);
         builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setCancelable(true);
@@ -527,7 +527,7 @@ public class MainActivity extends AppCompatActivity {
         tx.setText(keyPickerString);
         tx.setTextSize(20);
         tx.setPadding(5,20,5,5);
-        tx.setTextColor(Color.parseColor("#4F4A45"));
+        tx.setTextColor(Color.parseColor(colorTheme.c4));
 
         keyPickerPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override

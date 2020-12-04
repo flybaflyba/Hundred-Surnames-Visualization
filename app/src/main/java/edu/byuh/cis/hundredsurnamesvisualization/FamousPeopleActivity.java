@@ -22,6 +22,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
     private int surnameID;
     private int personID;
     private List<String> nameList;
+    private ColorTheme colorTheme;
 
 
 
@@ -32,7 +33,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
         final DataHolder dataHolder = new DataHolder(this);
         Intent i=getIntent();
         int index=i.getIntExtra(SpiralView.INDEX,0);
-
+        colorTheme=new ColorTheme();
 
         nameList=new ArrayList<String>();
         surnameID=index;
@@ -54,8 +55,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
         String text=nameList.toString();
 
         textView.setText(nameList.toString());
-        textView.setTextColor(Color.parseColor("#4F4A45"));
-        //textView.setTextColor(Color.WHITE);
+        textView.setTextColor(Color.parseColor(colorTheme.c4));
         //textView.setTextScaleX(1.5f);
 
 

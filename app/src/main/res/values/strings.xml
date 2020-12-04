@@ -32,6 +32,15 @@
         <item>cantonese</item>
     </string-array>
 
+    <string-array name="ColorOption">
+        <item>Shabby Chic Neutrals</item>
+        <item>Green Fields</item>
+    </string-array>
+
+    <string-array name="ColorOption_value">
+        <item>COLOR80</item>
+        <item>COLOR75</item>
+    </string-array>
 
     <string name="SpiralEffectTitle">Spiral Effect</string>
     <string name="SpiralEffectSummary">Select an animation style for the spiral</string>

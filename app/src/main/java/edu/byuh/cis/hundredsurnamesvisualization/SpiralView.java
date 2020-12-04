@@ -97,47 +97,28 @@ public class SpiralView extends View {
     private Paint thisMemberPaint;
     private TextToSpeech textToSpeech;
     public static final String INDEX="INDEX";
-    public String color1,color2,color3,color4;
+    private ColorTheme colorTheme;
+    //public String color,color2,color3,color4;
 
 
 
     public SpiralView(Context context, int num) {
         super(context);
-        //circle color
-//        if(PrefsActivity.getCirclePref(getContext())) {
-//            color1 = "#CDAB81";
-//            invalidate();
-//        }else{
-//            color1 = "#DAC3B3";
-//            invalidate();
-//        }
-        color1 = "#CDAB81";
-        //character color
-        color2="#4F4A45";
-        //background color
-        color3 = "#DAC3B3";
-
-        color4="#BCBABE";
-
-
-
-
+        colorTheme=new ColorTheme();
 
 //        textToSpeech = new TextToSpeech(context, this);
         numOfMembers = num;
         circlePaint = new Paint();
-        //bluePaint.
-        //circlePaint.setColor(Color.parseColor("#17252a"));
-        circlePaint.setColor(Color.parseColor(color1));
+        circlePaint.setColor(Color.parseColor(colorTheme.c2));
         circlePaint.setStyle(Paint.Style.FILL);
         circlePaint.setTextSize(35);
         redPaint = new Paint();
         //redPaint.setColor(Color.RED);
-        redPaint.setColor(Color.parseColor("#DAC3B3"));
+        redPaint.setColor(Color.parseColor(colorTheme.c1));
         redPaint.setStyle(Paint.Style.FILL);
         redPaint.setTextSize(60);
         spiralPaint = new Paint();
-        spiralPaint.setColor(Color.parseColor("#1995AD"));
+        spiralPaint.setColor(Color.parseColor(colorTheme.c3));
         //spiralPaint.setColor(Color.RED);
         spiralPaint.setStyle(Paint.Style.STROKE);
         spiralPaint.setStrokeWidth(5);
@@ -158,14 +139,12 @@ public class SpiralView extends View {
         selectedKey = "";
 
         noImageCirclePaint = new Paint();
-        noImageCirclePaint.setColor(Color.parseColor("#DAC3B3"));
-        //noImageCirclePaint.setColor(Color.parseColor("#17252a"));
+        noImageCirclePaint.setColor(Color.parseColor(colorTheme.c1));
         noImageCirclePaint.setStyle(Paint.Style.FILL);
 
         //character paint
         thisMemberPaint = new Paint();
-        thisMemberPaint.setColor(Color.parseColor(color2));
-        //thisMemberPaint.setColor(Color.parseColor("#DAC3B3"));
+        thisMemberPaint.setColor(Color.parseColor(colorTheme.c4));
         thisMemberPaint.setStyle(Paint.Style.FILL);
         thisMemberPaint.setTextAlign(Paint.Align.CENTER);
 //        AssetManager assetManager = getContext().getAssets();
@@ -699,11 +678,9 @@ public class SpiralView extends View {
 //        lnlSinglePage.addView(lnlWeb);
 
         lnl.addView(singleMemberDialogTitleView);
-        //singleMemberDialogTitleView.setBackgroundColor(Color.YELLOW);
         lnl.addView(lnlH);
-        //lnlH.setBackgroundColor(Color.GREEN);
 //        lnl.addView(sv);
-//        sv.setBackgroundColor(Color.RED);
+
         lnl.addView(lnlWebView);
 
 //        ((ViewGroup)singleMemberTextView.getParent()).removeView(singleMemberTextView);
@@ -907,13 +884,13 @@ public class SpiralView extends View {
         //Log.d("spiral effect ", spiral_effect + " ");
 
         if(PrefsActivity.getCirclePref(getContext())) {
-            color1 = "#CDAB81";
+            circlePaint.setColor(Color.parseColor(colorTheme.c2));
             invalidate();
         }else{
-            color1 = "#DAC3B3";
+            circlePaint.setColor(Color.parseColor(colorTheme.c1));
             invalidate();
         }
-        circlePaint.setColor(Color.parseColor(color1));
+
 
 
 
@@ -991,12 +968,10 @@ public class SpiralView extends View {
             getCoordinatesThreeD();
         }
 
-        //c.drawColor(Color.parseColor("#66ccff"));
 
         //Member View Background color
-        //c.drawColor(Color.parseColor("#24292b"));
-//        c.drawColor(Color.parseColor("#17252a"));
-        c.drawColor(Color.parseColor(color3));
+
+        c.drawColor(Color.parseColor(colorTheme.c1));
 
         //we just want to load the images once, we don't have to load it every time when we re-draw. otherwise the program is gonna be so slow
         if (loadedImages == false) {
@@ -1037,7 +1012,7 @@ public class SpiralView extends View {
 
         Paint thisMemberLabelPaint = new Paint();
 
-        thisMemberLabelPaint.setColor(Color.parseColor("#def2f1"));
+        thisMemberLabelPaint.setColor(Color.parseColor(colorTheme.c1));
         thisMemberLabelPaint.setStyle(Paint.Style.FILL);
         thisMemberLabelPaint.setTextSize((int)(newCurrentMemberRadius/3));  //if we are drawing the years as main object , before: ((int)(newCurrentMemberRadius/3))
         thisMemberLabelPaint.setTextAlign(Paint.Align.CENTER);
@@ -1070,7 +1045,7 @@ public class SpiralView extends View {
 
         // if current member is with selected year then draw a circle frame
         Paint selectedKeyMemberFramePaint = new Paint();
-        selectedKeyMemberFramePaint.setColor(Color.parseColor("#287a78"));
+        selectedKeyMemberFramePaint.setColor(Color.parseColor(colorTheme.c2));
         selectedKeyMemberFramePaint.setStyle(Paint.Style.FILL);
 
         if (allKeys.get(thisMemberIndex).equals(selectedKey)) {
