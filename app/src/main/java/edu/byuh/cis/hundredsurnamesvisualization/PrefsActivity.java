@@ -16,7 +16,7 @@ public class PrefsActivity extends PreferenceActivity {
     public static final String SHOW_LABEL= "SHOW_LABEL";
     public static final String CHARACTER_OPTION = "CHARACTER_OPTION";
     public static final String PINYIN_OPTION = "PINYIN";
-    //public static final String COLOR_OPTION = "COLOR80";
+    public static final String COLOR_OPTION = "COLOR80";
 
     @Override
     public void onCreate(Bundle b) {
@@ -108,13 +108,13 @@ public class PrefsActivity extends PreferenceActivity {
 
     }
 
-    public static int getColorOptionPref(Context c){
-        return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(c).getString("COLOR_OPTION","COLOR80"));
-    }
-
-//    public static String getColorOptionPref(Context c) {
-//        return PreferenceManager.getDefaultSharedPreferences(c).getString(COLOR_OPTION, "COLOR80");
-//
+//    public static int getColorOptionPref(Context c){
+//        return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(c).getString("COLOR_OPTION","COLOR80"));
 //    }
+
+    public static String getColorOptionPref(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getString(COLOR_OPTION, "COLOR80");
+
+    }
 
 }

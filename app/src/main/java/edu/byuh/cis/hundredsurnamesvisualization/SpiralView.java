@@ -104,7 +104,7 @@ public class SpiralView extends View {
 
     public SpiralView(Context context, int num) {
         super(context);
-        colorTheme=new ColorTheme();
+        colorTheme=new ColorTheme(context);
 
 //        textToSpeech = new TextToSpeech(context, this);
         numOfMembers = num;

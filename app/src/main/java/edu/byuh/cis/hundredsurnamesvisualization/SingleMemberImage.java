@@ -63,7 +63,7 @@ public class SingleMemberImage extends View {
 
         textPaint = new Paint();
         textPaint.setTextSize(50);
-        colorTheme =new ColorTheme();
+        colorTheme =new ColorTheme(getContext());
     }
 
     public void updateThreeMembersBitmapIds(String s, String sLast, String sNext) {

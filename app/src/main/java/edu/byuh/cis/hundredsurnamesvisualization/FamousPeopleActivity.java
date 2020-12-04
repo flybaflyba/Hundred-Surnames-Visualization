@@ -33,7 +33,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
         final DataHolder dataHolder = new DataHolder(this);
         Intent i=getIntent();
         int index=i.getIntExtra(SpiralView.INDEX,0);
-        colorTheme=new ColorTheme();
+        colorTheme=new ColorTheme(this);
 
         nameList=new ArrayList<String>();
         surnameID=index;
