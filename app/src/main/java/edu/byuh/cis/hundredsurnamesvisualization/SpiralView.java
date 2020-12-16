@@ -722,7 +722,7 @@ public class SpiralView extends View {
         int h = 0;
         int w = 0;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            h = (int)(Math.min(windowHeight, windowWidth) * 1.5);
+            h = (int)(Math.max(windowHeight, windowWidth) * 0.9);
             w = (int)Math.min(windowHeight, windowWidth);
         } else {
             h = (int)(Math.min(windowHeight, windowWidth) * 0.9);
@@ -832,7 +832,7 @@ public class SpiralView extends View {
             int h = 0;
             int w = 0;
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                h = (int)(Math.min(windowHeight, windowWidth) * 1.5);
+                h = (int)(Math.max(windowHeight, windowWidth) * 0.9);
                 w = (int)Math.min(windowHeight, windowWidth);
             } else {
                 h = (int)(Math.min(windowHeight, windowWidth) * 0.9);
@@ -842,6 +842,7 @@ public class SpiralView extends View {
             params.width =  w;
             singleMemberDialog.getWindow().setAttributes(params);
         }
+
 
     }
 
@@ -894,7 +895,7 @@ public class SpiralView extends View {
             spiralCoordinates.clear();
             //sizes.clear();
             getCoordinates();
-            //getSizes();
+            getSizes();
             orientationJustChanged = FALSE;
             //Log.d("coordinates and sizes ", " just reset ");
             //Log.d("orChanged coorSize ", " ++++++++++++++++ "
@@ -1360,7 +1361,15 @@ public class SpiralView extends View {
         float pi = (float) Math.PI;
 
         //circles sizes remain whether landscape or portrait
-        initialR = screenWidth / 10;
+//        initialR = screenWidth / 10;
+
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            initialR = ultimateScreenWidth / 10;
+        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            initialR = screenWidth / 10;
+        }
+
         //Toast.makeText(getContext(), "getSizes called, sizes.length is " + sizes.size(), Toast.LENGTH_SHORT).show();
 
         float newSize = 0;
