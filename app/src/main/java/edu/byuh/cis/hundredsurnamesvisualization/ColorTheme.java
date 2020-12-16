@@ -36,6 +36,7 @@ public class ColorTheme {
             c4 = "#003B46";
         }else{
             //color 79 Beyond Black and White
+            //should never exists
             c1="#F0EFFE";
             c2="#31A2AC";
             c3="#AF1C1C";

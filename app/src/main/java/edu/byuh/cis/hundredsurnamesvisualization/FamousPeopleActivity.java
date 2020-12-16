@@ -49,16 +49,16 @@ public class FamousPeopleActivity extends AppCompatActivity {
         //String person=dataHolder.famousPeopleList.get(personID);
         webView.loadUrl("https://en.wikipedia.org/wiki/"+person);
 
-        TextView textView = findViewById(R.id.title);
-        String text=nameList.toString();
-
-        textView.setText(nameList.toString());
-        textView.setTextColor(Color.parseColor(ColorTheme.c4));
+//        TextView textView = findViewById(R.id.title);
+//        String text=nameList.toString();
+//
+//        textView.setText(nameList.toString());
+//        textView.setTextColor(Color.parseColor(ColorTheme.c4));
         //textView.setTextScaleX(1.5f);
 
 
-        Button buttonLeft = findViewById(R.id.buttonLeft);
-        buttonLeft.setText("<");
+        Button buttonLeft = findViewById(R.id.buttonPrev);
+        //buttonLeft.setText("<");
         buttonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +69,8 @@ public class FamousPeopleActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonRight = findViewById(R.id.buttonRight);
-        buttonRight.setText(">");
+        Button buttonRight = findViewById(R.id.buttonNext);
+        //buttonRight.setText(">");
         buttonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

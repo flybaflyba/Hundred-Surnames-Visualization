@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Bai Jia Xin</string>
-
+<!--    <string name="app_name">Bai Jia Xin</string>-->
+    <string name="app_name">100 names</string>
+    <string name="app_Fullname">Hundreds Chinese Surnames</string>
     PrefsActivity
 
     <string name="SpiralEffectTitle">Spiral Effect</string>
@@ -54,7 +55,7 @@
     <string-array name="ColorOption">
         <item>Shabby Chic Neutrals</item>
         <item>Green Fields</item>
-        <item>name of color</item>
+        <item>Cool Blues</item>
     </string-array>
     <string-array name="ColorOption_value">
         <item>COLOR80</item>

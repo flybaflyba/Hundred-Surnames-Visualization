@@ -149,9 +149,7 @@ public class MainActivity extends AppCompatActivity {
         mainColor=Color.parseColor(ColorTheme.c2);
         sliderButtonColor=Color.parseColor(ColorTheme.c1);
 
-
-
-
+//        LinearLayout layoutTop=findViewById(R.id.TopPanel);
 
 
 
@@ -494,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.app_name));
+        builder.setTitle(getResources().getString(R.string.app_Fullname));
 
         TextView aboutTv = new TextView(this);
         aboutTv.setText(Html.fromHtml(html));
