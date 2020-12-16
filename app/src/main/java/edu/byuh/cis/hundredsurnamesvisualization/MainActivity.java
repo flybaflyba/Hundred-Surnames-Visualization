@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +34,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 
 import static android.graphics.Color.BLUE;
@@ -137,9 +141,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
-        colorTheme=new ColorTheme(this);
-        mainColor=Color.parseColor(colorTheme.c2);
-        sliderButtonColor=Color.parseColor(colorTheme.c1);
+        mainColor=Color.parseColor(ColorTheme.c2);
+        sliderButtonColor=Color.parseColor(ColorTheme.c1);
 
 
 
@@ -180,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
         tv.setLayoutParams(nice);
         slider = findViewById(R.id.seekBar3);
         slider.setBackgroundColor(mainColor);
+
+//        ActionBar actionBar =  this.getSupportActionBar();
+//        actionBar.setBackgroundDrawable(new ColorDrawable()); // set your desired color
 
         int sliderMax = numOfMembers * 30;
 
@@ -256,9 +262,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         leftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
+
+
+
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     leftButton.setBackgroundColor(mainColor);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
