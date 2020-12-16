@@ -467,7 +467,8 @@ public class SpiralView extends View {
         final TextView singleMemberDialogTitleView = new TextView(getContext());
 //        singleMemberDialogTitleView.setText(surnameCharactersSimplified.get(realEachIndex));
         String title = "N/A";
-        if (sliderMoving == false && show_label) {
+//        if (sliderMoving == false && show_label) {
+
             if(pinyin_option.equals("simplified")){
                 title = memberObjects.get(realEachIndex).pinyin;
             } else if(pinyin_option.equals("cantonese")){
@@ -475,7 +476,7 @@ public class SpiralView extends View {
             } else {
                 title = "N/A";
             }
-        }
+//        }
         singleMemberDialogTitleView.setText(title);
         singleMemberDialogTitleView.setTextSize(20);
         singleMemberDialogTitleView.setPadding(0,20,0,0);
