@@ -39,6 +39,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.GREEN;
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder keyPickerDialogBuilder;
     private boolean keyPickerDialogDismissedByPositiveButton;
     private String spaceDependingOnLanguage = "";
-    private ColorTheme colorTheme;
     private int mainColor;
     private int sliderButtonColor;
 
@@ -141,8 +142,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
+
+        String colorPrefs=PrefsActivity.getColorOptionPref(mContext);
+        ColorTheme.changeColorTheme(colorPrefs);
+
         mainColor=Color.parseColor(ColorTheme.c2);
         sliderButtonColor=Color.parseColor(ColorTheme.c1);
+
+
+
+
+
 
 
 
@@ -260,15 +270,9 @@ public class MainActivity extends AppCompatActivity {
         // arrow color is the same as spiral background #17252a
 
 
-
-
-
         leftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-
-
 
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
                     leftButton.setBackgroundColor(mainColor);
@@ -323,14 +327,14 @@ public class MainActivity extends AppCompatActivity {
         rightButton.setLayoutParams(two);
         lnlH = new LinearLayout(this);
         lnlH.setOrientation(LinearLayout.HORIZONTAL);
-        lnlH.setBackgroundColor(Color.parseColor(colorTheme.c3));
+        lnlH.setBackgroundColor(Color.parseColor(ColorTheme.c3));
         ((ViewGroup)leftButton.getParent()).removeView(leftButton);
         lnlH.addView(leftButton);
 
         LinearLayout lnlSlider = new LinearLayout(this);
         lnlSlider.setOrientation(LinearLayout.VERTICAL);
 
-        LinearLayout sliderLabelNoText = findViewById(R.id.sliderLabelNoText);
+        final LinearLayout sliderLabelNoText = findViewById(R.id.sliderLabelNoText);
         sliderLabelNoText.setBackgroundColor(mainColor);
 
         ((ViewGroup)sliderLabelNoText.getParent()).removeView(sliderLabelNoText);
@@ -339,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
         ((ViewGroup)slider.getParent()).removeView(slider);
         lnlSlider.addView(slider);
 
-        LinearLayout sliderLabelNoTextTwo = findViewById(R.id.sliderLabelNoTextTwo);
+        final LinearLayout sliderLabelNoTextTwo = findViewById(R.id.sliderLabelNoTextTwo);
         sliderLabelNoTextTwo.setBackgroundColor(mainColor);
 
         ((ViewGroup)sliderLabelNoTextTwo.getParent()).removeView(sliderLabelNoTextTwo);
@@ -380,6 +384,31 @@ public class MainActivity extends AppCompatActivity {
 
         lnl.addView(lnlH);
         setContentView(lnl);
+
+
+        Timer timer = new Timer();
+        TimerTask myTask = new TimerTask() {
+            @Override
+            public void run() {
+                // whatever you need to do every 2 seconds
+                String colorPrefs=PrefsActivity.getColorOptionPref(mContext);
+                ColorTheme.changeColorTheme(colorPrefs);
+                Log.d("UPDATE COLOR", "UPDATE COLOR");
+                mainColor=Color.parseColor(ColorTheme.c2);
+                sliderButtonColor=Color.parseColor(ColorTheme.c1);
+                slider.setBackgroundColor(mainColor);
+                sliderLabelNoText.setBackgroundColor(mainColor);
+                sliderLabelNoTextTwo.setBackgroundColor(mainColor);
+
+                rightButton.setBackgroundColor(sliderButtonColor);
+                leftButton.setBackgroundColor(sliderButtonColor);
+
+                ActionBar actionBar =  getSupportActionBar();
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+
+            }
+        };
+        timer.schedule(myTask, 0, 1000);
 
     }
 
@@ -473,7 +502,7 @@ public class MainActivity extends AppCompatActivity {
         aboutTv.setGravity(Gravity.LEFT);
         aboutTv.setTextSize(20);
         aboutTv.setPadding(50,50,50,50);
-        aboutTv.setTextColor(Color.parseColor(colorTheme.c4));
+        aboutTv.setTextColor(Color.parseColor(ColorTheme.c4));
         builder.setView(aboutTv);
         builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setCancelable(true);
@@ -538,7 +567,7 @@ public class MainActivity extends AppCompatActivity {
         tx.setText(keyPickerString);
         tx.setTextSize(20);
         tx.setPadding(5,20,5,5);
-        tx.setTextColor(Color.parseColor(colorTheme.c4));
+        tx.setTextColor(Color.parseColor(ColorTheme.c4));
 
         keyPickerPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override

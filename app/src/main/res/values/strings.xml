@@ -54,6 +54,7 @@
     <string-array name="ColorOption">
         <item>Shabby Chic Neutrals</item>
         <item>Green Fields</item>
+        <item>name of color</item>
     </string-array>
     <string-array name="ColorOption_value">
         <item>COLOR80</item>

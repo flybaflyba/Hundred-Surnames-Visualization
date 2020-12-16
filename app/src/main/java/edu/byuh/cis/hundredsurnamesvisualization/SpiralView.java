@@ -901,6 +901,9 @@ public class SpiralView extends View {
         }
 
 
+        String colorPrefs=PrefsActivity.getColorOptionPref(getContext());
+        ColorTheme.changeColorTheme(colorPrefs);
+
 
 
         character_option = PrefsActivity.getCharacterOptionPref(getContext());

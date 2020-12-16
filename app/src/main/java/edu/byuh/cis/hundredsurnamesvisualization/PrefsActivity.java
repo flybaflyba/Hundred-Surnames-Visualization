@@ -72,7 +72,7 @@ public class PrefsActivity extends PreferenceActivity {
         ListPreference color_option = new ListPreference(this);
         color_option.setTitle(R.string.color_title);
         color_option.setSummary(R.string.color_summary);
-        color_option.setKey("COLOR_OPTION");
+        color_option.setKey(COLOR_OPTION);
         color_option.setEntries(R.array.ColorOption);
         color_option.setEntryValues(R.array.ColorOption_value);
         color_option.setValue("COLOR80");
