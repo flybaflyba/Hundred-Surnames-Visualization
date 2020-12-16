@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
         super.setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
         colorTheme=new ColorTheme(this);
-        mainColor=Color.parseColor(colorTheme.c4);
-        sliderButtonColor=Color.parseColor(colorTheme.c4);
+        mainColor=Color.parseColor(colorTheme.c2);
+        sliderButtonColor=Color.parseColor(colorTheme.c1);
 
 
 
