@@ -16,6 +16,7 @@ public class PrefsActivity extends PreferenceActivity {
     public static final String SHOW_LABEL= "SHOW_LABEL";
     public static final String CHARACTER_OPTION = "CHARACTER_OPTION";
     public static final String PINYIN_OPTION = "PINYIN";
+    public static final String COLOR_OPTION = "COLOR80";
 
     @Override
     public void onCreate(Bundle b) {
@@ -40,28 +41,47 @@ public class PrefsActivity extends PreferenceActivity {
         show_label.setChecked(true);
         screen.addPreference(show_label);
 
+
+        CheckBoxPreference circle = new CheckBoxPreference(this);
+        circle.setTitle(R.string.circle_button_lable);
+        circle.setSummaryOn(R.string.circle_button_on);
+        circle.setSummaryOff(R.string.circle_button_off);
+        circle.setKey("CIRCLE");
+        circle.setChecked(true);
+        screen.addPreference(circle);
+
+
         ListPreference character_option = new ListPreference(this);
-        character_option.setTitle("Character");
-        character_option.setSummary("Choose Your Character Preference");
+        character_option.setTitle(R.string.charactersOption_title);
+        character_option.setSummary(R.string.charactersOption_summary);
         character_option.setKey(CHARACTER_OPTION);
-        character_option.setEntries(R.array.CharactersOption);
-        character_option.setEntryValues(R.array.CharactersOption_value);
+        character_option.setEntries(R.array.charactersOption);
+        character_option.setEntryValues(R.array.charactersOption_value);
         character_option.setValue("simplified");
         screen.addPreference(character_option);
 
         ListPreference pinyin_option = new ListPreference(this);
-        pinyin_option.setTitle("Pinyin");
-        pinyin_option.setSummary("Choose Your Pinyin Preference");
+        pinyin_option.setTitle(R.string.pinyinOption_title);
+        pinyin_option.setSummary(R.string.pinyinOption_summary);
         pinyin_option.setKey(PINYIN_OPTION);
-        pinyin_option.setEntries(R.array.PinyinsOption);
-        pinyin_option.setEntryValues(R.array.PinyinsOption_value);
+        pinyin_option.setEntries(R.array.pinyinsOption);
+        pinyin_option.setEntryValues(R.array.pinyinsOption_value);
         pinyin_option.setValue("simplified");
         screen.addPreference(pinyin_option);
+
+        ListPreference color_option = new ListPreference(this);
+        color_option.setTitle(R.string.color_title);
+        color_option.setSummary(R.string.color_summary);
+        color_option.setKey("COLOR_OPTION");
+        color_option.setEntries(R.array.ColorOption);
+        color_option.setEntryValues(R.array.ColorOption_value);
+        color_option.setValue("COLOR80");
+        screen.addPreference(color_option);
 
 
         setPreferenceScreen(screen);
 
-        //Log.d("Prefs ", "preference screen here ");
+
 
     }
 
@@ -74,6 +94,9 @@ public class PrefsActivity extends PreferenceActivity {
     public static boolean getShowLabelPref(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c).getBoolean(SHOW_LABEL, true);
     }
+    public static boolean getCirclePref(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getBoolean("CIRCLE", false);
+    }
 
     public static String getCharacterOptionPref(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c).getString(CHARACTER_OPTION, "simplified");
@@ -82,6 +105,15 @@ public class PrefsActivity extends PreferenceActivity {
 
     public static String getPinyinOptionPref(Context c) {
         return PreferenceManager.getDefaultSharedPreferences(c).getString(PINYIN_OPTION, "simplified");
+
+    }
+
+//    public static int getColorOptionPref(Context c){
+//        return Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(c).getString("COLOR_OPTION","COLOR80"));
+//    }
+
+    public static String getColorOptionPref(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getString(COLOR_OPTION, "COLOR80");
 
     }
 

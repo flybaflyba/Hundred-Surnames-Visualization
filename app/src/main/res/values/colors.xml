@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#931b34</color>
-    <color name="colorPrimaryDark">#931b34</color>
-    <color name="colorAccent">#D81B60</color>
+
+
+<!--    color Shabby Chic Neutrals-->
+    <color name="colorPrimary">#CDAB81</color>
+    <color name="colorPrimaryDark">#6C5F5B</color>
+    <color name="colorAccent">#4F4A45</color>
+
+<!--color 75 Green Fields-->
+<!--    <color name="colorPrimary">#919636</color>-->
+<!--    <color name="colorPrimaryDark">#5A5F37</color>-->
+<!--    <color name="colorAccent">#524A3A</color>-->
+
+<!--&lt;!&ndash;color 05 cool blue&ndash;&gt;-->
+<!--    <color name="colorPrimary">#66A5AD</color>-->
+<!--    <color name="colorPrimaryDark">#07575B</color>-->
+<!--    <color name="colorAccent">#003B46</color>-->
+
+
+
+
 </resources>
