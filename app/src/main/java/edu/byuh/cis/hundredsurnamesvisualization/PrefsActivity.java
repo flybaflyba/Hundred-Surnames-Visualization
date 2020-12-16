@@ -95,7 +95,7 @@ public class PrefsActivity extends PreferenceActivity {
         return PreferenceManager.getDefaultSharedPreferences(c).getBoolean(SHOW_LABEL, true);
     }
     public static boolean getCirclePref(Context c) {
-        return PreferenceManager.getDefaultSharedPreferences(c).getBoolean("CIRCLE", false);
+        return PreferenceManager.getDefaultSharedPreferences(c).getBoolean("CIRCLE", true);
     }
 
     public static String getCharacterOptionPref(Context c) {
