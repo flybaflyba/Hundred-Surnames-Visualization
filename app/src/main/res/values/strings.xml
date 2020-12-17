@@ -72,7 +72,7 @@
 
     <string name="about_content_one">Programming by Litian Zhang and Tsz Chin Lam under the supervision of Dr. Geoffrey Draper at Brigham Young University--Hawaii.</string>
     <string name="about_content_two">Surnames order is based on </string>
-    <string name="about_content_three">The Report on National Names, 2019 (二〇一九年全国姓名报告发布)</string>
+    <string name="about_content_three">The Report on National Names, 2019</string>
     <string name="about_content_four">published by The Ministry of Public Security of the People\'s Republic of China.</string>
 
     <string name="surnames_order_source_link">https://app.mps.gov.cn/gdnps/pc/content.jsp?id=7478899</string>
@@ -84,7 +84,7 @@
     <string name="view">View</string>
     <string name="you_didnt_pick_any">You didn\'t pick anything</string>
     <string name="app_website_link">http://litianzhang.com/</string>
-    <string name="first_is_the_first">This is the first name</string>
-    <string name="last_is_the_last">This is the last name</string>
+    <string name="first_is_the_first">This is the first name in this app</string>
+    <string name="last_is_the_last">This is the last name in this app</string>
 
 </resources>

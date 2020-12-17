@@ -3,4 +3,31 @@
     <string name="app_name">百家姓</string>
     <string name="app_Fullname">百家姓</string>
     <string name="SpiralEffectTitle">螺旋样式</string>
+    <string name="SpiralEffectSummary">选择一个动画样式</string>
+    <string name="show_label_title">显示标签</string>
+    <string name="show_label_on">显示拼音标签</string>
+    <string name="show_label_off">不显示拼音标签</string>
+    <string name="circle_button_lable">汉字背景圈</string>
+    <string name="circle_button_on">显示汉字背景圈</string>
+    <string name="circle_button_off">不显示汉字背景圈</string>
+    <string name="charactersOption_title">汉字</string>
+    <string name="charactersOption_summary">选择一个汉字类型</string>
+    <string name="pinyinOption_title">拼音</string>
+    <string name="color_title">主题颜色</string>
+    <string name="pinyinOption_summary">选择一个拼音类型</string>
+    <string name="about_content_one">此应用由杨百翰大学夏威夷分校学生张力天和林梓芊在杰弗里·德拉普尔教授指导下编写。</string>
+    <string name="about">关于</string>
+    <string name="settings">设置</string>
+    <string name="color_summary">选择一个主题颜色</string>
+    <string name="about_content_two">姓氏排序按照</string>
+    <string name="about_content_three">" 二〇一九年全国姓名报告"</string>
+    <string name="about_content_four">（由中华人民共和国公安部发布）</string>
+    <string name="surnames_order_source_link">https://app.mps.gov.cn/gdnps/pc/content.jsp?id=7478899</string>
+    <string name="return_button">返回</string>
+    <string name="website_button">网站</string>
+    <string name="view">显示</string>
+    <string name="you_didnt_pick_any">你没有选择任何姓氏</string>
+    <string name="app_website_link">http://litianzhang.com/</string>
+    <string name="first_is_the_first">这是本应用第一个姓氏</string>
+    <string name="last_is_the_last">这是本应用最后一个姓氏</string>
 </resources>
