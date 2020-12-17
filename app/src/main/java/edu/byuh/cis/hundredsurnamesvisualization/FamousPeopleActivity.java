@@ -2,13 +2,16 @@ package edu.byuh.cis.hundredsurnamesvisualization;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -32,6 +35,9 @@ public class FamousPeopleActivity extends AppCompatActivity {
         final DataHolder dataHolder = new DataHolder(this);
         Intent i=getIntent();
         int index=i.getIntExtra(SpiralView.INDEX,0);
+
+        ActionBar actionBar =  getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
 
         nameList=new ArrayList<String>();
         surnameID=index;
@@ -80,6 +86,11 @@ public class FamousPeopleActivity extends AppCompatActivity {
                 webView.loadUrl("https://en.wikipedia.org/wiki/"+person);
             }
         });
+
+//        buttonLeft.setBackgroundColor(Color.parseColor(ColorTheme.c2));
+
+        LinearLayout buttons = findViewById(R.id.buttons);
+        buttons.setBackgroundColor(Color.parseColor(ColorTheme.c2));
 
 
 

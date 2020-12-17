@@ -192,8 +192,10 @@ public class MainActivity extends AppCompatActivity {
         slider = findViewById(R.id.seekBar3);
         slider.setBackgroundColor(mainColor);
 
-//        ActionBar actionBar =  this.getSupportActionBar();
-//        actionBar.setBackgroundDrawable(new ColorDrawable()); // set your desired color
+        ActionBar actionBar =  this.getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable()); // set your desired color
+        actionBar.setTitle(R.string.app_Fullname);
+
 
         int sliderMax = numOfMembers * 30;
 
