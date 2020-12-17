@@ -1,7 +1,11 @@
 package edu.byuh.cis.hundredsurnamesvisualization;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Paint;
+
+import androidx.core.content.res.ResourcesCompat;
 
 /**
  * This class only contain the color String for convenience.
@@ -24,6 +28,7 @@ public class ColorTheme {
             c4="#4F4A45";
         }else if(colorPrefs.equals("COLOR75")) {
             //color 75 Green Fields
+
             c1 = "#FFFAE1";
             c2 = "#919636";
             c3 = "#5A5F37";

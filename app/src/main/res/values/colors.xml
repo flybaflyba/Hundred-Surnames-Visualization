@@ -7,15 +7,15 @@
     <color name="colorPrimaryDark">#6C5F5B</color>
     <color name="colorAccent">#4F4A45</color>
 
-<!--color 75 Green Fields-->
-<!--    <color name="colorPrimary">#919636</color>-->
-<!--    <color name="colorPrimaryDark">#5A5F37</color>-->
-<!--    <color name="colorAccent">#524A3A</color>-->
+    <!--color 75 Green Fields-->
+    <color name="greenPrimary">#919636</color>
+    <color name="greenPrimaryDark">#5A5F37</color>
+    <color name="greenAccent">#524A3A</color>
 
-<!--&lt;!&ndash;color 05 cool blue&ndash;&gt;-->
-<!--    <color name="colorPrimary">#66A5AD</color>-->
-<!--    <color name="colorPrimaryDark">#07575B</color>-->
-<!--    <color name="colorAccent">#003B46</color>-->
+<!--color 05 cool blue-->
+    <color name="bluePrimary">#66A5AD</color>
+    <color name="bluePrimaryDark">#07575B</color>
+    <color name="blueAccent">#003B46</color>
 
 
 
