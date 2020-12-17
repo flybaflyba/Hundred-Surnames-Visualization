@@ -4,7 +4,7 @@
     <string name="app_Fullname">百家姓</string>
     <string name="SpiralEffectTitle">螺旋样式</string>
     <string name="SpiralEffectSummary">选择一个动画样式</string>
-    <string name="show_label_title">显示标签</string>
+    <string name="show_label_title">拼音标签</string>
     <string name="show_label_on">显示拼音标签</string>
     <string name="show_label_off">不显示拼音标签</string>
     <string name="circle_button_lable">汉字背景圈</string>
@@ -12,7 +12,7 @@
     <string name="circle_button_off">不显示汉字背景圈</string>
     <string name="charactersOption_title">汉字</string>
     <string name="charactersOption_summary">选择一个汉字类型</string>
-    <string name="pinyinOption_title">拼音</string>
+    <string name="pinyinOption_title">普通话/广东话</string>
     <string name="color_title">主题颜色</string>
     <string name="pinyinOption_summary">选择一个拼音类型</string>
     <string name="about_content_one">此应用由杨百翰大学夏威夷分校学生张力天和林梓芊在杰弗里·德拉普尔教授指导下编写。</string>
@@ -30,4 +30,30 @@
     <string name="app_website_link">http://litianzhang.com/</string>
     <string name="first_is_the_first">这是本应用第一个姓氏</string>
     <string name="last_is_the_last">这是本应用最后一个姓氏</string>
+
+    <string-array name="SpiralEffect">
+        <item>默认</item>
+        <item>旋转</item>
+        <item>放大</item>
+        <item>3D</item>
+    </string-array>
+    <string-array name="ColorOption">
+        <item>大地色系</item>
+        <item>绿色系</item>
+        <item>蓝色系</item>
+    </string-array>
+    <string-array name="charactersOption">
+        <item>简体</item>
+        <item>繁體</item>
+    </string-array>
+    <string-array name="pinyinsOption">
+        <item>普通话</item>
+        <item>广东话</item>
+    </string-array>
+    <string name="prev">上一个</string>
+    <string name="next">下一个</string>
+    <string name="famous_button">名人</string>
+    <string name="audio_button">發音</string>
+
+
 </resources>

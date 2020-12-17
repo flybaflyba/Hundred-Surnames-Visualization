@@ -19,9 +19,9 @@
         <item>threeD</item>
     </string-array>
 
-    <string name="show_label_title">Show Lable</string>
-    <string name="show_label_on">Characters have Pinyin Labels</string>
-    <string name="show_label_off">Characters don\'t have Pinyin Labels</string>
+    <string name="show_label_title">Pinyin Lable</string>
+    <string name="show_label_on">" Pinyin Labels on"</string>
+    <string name="show_label_off">Pinyin Labels off</string>
 
     <string name="circle_button_lable">Circle around the character</string>
     <string name="circle_button_on">Circle is on</string>
@@ -39,10 +39,10 @@
         <item>traditional</item>
     </string-array>
 
-    <string name="pinyinOption_title">Pinyin</string>
+    <string name="pinyinOption_title">Mandarin/Cantonese</string>
     <string name="pinyinOption_summary">Choose Your Pinyin Preference</string>
     <string-array name="pinyinsOption">
-        <item>Simplified</item>
+        <item>Mandarin</item>
         <item>Cantonese</item>
     </string-array>
     <string-array name="pinyinsOption_value">
@@ -78,6 +78,8 @@
     <string name="surnames_order_source_link">https://app.mps.gov.cn/gdnps/pc/content.jsp?id=7478899</string>
 
     <string name="return_button">Dismiss</string>
+    <string name="famous_button">Famous</string>
+    <string name="audio_button">Audio</string>
     <string name="website_button">Website</string>
 
 
@@ -87,4 +89,8 @@
     <string name="first_is_the_first">This is the first name in this app</string>
     <string name="last_is_the_last">This is the last name in this app</string>
 
+
+    famous people activity
+    <string name="prev">Previous</string>
+    <string name="next">Next</string>
 </resources>

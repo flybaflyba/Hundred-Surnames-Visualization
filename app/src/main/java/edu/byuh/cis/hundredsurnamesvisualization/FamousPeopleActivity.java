@@ -64,7 +64,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
 
 
         Button buttonLeft = findViewById(R.id.buttonPrev);
-        //buttonLeft.setText("<");
+        buttonLeft.setText(R.string.prev);
         buttonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +76,7 @@ public class FamousPeopleActivity extends AppCompatActivity {
         });
 
         Button buttonRight = findViewById(R.id.buttonNext);
-        //buttonRight.setText(">");
+        buttonRight.setText(R.string.next);
         buttonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

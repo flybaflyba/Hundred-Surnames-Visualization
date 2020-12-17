@@ -2,4 +2,60 @@
 <resources>
     <string name="app_website_link">http://litianzhang.com/</string>
     <string name="surnames_order_source_link">https://app.mps.gov.cn/gdnps/pc/content.jsp?id=7478899</string>
+    <string name="app_name">百家姓</string>
+    <string name="app_Fullname">百家姓</string>
+    <string name="SpiralEffectTitle">旋轉模式</string>
+    <string name="SpiralEffectSummary">選擇一個旋轉模式</string>
+    <string name="show_label_title">拼音標記</string>
+    <string name="show_label_on">顯示拼音標記</string>
+    <string name="show_label_off">不顯示拼音標記</string>
+    <string name="circle_button_lable">文字背景圈</string>
+    <string name="circle_button_on">顯示文字背景圈</string>
+    <string name="circle_button_off">不顯示文字背景圈</string>
+    <string name="charactersOption_title">簡體/繁體</string>
+    <string name="charactersOption_summary">選擇一個漢字類型</string>
+    <string name="pinyinOption_title">普通話/廣東話</string>
+    <string name="pinyinOption_summary">請選擇一個拼音類型</string>
+    <string name="color_title">主題顏色</string>
+    <string name="color_summary">選擇一個主題顏色</string>
+    <string name="settings">設定</string>
+    <string name="about">關於</string>
+    <string name="about_content_one">此應用程式由楊百翰大學夏威夷分校學生張力天和林梓芊在杰弗裡·德拉普爾教授指導下編寫。</string>
+    <string name="about_content_two">姓氏排序按照</string>
+    <string name="about_content_three">" 二〇一九年全國姓名報告"</string>
+    <string name="about_content_four">（由中華人民共和國公安部發布）</string>
+    <string name="return_button">返回</string>
+    <string name="website_button">網站</string>
+    <string name="view">顯示</string>
+    <string name="you_didnt_pick_any">你沒有選擇任何姓氏</string>
+    <string name="first_is_the_first">這是本應用程式第一個姓氏</string>
+    <string name="last_is_the_last">這是本應用程式最後一個姓氏</string>
+
+    <string-array name="SpiralEffect">
+        <item>預設</item>
+        <item>旋轉</item>
+        <item>放大</item>
+        <item>3D</item>
+    </string-array>
+
+
+    <string-array name="ColorOption">
+        <item>大地色系</item>
+        <item>綠色系</item>
+        <item>藍色系</item>
+    </string-array>
+    <string-array name="charactersOption">
+        <item>简体</item>
+        <item>繁體</item>
+    </string-array>
+    <string-array name="pinyinsOption">
+        <item>普通話</item>
+        <item>廣東話</item>
+    </string-array>
+    <string name="prev">上一個</string>
+    <string name="next">下一個</string>
+    <string name="audio_button">發音</string>
+    <string name="famous_button">名人</string>
+
+
 </resources>

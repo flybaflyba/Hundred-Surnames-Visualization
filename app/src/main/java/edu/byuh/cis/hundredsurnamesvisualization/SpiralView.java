@@ -705,19 +705,19 @@ public class SpiralView extends View {
         builder.setCancelable(true);
 
 //        getResources().getString(R.string.return_button) // this is the return button text
-        builder.setPositiveButton("Famous", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.famous_button, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Log.d("click mahalo ", "mahalo");
             }
         });
-        builder.setNegativeButton("Audio", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.audio_button, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
                 Log.d("click dismiss ", "dismiss");
 
             }
         });
-        builder.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(R.string.return_button, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //set onclick method for this button below
                 Log.d("click aloha ", "aloha");
