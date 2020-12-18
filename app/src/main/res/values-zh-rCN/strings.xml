@@ -44,7 +44,7 @@
     </string-array>
     <string-array name="charactersOption">
         <item>简体</item>
-        <item>繁體</item>
+        <item>繁体</item>
     </string-array>
     <string-array name="pinyinsOption">
         <item>普通话</item>
@@ -53,7 +53,7 @@
     <string name="prev">上一个</string>
     <string name="next">下一个</string>
     <string name="famous_button">名人</string>
-    <string name="audio_button">發音</string>
+    <string name="audio_button">发音</string>
 
 
 </resources>
