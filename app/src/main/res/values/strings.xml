@@ -1,7 +1,7 @@
 <resources>
 <!--    <string name="app_name">Bai Jia Xin</string>-->
     <string name="app_name">100 Surnames</string>
-    <string name="app_Fullname">Hundreds Chinese Surnames</string>
+    <string name="app_Fullname">Hundred Chinese Surnames</string>
     PrefsActivity
 
     <string name="SpiralEffectTitle">Spiral Effect</string>
