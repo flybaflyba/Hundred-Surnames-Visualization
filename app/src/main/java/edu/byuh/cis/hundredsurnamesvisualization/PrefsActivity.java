@@ -10,6 +10,10 @@ import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.util.Log;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class PrefsActivity extends PreferenceActivity {
@@ -24,8 +28,19 @@ public class PrefsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
+        
+        Timer timer = new Timer();
+        TimerTask myTask = new TimerTask() {
+            @Override
+            public void run() {
+                String colorPrefs=PrefsActivity.getColorOptionPref(getBaseContext());
+                ColorTheme.changeColorTheme(colorPrefs);
+                ActionBar actionBar =  getActionBar();
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+            }
+        };
+        timer.schedule(myTask, 0, 1000);
 
-      
 
         PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(this);
 
