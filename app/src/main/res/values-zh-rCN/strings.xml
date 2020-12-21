@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">百家姓</string>
-    <string name="app_Fullname">百家姓</string>
+    <string name="app_fullname">百家姓</string>
     <string name="SpiralEffectTitle">螺旋样式</string>
     <string name="SpiralEffectSummary">选择一个动画样式</string>
     <string name="show_label_title">拼音标签</string>
@@ -54,6 +54,6 @@
     <string name="next">下一个</string>
     <string name="famous_button">名人</string>
     <string name="audio_button">发音</string>
-
+    <string name="pick_a_surname">选择一个姓氏</string>
 
 </resources>

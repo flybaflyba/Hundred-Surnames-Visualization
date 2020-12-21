@@ -1,8 +1,8 @@
 <resources>
 <!--    <string name="app_name">Bai Jia Xin</string>-->
     <string name="app_name">100 Surnames</string>
-    <string name="app_Fullname">Hundred Chinese Surnames</string>
-    PrefsActivity
+    <string name="app_fullname">Hundred Chinese Surnames</string>
+<!--    PrefsActivity-->
 
     <string name="SpiralEffectTitle">Spiral Effect</string>
     <string name="SpiralEffectSummary">Select an animation style for the spiral</string>
@@ -19,7 +19,7 @@
         <item>threeD</item>
     </string-array>
 
-    <string name="show_label_title">Pinyin Lable</string>
+    <string name="show_label_title">Pinyin Label</string>
     <string name="show_label_on">" Pinyin Labels on"</string>
     <string name="show_label_off">Pinyin Labels off</string>
 
@@ -87,7 +87,10 @@
     <string name="last_is_the_last">This is the last name in this app</string>
 
 
-    famous people activity
+<!--    famous people activity-->
     <string name="prev">Previous</string>
     <string name="next">Next</string>
+
+    <string name="pick_a_surname">Pick a Surname</string>
+
 </resources>

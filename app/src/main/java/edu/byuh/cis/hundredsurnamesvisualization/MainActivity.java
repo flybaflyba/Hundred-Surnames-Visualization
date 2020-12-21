@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.speech.tts.TextToSpeech;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
@@ -36,7 +35,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -194,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar =  this.getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable()); // set your desired color
-        actionBar.setTitle(R.string.app_Fullname);
+        actionBar.setTitle(R.string.app_fullname);
 
 
         int sliderMax = numOfMembers * 30;
@@ -494,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.app_Fullname));
+        builder.setTitle(getResources().getString(R.string.app_fullname));
 
         TextView aboutTv = new TextView(this);
         aboutTv.setText(Html.fromHtml(html));
@@ -562,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        keyPickerString = getResources().getString(R.string.view) + selectedKey + " " + getResources().getString(R.string.objects); //英文
 
-        keyPickerString = "Pick a Surname";
+        keyPickerString = getResources().getString(R.string.pick_a_surname);
 
         tx.setText(keyPickerString);
         tx.setTextSize(20);

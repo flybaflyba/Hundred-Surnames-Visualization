@@ -1,6 +1,9 @@
 package edu.byuh.cis.hundredsurnamesvisualization;
 
+import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -21,6 +24,8 @@ public class PrefsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
+
+      
 
         PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(this);
 

@@ -3,7 +3,7 @@
     <string name="app_website_link">http://litianzhang.com/</string>
     <string name="surnames_order_source_link">https://app.mps.gov.cn/gdnps/pc/content.jsp?id=7478899</string>
     <string name="app_name">百家姓</string>
-    <string name="app_Fullname">百家姓</string>
+    <string name="app_fullname">百家姓</string>
     <string name="SpiralEffectTitle">旋轉模式</string>
     <string name="SpiralEffectSummary">選擇一個旋轉模式</string>
     <string name="show_label_title">拼音標記</string>
@@ -56,6 +56,6 @@
     <string name="next">下一個</string>
     <string name="audio_button">發音</string>
     <string name="famous_button">名人</string>
-
+    <string name="pick_a_surname">選擇一個姓氏</string>
 
 </resources>
