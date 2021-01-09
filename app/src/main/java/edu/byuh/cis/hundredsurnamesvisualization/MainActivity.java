@@ -508,7 +508,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.app_fullname));
+        builder.setTitle(getResources().getString(R.string.about));
 
         TextView aboutTv = new TextView(this);
         aboutTv.setText(Html.fromHtml(html));
@@ -518,14 +518,21 @@ public class MainActivity extends AppCompatActivity {
         aboutTv.setPadding(50,50,50,50);
         aboutTv.setTextColor(Color.parseColor(ColorTheme.c4));
         builder.setView(aboutTv);
-        builder.setIcon(R.mipmap.ic_launcher_round);
+//        builder.setIcon(R.mipmap.ic_launcher_round);
         builder.setCancelable(true);
         builder.setNeutralButton(getResources().getString(R.string.return_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
 
-        final AlertDialog dialog = builder.create();
+        AlertDialog dialog = builder.create();
+
+//        if (dialog == null) {
+//            Log.d("about dialog","is null");
+//        } else {
+//            Log.d("about dialog","is not null");
+//        }
+
         dialog.show();
 
         final Button positiveButton=dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
@@ -533,6 +540,9 @@ public class MainActivity extends AppCompatActivity {
         positiveButtonLL.gravity=Gravity.CENTER;
         positiveButtonLL.width=ViewGroup.LayoutParams.MATCH_PARENT;
         positiveButton.setLayoutParams(positiveButtonLL);
+
+
+
 
     }
 
