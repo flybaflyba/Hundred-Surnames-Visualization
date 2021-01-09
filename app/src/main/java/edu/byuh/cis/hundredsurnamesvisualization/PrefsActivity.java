@@ -28,15 +28,38 @@ public class PrefsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-        
+
+//        Timer timer = new Timer();
+//        TimerTask myTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                String colorPrefs=PrefsActivity.getColorOptionPref(getBaseContext());
+//                ColorTheme.changeColorTheme(colorPrefs);
+//                ActionBar actionBar =  getActionBar();
+//                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+//            }
+//        };
+//        timer.schedule(myTask, 0, 1000);
+//
+
+
+
         Timer timer = new Timer();
         TimerTask myTask = new TimerTask() {
             @Override
             public void run() {
-                String colorPrefs=PrefsActivity.getColorOptionPref(getBaseContext());
-                ColorTheme.changeColorTheme(colorPrefs);
-                ActionBar actionBar =  getActionBar();
-                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+                runOnUiThread(new Runnable() { // use the solve the bug: Only the original thread that created a view hierarchy can touch its views.
+                    @Override
+                    public void run() {
+                        // Stuff that updates the UI
+
+                        String colorPrefs=PrefsActivity.getColorOptionPref(getBaseContext());
+                        ColorTheme.changeColorTheme(colorPrefs);
+                        ActionBar actionBar =  getActionBar();
+                        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+
+                    }
+                });
             }
         };
         timer.schedule(myTask, 0, 1000);

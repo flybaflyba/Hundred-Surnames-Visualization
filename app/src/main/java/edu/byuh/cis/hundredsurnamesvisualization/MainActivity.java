@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private String spaceDependingOnLanguage = "";
     private int mainColor;
     private int sliderButtonColor;
+    private ActionBar actionBar;
 
 
 
@@ -190,9 +191,7 @@ public class MainActivity extends AppCompatActivity {
         slider = findViewById(R.id.seekBar3);
         slider.setBackgroundColor(mainColor);
 
-        ActionBar actionBar =  this.getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable()); // set your desired color
-        actionBar.setTitle(R.string.app_fullname);
+
 
 
         int sliderMax = numOfMembers * 30;
@@ -384,29 +383,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(lnl);
 
 
+        actionBar =  this.getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable()); // set your desired color
+        actionBar.setTitle(R.string.app_fullname);
+
+
         Timer timer = new Timer();
         TimerTask myTask = new TimerTask() {
             @Override
             public void run() {
-                // whatever you need to do every 2 seconds
-                String colorPrefs=PrefsActivity.getColorOptionPref(mContext);
-                ColorTheme.changeColorTheme(colorPrefs);
-                Log.d("UPDATE COLOR", "UPDATE COLOR");
-                mainColor=Color.parseColor(ColorTheme.c2);
-                sliderButtonColor=Color.parseColor(ColorTheme.c1);
-                slider.setBackgroundColor(mainColor);
-                sliderLabelNoText.setBackgroundColor(mainColor);
-                sliderLabelNoTextTwo.setBackgroundColor(mainColor);
+                runOnUiThread(new Runnable() { // use the solve the bug: Only the original thread that created a view hierarchy can touch its views.
+                    @Override
+                    public void run() {
+                        // Stuff that updates the UI
 
-                rightButton.setBackgroundColor(sliderButtonColor);
-                leftButton.setBackgroundColor(sliderButtonColor);
+                        String colorPrefs=PrefsActivity.getColorOptionPref(mContext);
+                        ColorTheme.changeColorTheme(colorPrefs);
+                        Log.d("UPDATE COLOR", "UPDATE COLOR");
+                        mainColor=Color.parseColor(ColorTheme.c2);
+                        sliderButtonColor=Color.parseColor(ColorTheme.c1);
+                        slider.setBackgroundColor(mainColor);
+                        sliderLabelNoText.setBackgroundColor(mainColor);
+                        sliderLabelNoTextTwo.setBackgroundColor(mainColor);
 
-                ActionBar actionBar =  getSupportActionBar();
-                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+                        rightButton.setBackgroundColor(sliderButtonColor);
+                        leftButton.setBackgroundColor(sliderButtonColor);
 
+                        //ActionBar actionBar =  getSupportActionBar();
+                        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+
+                    }
+                });
             }
         };
         timer.schedule(myTask, 0, 1000);
+
+        // actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(ColorTheme.c2))); // set your desired color
+
+    }
+
+    public void setActionBar() {
 
     }
 
