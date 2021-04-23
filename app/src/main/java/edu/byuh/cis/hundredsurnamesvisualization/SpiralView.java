@@ -878,7 +878,7 @@ public class SpiralView extends View {
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             screenWidth = c.getWidth();
             screenHeight = c.getHeight();
-            centerX = screenWidth / 2;
+            centerX = screenWidth * 0.57f;
             centerY = screenHeight / 2;
             ultimateScreenWidth = screenWidth;
             //Log.d("PORTRAIT ", "|||||||||||||||||||||||||||||" + screenWidth);
